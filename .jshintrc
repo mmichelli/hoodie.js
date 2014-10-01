@@ -40,7 +40,6 @@
   "eqnull": true,
   "evil": false,
   "expr": true,
-  "forin": true,
   "immed": true,
   "latedef": false,
   "loopfunc": false,
@@ -67,4 +66,5 @@
   "quotmark": "single",
   "trailing": true
 }
+
 
