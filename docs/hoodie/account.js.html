@@ -1,0 +1,1502 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width" charset="utf-8">
+    <title>Hoodie.js</title>
+    <link rel="stylesheet" href="http://getbootstrap.com/2.3.2/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="http://getbootstrap.com/2.3.2/assets/css/bootstrap-responsive.css">
+    <link rel="stylesheet" href="http://getbootstrap.com/2.3.2/assets/css/docs.css">
+    <style>
+      .bs-docs-sidenav.affix {
+        box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.5);
+        z-index: 10;
+      }
+      
+      .bs-docs-sidenav i{
+        width: 8px;
+        height: 8px;
+        padding: 0px;
+        margin: 0px;
+        display: inline-block;
+        margin-right:0.5em;
+      }
+      
+      .bs-docs-sidenav > li > a {
+          word-wrap: break-word;
+      }
+      
+      .bs-docs-sidenav > li:first-child > a {
+        border-top-right-radius: 6px;
+        border-top-left-radius: 6px;
+      }
+      
+      code[class*="language-"],pre[class*="language-"]{color:black;text-shadow:0 1px white;font-family:Consolas,Monaco,'Andale Mono',monospace;direction:ltr;text-align:left;white-space:pre;word-spacing:normal;-moz-tab-size:2;-o-tab-size:2;tab-size2;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*="language-"]{padding:1em;margin:.5em 0;overflow:auto}:not(pre)>code[class*="language-"],pre[class*="language-"]{background:#f5f2f0}:not(pre)>code[class*="language-"]{padding:.1em;border-radius:.3em}.token.comment,.token.prolog,.token.doctype,.token.cdata{color:slategray}.token.punctuation{color:#999}.namespace{opacity:.7}.token.property,.token.tag,.token.boolean,.token.number{color:#905}.token.selector,.token.attr-name,.token.string{color:#690}.token.operator,.token.entity,.token.url,.language-css .token.string,.style .token.string{color:#a67f59;background:hsla(0,0%,100%,.5)}.token.atrule,.token.attr-value,.token.keyword{color:#07a}.token.regex,.token.important{color:#e90}.token.important{font-weight:bold}.token.entity{cursor:help}
+      div.description {margin: 14px 0; padding-top: 14px; border-bottom:1px solid #eee; }
+      .tags {}
+      .ctx-type {
+        display:inline-block;
+        margin-right:0.5em;
+        //- float:right; margin-top:8px
+      }
+      
+      footer iframe{vertical-align:middle;}
+      
+    </style>
+  </head>
+  <body data-spy="scroll" data-target=".scrollspy">
+    <header id="overview" class="jumbotron subhead">
+      <div class="container">
+        <h1>Hoodie.js</h1>
+        <p class="lead"></p>
+      </div>
+    </header>
+    <div class="container">
+      <div class="row">
+        <div class="span3 bs-docs-sidebar">
+          <ul class="nav nav-list bs-docs-sidenav affix-top">
+            <li><a href="../index.html">Main</a></li>
+            <li class="active"><a href="../hoodie/account.js.html">hoodie/account.js</a></li>
+            <li><a href="../hoodie/connection.js.html">hoodie/connection.js</a></li>
+            <li><a href="../hoodie/id.js.html">hoodie/id.js</a></li>
+            <li><a href="../hoodie/open.js.html">hoodie/open.js</a></li>
+            <li><a href="../hoodie/remote.js.html">hoodie/remote.js</a></li>
+            <li><a href="../hoodie/request.js.html">hoodie/request.js</a></li>
+            <li><a href="../hoodie/store.js.html">hoodie/store.js</a></li>
+            <li><a href="../hoodie/task.js.html">hoodie/task.js</a></li>
+            <li><a href="../hoodie.js.html">hoodie.js</a></li>
+            <li><a href="../lib/error/error.js.html">lib/error/error.js</a></li>
+            <li><a href="../lib/error/index.js.html">lib/error/index.js</a></li>
+            <li><a href="../lib/error/object_id.js.html">lib/error/object_id.js</a></li>
+            <li><a href="../lib/error/object_type.js.html">lib/error/object_type.js</a></li>
+            <li><a href="../lib/events.js.html">lib/events.js</a></li>
+            <li><a href="../lib/index.js.html">lib/index.js</a></li>
+            <li><a href="../lib/store/api.js.html">lib/store/api.js</a></li>
+            <li><a href="../lib/store/index.js.html">lib/store/index.js</a></li>
+            <li><a href="../lib/store/remote.js.html">lib/store/remote.js</a></li>
+            <li><a href="../lib/store/scoped.js.html">lib/store/scoped.js</a></li>
+            <li><a href="../lib/task/index.js.html">lib/task/index.js</a></li>
+            <li><a href="../lib/task/scoped.js.html">lib/task/scoped.js</a></li>
+            <li><a href="../utils/config.js.html">utils/config.js</a></li>
+            <li><a href="../utils/generate_id.js.html">utils/generate_id.js</a></li>
+            <li><a href="../utils/hoodiefy_request_error_name.js.html">utils/hoodiefy_request_error_name.js</a></li>
+            <li><a href="../utils/index.js.html">utils/index.js</a></li>
+            <li><a href="../utils/local_storage_wrapper.js.html">utils/local_storage_wrapper.js</a></li>
+            <li><a href="../utils/promise/defer.js.html">utils/promise/defer.js</a></li>
+            <li><a href="../utils/promise/index.js.html">utils/promise/index.js</a></li>
+            <li><a href="../utils/promise/is_promise.js.html">utils/promise/is_promise.js</a></li>
+            <li><a href="../utils/promise/reject.js.html">utils/promise/reject.js</a></li>
+            <li><a href="../utils/promise/reject_with.js.html">utils/promise/reject_with.js</a></li>
+            <li><a href="../utils/promise/resolve.js.html">utils/promise/resolve.js</a></li>
+            <li><a href="../utils/promise/resolve_with.js.html">utils/promise/resolve_with.js</a></li>
+          </ul>
+          <div class="scrollspy">
+            <ul class="nav nav-list bs-docs-sidenav affix-top">
+              <li><a href="#authenticate"><i class="alert alert-info"></i><span>authenticate</span></a>
+              </li>
+              <li><a href="#hasValidSession"><i class="alert alert-info"></i><span>hasValidSession</span></a>
+              </li>
+              <li><a href="#hasInvalidSession"><i class="alert alert-info"></i><span>hasInvalidSession</span></a>
+              </li>
+              <li><a href="#signUp"><i class="alert alert-info"></i><span>signUp</span></a>
+              </li>
+              <li><a href="#anonymousSignUp"><i class="alert alert-info"></i><span>anonymousSignUp</span></a>
+              </li>
+              <li><a href="#hasAccount"><i class="alert alert-info"></i><span>hasAccount</span></a>
+              </li>
+              <li><a href="#hasAnonymousAccount"><i class="alert alert-info"></i><span>hasAnonymousAccount</span></a>
+              </li>
+              <li><a href="#signIn"><i class="alert alert-info"></i><span>signIn</span></a>
+              </li>
+              <li><a href="#db"><i class="alert alert-info"></i><span>db</span></a>
+              </li>
+              <li><a href="#fetch"><i class="alert alert-info"></i><span>fetch</span></a>
+              </li>
+              <li><a href="#changePassword"><i class="alert alert-info"></i><span>changePassword</span></a>
+              </li>
+              <li><a href="#resetPassword"><i class="alert alert-info"></i><span>resetPassword</span></a>
+              </li>
+              <li><a href="#checkPasswordReset"><i class="alert alert-info"></i><span>checkPasswordReset</span></a>
+              </li>
+              <li><a href="#changeUsername"><i class="alert alert-info"></i><span>changeUsername</span></a>
+              </li>
+              <li><a href="#subscribeToOutsideEvents"><i class="alert alert-info"></i><span>subscribeToOutsideEvents</span></a>
+              </li>
+              <li><a href="#subscribeToOutsideEvents"><i class="alert alert-info"></i><span>subscribeToOutsideEvents</span></a>
+              </li>
+              <li><a href="#reauthenticate"><i class="alert alert-info"></i><span>reauthenticate</span></a>
+              </li>
+              <li><a href="#setUsername"><i class="alert alert-info"></i><span>setUsername</span></a>
+              </li>
+              <li><a href="#handleAuthenticateRequestSuccess"><i class="alert alert-info"></i><span>handleAuthenticateRequestSuccess</span></a>
+              </li>
+              <li><a href="#handleSignUpSuccess"><i class="alert alert-info"></i><span>handleSignUpSuccess</span></a>
+              </li>
+              <li><a href="#handleSignUpError"><i class="alert alert-info"></i><span>handleSignUpError</span></a>
+              </li>
+              <li><a href="#delayedSignIn"><i class="alert alert-info"></i><span>delayedSignIn</span></a>
+              </li>
+              <li><a href="#handleSignInSuccess"><i class="alert alert-info"></i><span>handleSignInSuccess</span></a>
+              </li>
+              <li><a href="#handlePasswordResetStatusRequestSuccess"><i class="alert alert-info"></i><span>handlePasswordResetStatusRequestSuccess</span></a>
+              </li>
+              <li><a href="#handlePasswordResetStatusRequestError"><i class="alert alert-info"></i><span>handlePasswordResetStatusRequestError</span></a>
+              </li>
+              <li><a href="#awaitPasswordResetResult"><i class="alert alert-info"></i><span>awaitPasswordResetResult</span></a>
+              </li>
+              <li><a href="#removePasswordResetObject"><i class="alert alert-info"></i><span>removePasswordResetObject</span></a>
+              </li>
+              <li><a href="#changeUsernameAndPassword"><i class="alert alert-info"></i><span>changeUsernameAndPassword</span></a>
+              </li>
+              <li><a href="#upgradeAnonymousAccount"><i class="alert alert-info"></i><span>upgradeAnonymousAccount</span></a>
+              </li>
+              <li><a href="#handleFetchBeforeDestroySuccess"><i class="alert alert-info"></i><span>handleFetchBeforeDestroySuccess</span></a>
+              </li>
+              <li><a href="#handleFetchBeforeDestroyError"><i class="alert alert-info"></i><span>handleFetchBeforeDestroyError</span></a>
+              </li>
+              <li><a href="#cleanup"><i class="alert alert-info"></i><span>cleanup</span></a>
+              </li>
+              <li><a href="#disconnect"><i class="alert alert-info"></i><span>disconnect</span></a>
+              </li>
+              <li><a href="#userTypeAndId"><i class="alert alert-info"></i><span>userTypeAndId</span></a>
+              </li>
+              <li><a href="#userDocKey"><i class="alert alert-info"></i><span>userDocKey</span></a>
+              </li>
+              <li><a href="#userDocUrl"><i class="alert alert-info"></i><span>userDocUrl</span></a>
+              </li>
+              <li><a href="#sendChangeUsernameAndPasswordRequest"><i class="alert alert-info"></i><span>sendChangeUsernameAndPasswordRequest</span></a>
+              </li>
+              <li><a href="#handleChangeUsernameAndPasswordResponse"><i class="alert alert-info"></i><span>handleChangeUsernameAndPasswordResponse</span></a>
+              </li>
+              <li><a href="#awaitCurrentAccountRemoved"><i class="alert alert-info"></i><span>awaitCurrentAccountRemoved</span></a>
+              </li>
+              <li><a href="#withPreviousRequestsAborted"><i class="alert alert-info"></i><span>withPreviousRequestsAborted</span></a>
+              </li>
+              <li><a href="#withSingleRequest"><i class="alert alert-info"></i><span>withSingleRequest</span></a>
+              </li>
+              <li><a href="#pushLocalChanges"><i class="alert alert-info"></i><span>pushLocalChanges</span></a>
+              </li>
+              <li><a href="#sendSignInRequest"><i class="alert alert-info"></i><span>sendSignInRequest</span></a>
+              </li>
+              <li><a href="#sendSignUpRequest"><i class="alert alert-info"></i><span>sendSignUpRequest</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="span9">
+          <section id="authenticate">
+            <h1>authenticate</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>account.authenticate()</span> -><span>Object</span>
+            </p>
+          </section>
+          <div class="description"><p>Use this method to assure that the user is authenticated:<br /><code>hoodie.account.authenticate().done( doSomething ).fail( handleError )</code></p> </div>
+          <pre><code class="language-javascript">account.authenticate = function authenticate() {
+    var sendAndHandleAuthRequest;
+
+    // already tried to authenticate, and failed
+    if (authenticated === false) {
+      return reject();
+    }
+
+    // already tried to authenticate, and succeeded
+    if (authenticated === true) {
+      return resolveWith(account.username);
+    }
+
+    // if there is a pending signOut request, return its promise,
+    // but pipe it so that it always ends up rejected
+    //
+    if (requests.signOut &amp;&amp; requests.signOut.state() === 'pending') {
+      return requests.signOut.then(reject);
+    }
+
+    // if there is a pending signIn request, return its promise
+    //
+    if (requests.signIn &amp;&amp; requests.signIn.state() === 'pending') {
+      return requests.signIn;
+    }
+
+    // if user has no account, make sure to end the session
+    if (!account.hasAccount()) {
+      return sendSignOutRequest().then(function() {
+        authenticated = false;
+        return reject();
+      });
+    }
+
+    // send request to check for session status. If there is a
+    // pending request already, return its promise.
+    //
+    sendAndHandleAuthRequest = function() {
+      return account.request('GET', '/_session').then(handleAuthenticateRequestSuccess);
+    };
+
+    return withSingleRequest('authenticate', sendAndHandleAuthRequest);
+  };</code></pre>
+          <section id="hasValidSession">
+            <h1>hasValidSession</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>account.hasValidSession()</span> -><span>Boolean</span>
+            </p>
+          </section>
+          <div class="description"><p>Returns true if the user is signed in, and has a valid cookie.</p> </div>
+          <pre><code class="language-javascript">account.hasValidSession = function() {
+    if (!account.hasAccount()) {
+      return false;
+    }
+
+    return authenticated === true;
+  };</code></pre>
+          <section id="hasInvalidSession">
+            <h1>hasInvalidSession</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>account.hasInvalidSession()</span> -><span>Boolean</span>
+            </p>
+          </section>
+          <div class="description"><p>Returns true if the user is signed in, but does not have a valid cookie</p> </div>
+          <pre><code class="language-javascript">account.hasInvalidSession = function() {
+    if (!account.hasAccount()) {
+      return false;
+    }
+
+    return authenticated === false;
+  };</code></pre>
+          <section id="signUp">
+            <h1>signUp</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>account.signUp()</span> -><span>Boolean</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>username</td>
+                <td>String</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>password</td>
+                <td>String</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Returns true if the user is signed in, but does not have a valid cookie<br />uses standard CouchDB API to create a new document in _users db.<br />The backend will automatically create a userDB based on the username<br />address and approve the account by adding a &#39;confirmed&#39; role to the<br />user doc. The account confirmation might take a while, so we keep trying<br />to sign in with a 300ms timeout.</p> </div>
+          <pre><code class="language-javascript">account.signUp = function signUp(username, password) {
+    if (password === undefined) {
+      password = '';
+    }
+
+    if (!username) {
+      return rejectWith('Username must be set.');
+    }
+
+    if (account.hasAnonymousAccount()) {
+      return upgradeAnonymousAccount(username, password);
+    }
+
+    if (account.hasAccount()) {
+      return rejectWith('Must sign out first.');
+    }
+
+    return sendSignUpRequest(username, password)
+    .done(function(newUsername, newHoodieId, newBearerToken) {
+      setUsername(username);
+      setBearerToken(newBearerToken);
+      account.trigger('signup', username);
+    });
+  };</code></pre>
+          <section id="anonymousSignUp">
+            <h1>anonymousSignUp</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>account.anonymousSignUp()</span> -><span>Object</span>
+            </p>
+          </section>
+          <div class="description"><p>If the user did not sign up yet, but data needs to be transferred<br />to the couch, e.g. to send an email or to share data, the anonymousSignUp<br />method can be used. It generates a random password and stores it locally<br />in the browser.</p><p>If the user signs up for real later, we &#39;upgrade&#39; the account, meaning we<br />change the username and password internally instead of creating another user.</p> </div>
+          <pre><code class="language-javascript">account.anonymousSignUp = function anonymousSignUp() {
+    var password, username;
+
+    password = generateId(10);
+    username = hoodie.id();
+
+    return sendSignUpRequest(username, password)
+    .progress( function() {
+      setAnonymousPassword(password);
+    })
+    .done(function() {
+      account.trigger('signup:anonymous');
+    });
+  };</code></pre>
+          <section id="hasAccount">
+            <h1>hasAccount</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>account.hasAccount()</span>
+            </p>
+          </section>
+          <div class="description"><p>@return     {Object}</p> </div>
+          <pre><code class="language-javascript">account.hasAccount = function hasAccount() {
+    var hasUsername = !!account.username;
+    return hasUsername || account.hasAnonymousAccount();
+  };</code></pre>
+          <section id="hasAnonymousAccount">
+            <h1>hasAnonymousAccount</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>account.hasAnonymousAccount()</span> -><span>Object</span>
+            </p>
+          </section>
+          <div class="description"><p>anonymous accounts get created when data needs to be<br />synced without the user having an account. That happens<br /> automatically when the user creates a task, but can also<br />be done manually using hoodie.account.anonymousSignUp(),<br />e.g. to prevent data loss.<br />To determine between anonymous and &quot;real&quot; accounts, we<br />can compare the username to the hoodie.id, which is the<br />same for anonymous accounts.</p> </div>
+          <pre><code class="language-javascript">account.hasAnonymousAccount = function hasAnonymousAccount() {
+    return !!getAnonymousPassword();
+  };
+
+
+  var anonymousPasswordKey = '_account.anonymousPassword';
+
+  function setAnonymousPassword(password) {
+    return config.set(anonymousPasswordKey, password);
+  }
+
+  function getAnonymousPassword() {
+    return config.get(anonymousPasswordKey);
+  }
+
+  function removeAnonymousPassword() {
+    return config.unset(anonymousPasswordKey);
+  }
+
+  function anonymousSignIn () {
+    var username = hoodie.id();
+    var password = getAnonymousPassword();
+    return account.signIn(username, password).done( function() {
+      account.trigger('signin:anonymous', username);
+    });
+  }</code></pre>
+          <section id="signIn">
+            <h1>signIn</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>account.signIn()</span> -><span>Object</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>username</td>
+                <td>String</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>password</td>
+                <td>String</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>options</td>
+                <td>Object</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>uses standard CouchDB API to create a new user session (POST /_session).<br />Besides the standard sign in we also check if the account has been confirmed<br />(roles include &#39;confirmed&#39; role).</p><p>When signing in, by default all local data gets cleared beforehand.<br />Otherwise data that has been created beforehand (authenticated with another user<br />account or anonymously) would be merged into the user account that signs in.<br />That only applies if username isn&#39;t the same as current username.<br />To prevent data loss, signIn can be called with options.moveData = true, that wll<br />move all data from the anonymous account to the account the user signed into.</p> </div>
+          <pre><code class="language-javascript">account.signIn = function signIn(username, password, options) {
+    var isReauthenticating = (username === account.username);
+    var isSilent;
+    var promise;
+
+    if (! username) { username = ''; }
+    if (! password) { password = ''; }
+    username = username.toLowerCase();
+
+    options = options || {};
+    isSilent = options.silent;
+
+    if (account.hasAccount() &amp;&amp; !isReauthenticating &amp;&amp; !options.moveData) {
+      promise = pushLocalChanges(options).then(function() {
+        return sendSignInRequest(username, password, options);
+      });
+    } else {
+      promise = sendSignInRequest(username, password, options);
+    }
+
+    if (!isReauthenticating) {
+      promise.done(disconnect);
+    }
+
+    return promise.done( function(newUsername, newHoodieId, newBearerToken) {
+      if (options.moveData) {
+        account.trigger('movedata');
+      }
+      if (!isReauthenticating &amp;&amp; !options.moveData) {
+        cleanup();
+      }
+      setBearerToken(newBearerToken);
+      if (isReauthenticating) {
+        if (!isSilent) {
+          account.trigger('reauthenticated', newUsername);
+        }
+      } else {
+        setUsername(newUsername);
+      }
+      if (!isSilent) {
+        account.trigger('signin', newUsername, newHoodieId, options);
+      }
+    });
+  };</code></pre>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>password</td>
+                <td>String</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>options</td>
+                <td>Object</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Uses standard CouchDB API to invalidate a user session (DELETE /_session)</p> </div>
+          <pre><code class="language-javascript">//
+  account.signOut = function signOut(options) {
+    var cleanupMethod;
+    options = options || {};
+    cleanupMethod = options.silent ? cleanup : cleanupAndTriggerSignOut;
+
+    if (!account.hasAccount()) {
+      return cleanupMethod();
+    }
+
+    if (options.moveData) {
+      return sendSignOutRequest();
+    }
+
+    return pushLocalChanges(options).then(disconnect).then(sendSignOutRequest).then(cleanupMethod);
+  };
+
+
+  account.request = function accountRequest(type, path, options) {
+    options = options || {};
+    return hoodie.request.apply(hoodie, arguments);
+  };</code></pre>
+          <section id="db">
+            <h1>db</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>account.db()</span>
+            </p>
+          </section>
+          <div class="description"><p>@return     {String} UserDB Name</p> </div>
+          <pre><code class="language-javascript">account.db = function db() {
+    return 'user/' + hoodie.id();
+  };</code></pre>
+          <section id="fetch">
+            <h1>fetch</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>account.fetch()</span> -><span>Object</span>
+            </p>
+          </section>
+          <div class="description"><p>fetches _users doc from CouchDB and caches it in _doc</p> </div>
+          <pre><code class="language-javascript">account.fetch = function fetch(username) {
+    var currentUsername = account.hasAnonymousAccount() ? hoodie.id() : account.username;
+
+    if (username === undefined) {
+      username = currentUsername;
+    }
+
+    if (!username) {
+      return rejectWith({
+        name: 'HoodieUnauthorizedError',
+        message: 'Not signed in'
+      });
+    }
+
+    return withSingleRequest('fetch', function() {
+      return account.request('GET', userDocUrl(username)).done(function(response) {
+        userDoc = response;
+        return userDoc;
+      });
+    });
+  };</code></pre>
+          <section id="changePassword">
+            <h1>changePassword</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>account.changePassword()</span> -><span>Object</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>currentPassword</td>
+                <td>String</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>newPassword</td>
+                <td>String</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Note: the hoodie API requires the currentPassword for security reasons,<br />but couchDb doesn&#39;t require it for a password change, so it&#39;s ignored<br />in this implementation of the hoodie API.</p> </div>
+          <pre><code class="language-javascript">account.changePassword = function changePassword(currentPassword, newPassword) {
+
+    if (!account.username) {
+      return rejectWith({
+        name: 'HoodieUnauthorizedError',
+        message: 'Not signed in'
+      });
+    }
+
+    disconnect();
+
+    return account.fetch()
+    .then(sendChangeUsernameAndPasswordRequest(currentPassword, null, newPassword))
+    .done( function() {
+      account.trigger('changepassword');
+    });
+  };</code></pre>
+          <section id="resetPassword">
+            <h1>resetPassword</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>account.resetPassword()</span> -><span>Object</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>username</td>
+                <td>String</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>This is kind of a hack. We need to create an object anonymously<br />that is not exposed to others. The only CouchDB API offering such<br />functionality is the _users database.<br />So we actually sign up a new couchDB user with some special attributes.<br />It will be picked up by the password reset worker and removed<br />once the password was reset.</p> </div>
+          <pre><code class="language-javascript">account.resetPassword = function resetPassword(username) {
+    var data, key, options, resetPasswordId;
+
+    resetPasswordId = config.get('_account.resetPasswordId');
+
+    if (resetPasswordId) {
+      return account.checkPasswordReset();
+    }
+
+    resetPasswordId = '' + username + '/' + (generateId());
+
+    config.set('_account.resetPasswordId', resetPasswordId);
+
+    key = '' + userDocPrefix + ':$passwordReset/' + resetPasswordId;
+
+    data = {
+      _id: key,
+      name: '$passwordReset/' + resetPasswordId,
+      type: 'user',
+      roles: [],
+      password: resetPasswordId,
+      createdAt: now(),
+      updatedAt: now()
+    };
+
+    options = {
+      data: JSON.stringify(data),
+      contentType: 'application/json'
+    };
+
+    // TODO: spec that checkPasswordReset gets executed
+    return withPreviousRequestsAborted('resetPassword', function() {
+      return account.request('PUT', '/_users/' + (encodeURIComponent(key)), options)
+      .done(account.checkPasswordReset)
+      .then(awaitPasswordResetResult)
+      .done(function() {
+        account.trigger('resetpassword');
+      });
+    });
+  };</code></pre>
+          <section id="checkPasswordReset">
+            <h1>checkPasswordReset</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>account.checkPasswordReset()</span> -><span>Object</span>
+            </p>
+          </section>
+          <div class="description"><p>check for the status of a password reset. It might take<br />a while until the password reset worker picks up the job<br />and updates it<br />If a password reset request was successful, the $passwordRequest<br />doc gets removed from _users by the worker, therefore a 401 is<br />what we are waiting for.<br />Once called, it continues to request the status update with a<br />one second timeout.</p> </div>
+          <pre><code class="language-javascript">account.checkPasswordReset = function checkPasswordReset() {
+    var hash, options, resetPasswordId, url, username, couchUsername;
+
+    // reject if there is no pending password reset request
+    resetPasswordId = config.get('_account.resetPasswordId');
+
+    if (!resetPasswordId) {
+      return rejectWith('No pending password reset.');
+    }
+
+    // username is part of resetPasswordId, see account.resetPassword
+    username = resetPasswordId.split('/')[0];
+
+    // send request to check status of password reset
+    couchUsername = '$passwordReset/' + resetPasswordId;
+    url = '/_users/' + (encodeURIComponent(userDocPrefix + ':' + couchUsername));
+    hash = btoa(couchUsername + ':' + resetPasswordId);
+
+    options = {
+      headers: {
+        Authorization: 'Basic ' + hash
+      }
+    };
+
+    return withSingleRequest('passwordResetStatus', function() {
+      return account.request('GET', url, options)
+      .then(
+        handlePasswordResetStatusRequestSuccess,
+        handlePasswordResetStatusRequestError(username))
+        .fail(function(error) {
+          if (error.name === 'HoodiePendingError') {
+            global.setTimeout(account.checkPasswordReset, 1000);
+            return;
+          }
+          return account.trigger('error:passwordreset', error, username);
+        });
+    });
+  };</code></pre>
+          <section id="changeUsername">
+            <h1>changeUsername</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>account.changeUsername()</span> -><span>Object</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>currentPassword</td>
+                <td>String</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>newUsername</td>
+                <td>String</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Note: the hoodie API requires the current password for security reasons,<br />but technically we cannot (yet) prevent the user to change the username<br />without knowing the current password, so it is ignored in the current<br />implementation.<br />But the current password is needed to login with the new username.</p> </div>
+          <pre><code class="language-javascript">account.changeUsername = function changeUsername(currentPassword, newUsername) {
+    var currentUsername = account.hasAnonymousAccount() ? hoodie.id() : account.username;
+
+    if (newUsername !== currentUsername) {
+      newUsername = newUsername || '';
+      return changeUsernameAndPassword(currentPassword, newUsername.toLowerCase())
+      .done( function() {
+        setUsername(newUsername);
+        account.trigger('changeusername', newUsername);
+      });
+    }
+    return rejectWith({
+      name: 'HoodieConflictError',
+      message: 'Usernames identical'
+    });
+  };
+
+
+  account.destroy = function destroy() {
+    if (!account.hasAccount()) {
+      return cleanupAndTriggerSignOut();
+    }
+
+    return account.fetch().then(
+    handleFetchBeforeDestroySuccess, handleFetchBeforeDestroyError).then(cleanupAndTriggerSignOut);
+  };</code></pre>
+          <section id="subscribeToOutsideEvents">
+            <h1>subscribeToOutsideEvents</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">function</div><span>subscribeToOutsideEvents()</span>
+            </p>
+          </section>
+          <div class="description"><p>subscribe to events coming outside</p> </div>
+          <pre><code class="language-javascript">function subscribeToOutsideEvents() {
+    hoodie.on('remote:error:unauthenticated', reauthenticate);
+  }</code></pre>
+          <section id="subscribeToOutsideEvents">
+            <h1>subscribeToOutsideEvents</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>account.subscribeToOutsideEvents()</span>
+            </p>
+          </section>
+          <div class="description"><p>allow to run this once from outside</p> </div>
+          <pre><code class="language-javascript">account.subscribeToOutsideEvents = function() {
+    subscribeToOutsideEvents();
+    delete account.subscribeToOutsideEvents;
+  };</code></pre>
+          <section id="reauthenticate">
+            <h1>reauthenticate</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">function</div><span>reauthenticate()</span>
+            </p>
+          </section>
+          <div class="description"><p>reauthenticate: force hoodie to reauthenticate</p> </div>
+          <pre><code class="language-javascript">function reauthenticate() {
+    authenticated = undefined;
+    return account.authenticate();
+  }</code></pre>
+          <section id="setUsername">
+            <h1>setUsername</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">function</div><span>setUsername()</span>
+            </p>
+          </section>
+          <div class="description"><p>setters</p> </div>
+          <pre><code class="language-javascript">function setUsername(newUsername) {
+    if (account.username === newUsername) {
+      return;
+    }
+
+    account.username = newUsername;
+    return config.set('_account.username', newUsername);
+  }
+
+  function setBearerToken(newBearerToken) {
+    if (account.bearerToken === newBearerToken) {
+      return;
+    }
+
+    account.bearerToken = newBearerToken;
+    return config.set('_account.bearerToken', newBearerToken);
+  }</code></pre>
+          <section id="handleAuthenticateRequestSuccess">
+            <h1>handleAuthenticateRequestSuccess</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">function</div><span>handleAuthenticateRequestSuccess()</span>
+            </p>
+          </section>
+          <div class="description"><p>handle a successful authentication request.<br />As long as there is no server error or internet connection issue,<br />the authenticate request (GET /_session) does always return<br />a 200 status. To differentiate whether the user is signed in or<br />not, we check <code>userCtx.name</code> in the response. If the user is not<br />signed in, it&#39;s null, otherwise the name the user signed in with<br />If the user is not signed in, we differentiate between users that<br />signed in with a username / password or anonymously. For anonymous<br />users, the password is stored in local store, so we don&#39;t need<br />to trigger an &#39;unauthenticated&#39; error, but instead try to sign in.</p> </div>
+          <pre><code class="language-javascript">function handleAuthenticateRequestSuccess(response) {
+    if (response.userCtx.name) {
+      authenticated = true;
+      return resolveWith(account.username);
+    }
+
+    if (account.hasAnonymousAccount()) {
+      return anonymousSignIn();
+    }
+
+    authenticated = false;
+    account.trigger('error:unauthenticated');
+    return reject();
+  }</code></pre>
+          <section id="handleSignUpSuccess">
+            <h1>handleSignUpSuccess</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">function</div><span>handleSignUpSuccess()</span>
+            </p>
+          </section>
+          <div class="description"><p>** handle response of a successful signUp request.<br />Response looks like:<br />  /<br /> {<br />   &#39;ok&#39;: true,<br />   &#39;id&#39;: &#39;org.couchdb.user:joe&#39;,<br />   &#39;rev&#39;: &#39;1-e8747d9ae9776706da92810b1baa4248&#39;<br /> }</p> </div>
+          <pre><code class="language-javascript">function handleSignUpSuccess(username, password) {
+
+    return function(response) {
+      userDoc._rev = response.rev;
+      return delayedSignIn(username, password);
+    };
+  }</code></pre>
+          <section id="handleSignUpError">
+            <h1>handleSignUpError</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">function</div><span>handleSignUpError()</span>
+            </p>
+          </section>
+          <div class="description"><p>handle response of a failed signUp request.<br />In case of a conflict, reject with &quot;username already exists&quot; error<br /><a href="https://github.com/hoodiehq/hoodie.js/issues/174">https://github.com/hoodiehq/hoodie.js/issues/174</a><br />Error passed for request looks like this<br />    {<br />        &quot;name&quot;: &quot;HoodieConflictError&quot;,<br />        &quot;message&quot;: &quot;Object already exists.&quot;<br />    }</p> </div>
+          <pre><code class="language-javascript">function handleSignUpError(username) {
+
+    return function(error) {
+      if (error.name === 'HoodieConflictError') {
+        error.message = 'Username ' + username + ' already exists';
+      }
+      return rejectWith(error);
+    };
+  }</code></pre>
+          <section id="delayedSignIn">
+            <h1>delayedSignIn</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">function</div><span>delayedSignIn()</span>
+            </p>
+          </section>
+          <div class="description"><p>a delayed sign in is used after sign up and after a<br />username change.</p> </div>
+          <pre><code class="language-javascript">function delayedSignIn(username, password, options, defer) {
+
+    // delayedSignIn might call itself, when the user account
+    //is pending. In this case it passes the original defer,
+    // to keep a reference and finally resolve / reject it
+    // at some point
+    if (!defer) {
+      defer = getDefer();
+    }
+
+    global.setTimeout(function() {
+      var promise = sendSignInRequest(username, password, options);
+      promise.done(defer.resolve);
+      promise.fail(function(error) {
+        if (error.name === 'HoodieAccountUnconfirmedError') {
+          // It might take a bit until the account has been confirmed
+          delayedSignIn(username, password, options, defer);
+        } else {
+          defer.reject.apply(defer, arguments);
+        }
+      });
+
+    }, 300);
+
+    return defer.promise();
+  }</code></pre>
+          <section id="handleSignInSuccess">
+            <h1>handleSignInSuccess</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">function</div><span>handleSignInSuccess()</span>
+            </p>
+          </section>
+          <div class="description"><p>parse a successful sign in response from couchDB.<br />Response looks like:<br />    {<br />        &#39;ok&#39;: true,<br />        &#39;name&#39;: &#39;test1&#39;,<br />        &#39;roles&#39;: [<br />            &#39;mvu85hy&#39;,<br />            &#39;confirmed&#39;<br />        ],<br />       &#39;bearerToken&#39;: &#39;dXNlci2Mjow9N2Rh2WyZfioB1ubEsc5n9taWNoaWVsMjo1MzkxOEQKpdFA&#39;<br />    }</p><ul>
+<li>we want to turn it into &#39;test1&#39;, &#39;mvu85hy&#39;, &#39;dXNlci2Mjow9N2Rh2WyZfioB1ubEsc5n9taWNoaWVsMjo1MzkxOEQKpdFA&#39;</li>
+<li>or reject the promise in case an error occurred (&#39;roles&#39; array contains &#39;error&#39; or is empty)</li>
+</ul>
+ </div>
+          <pre><code class="language-javascript">function handleSignInSuccess(options) {
+    options = options || {};
+
+    return function(response) {
+      var newUsername;
+      var newHoodieId;
+      var newBearerToken;
+
+      newUsername = response.name.replace(/^user(_anonymous)?\//, '');
+      newHoodieId = response.roles[0];
+      newBearerToken = response.bearerToken;
+
+      //
+      // if an error occurred, the userDB worker stores it to the $error attribute
+      // and adds the 'error' role to the users doc object. If the user has the
+      // 'error' role, we need to fetch his _users doc to find out what the error
+      // is, before we can reject the promise.
+
+      // TODO:
+      // In that case we reject the sign in, but towards the backend we still get
+      // a new session, and the old one gets removed. That leads to a state like
+      // a session timeout: I'm still signed in with the old username, but not
+      // authorized anymore. A better approach might be to send an extra
+      // GET /_users/&lt;user-doc-id&gt; with HTTP basic auth to see if the user account
+      // is valid and only if it is, we'd send the POST /_session request.
+      //
+      if (response.roles.indexOf('error') !== -1) {
+        return account.fetch(newUsername).then(function() {
+          return rejectWith(userDoc.$error);
+        });
+      }
+
+      //
+      // When the userDB worker created the database for the user and everything
+      // worked out, it adds the role 'confirmed' to the user. If the role is
+      // not present yet, it might be that the worker didn't pick up the the
+      // user doc yet, or there was an error. In this cases, we reject the promise
+      // with an 'unconfirmed error'
+      //
+      if (response.roles.indexOf('confirmed') === -1) {
+        return rejectWith({
+          name: 'HoodieAccountUnconfirmedError',
+          message: 'Account has not been confirmed yet'
+        });
+      }
+      authenticated = true;
+
+      setBearerToken(newBearerToken);
+      account.fetch();
+      return resolveWith(newUsername, newHoodieId, newBearerToken, options);
+    };
+  }</code></pre>
+          <section id="handlePasswordResetStatusRequestSuccess">
+            <h1>handlePasswordResetStatusRequestSuccess</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">function</div><span>handlePasswordResetStatusRequestSuccess()</span>
+            </p>
+          </section>
+          <div class="description"><p>If the request was successful there might have occurred an<br />error, which the worker stored in the special $error attribute.<br />If that happens, we return a rejected promise with the error<br />Otherwise reject the promise with a &#39;pending&#39; error,<br />as we are not waiting for a success full response, but a 401<br />error, indicating that our password was changed and our<br />current session has been invalidated</p> </div>
+          <pre><code class="language-javascript">function handlePasswordResetStatusRequestSuccess(passwordResetObject) {
+    var error;
+
+    if (passwordResetObject.$error) {
+      error = passwordResetObject.$error;
+      error.object = passwordResetObject;
+      delete error.object.$error;
+    } else {
+      error = {
+        name: 'HoodiePendingError',
+        message: 'Password reset is still pending'
+      };
+    }
+    return rejectWith(error);
+  }</code></pre>
+          <section id="handlePasswordResetStatusRequestError">
+            <h1>handlePasswordResetStatusRequestError</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">function</div><span>handlePasswordResetStatusRequestError()</span>
+            </p>
+          </section>
+          <div class="description"><p>If the error is a 401, it&#39;s exactly what we&#39;ve been waiting for.<br />In this case we resolve the promise.</p> </div>
+          <pre><code class="language-javascript">function handlePasswordResetStatusRequestError(username) {
+    return function(error) {
+      if (error.name === 'HoodieUnauthorizedError') {
+        config.unset('_account.resetPasswordId');
+        account.trigger('passwordreset', username);
+
+        return resolve();
+      } else {
+        return rejectWith(error);
+      }
+    };
+  }</code></pre>
+          <section id="awaitPasswordResetResult">
+            <h1>awaitPasswordResetResult</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">function</div><span>awaitPasswordResetResult()</span>
+            </p>
+          </section>
+          <div class="description"><p>wait until a password reset gets either completed or marked as failed<br />and resolve / reject respectively</p> </div>
+          <pre><code class="language-javascript">function awaitPasswordResetResult() {
+    var defer = getDefer();
+
+    account.one('passwordreset', defer.resolve );
+    account.on('error:passwordreset', removePasswordResetObject );
+    account.on('error:passwordreset', defer.reject );
+
+    // clean up callbacks when either gets called
+    defer.always( function() {
+      account.unbind('passwordreset', defer.resolve );
+      account.unbind('error:passwordreset', removePasswordResetObject );
+      account.unbind('error:passwordreset', defer.reject );
+    });
+
+    return defer.promise();
+  }</code></pre>
+          <section id="removePasswordResetObject">
+            <h1>removePasswordResetObject</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">function</div><span>removePasswordResetObject()</span>
+            </p>
+          </section>
+          <div class="description"><p>when a password reset fails, remove it from /_users</p> </div>
+          <pre><code class="language-javascript">function removePasswordResetObject (error) {
+    var passwordResetObject = error.object;
+
+    // get username &amp; password for authentication
+    var username = passwordResetObject.name; // $passwordReset/username/randomhash
+    var password = username.substr(15); // =&gt; ** username/randomhash
+    var url = '/_users/' + (encodeURIComponent(userDocPrefix + ':' + username));
+    var hash = btoa(username + ':' + password);
+
+    // mark as deleted
+    passwordResetObject._deleted = true;
+
+    var options = {
+      headers: {
+        Authorization: 'Basic ' + hash
+      },
+      contentType: 'application/json',
+      data: JSON.stringify(passwordResetObject)
+    };
+
+    // cleanup
+    account.request('PUT', url, options);
+    config.unset('_account.resetPasswordId');
+  }</code></pre>
+          <section id="changeUsernameAndPassword">
+            <h1>changeUsernameAndPassword</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">function</div><span>changeUsernameAndPassword()</span>
+            </p>
+          </section>
+          <div class="description"><p>change username and password in 3 steps</p><ol>
+<li>assure we have a valid session</li>
+<li>update _users doc with new username and new password (if provided)</li>
+<li>if username changed, wait until current _users doc got removed</li>
+<li>sign in with new credentials to create new session.</li>
+</ol>
+ </div>
+          <pre><code class="language-javascript">function changeUsernameAndPassword(currentPassword, newUsername, newPassword) {
+    var currentUsername = account.hasAnonymousAccount() ? hoodie.id() : account.username;
+
+    return sendSignInRequest(currentUsername, currentPassword).then(function() {
+      return account.fetch()
+      .then(sendChangeUsernameAndPasswordRequest(currentPassword, newUsername, newPassword));
+    });
+  }</code></pre>
+          <section id="upgradeAnonymousAccount">
+            <h1>upgradeAnonymousAccount</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">function</div><span>upgradeAnonymousAccount()</span>
+            </p>
+          </section>
+          <div class="description"><p>turn an anonymous account into a real account. Internally, this is what happens:</p><ol>
+<li>rename the username from <code>&lt;hoodieId&gt;</code> to <code>username</code></li>
+<li>Set password to <code>password</code><br />3.</li>
+</ol>
+ </div>
+          <pre><code class="language-javascript">function upgradeAnonymousAccount(username, password) {
+    var currentPassword = getAnonymousPassword();
+
+    return changeUsernameAndPassword(currentPassword, username, password).done(function() {
+      account.trigger('signup', username);
+      removeAnonymousPassword();
+    });
+  }</code></pre>
+          <section id="handleFetchBeforeDestroySuccess">
+            <h1>handleFetchBeforeDestroySuccess</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">function</div><span>handleFetchBeforeDestroySuccess()</span>
+            </p>
+          </section>
+          <div class="description"><p>we now can be sure that we fetched the latest _users doc, so we can update it<br />without a potential conflict error.</p> </div>
+          <pre><code class="language-javascript">function handleFetchBeforeDestroySuccess() {
+
+    disconnect();
+    userDoc._deleted = true;
+
+    return withPreviousRequestsAborted('updateUsersDoc', function() {
+      account.request('PUT', userDocUrl(), {
+        data: JSON.stringify(userDoc),
+        contentType: 'application/json'
+      });
+    });
+  }</code></pre>
+          <section id="handleFetchBeforeDestroyError">
+            <h1>handleFetchBeforeDestroyError</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">function</div><span>handleFetchBeforeDestroyError()</span>
+            </p>
+          </section>
+          <div class="description"><p>dependant on what kind of error we get, we want to ignore<br />it or not.<br />When we get a <code>HoodieNotFoundError</code> it means that the _users doc have<br />been removed already, so we dont need to do it anymore, but<br />still want to finish the destroy locally, so we return a<br />resolved promise</p> </div>
+          <pre><code class="language-javascript">function handleFetchBeforeDestroyError(error) {
+    if (error.name === 'HoodieNotFoundError') {
+      return resolve();
+    } else {
+      return rejectWith(error);
+    }
+  }</code></pre>
+          <section id="cleanup">
+            <h1>cleanup</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">function</div><span>cleanup()</span>
+            </p>
+          </section>
+          <div class="description"><p>remove everything form the current account, so a new account can be initiated.<br />make sure to remove a promise.</p> </div>
+          <pre><code class="language-javascript">function cleanup() {
+
+    // allow other modules to clean up local data &amp; caches
+    account.trigger('cleanup');
+    authenticated = undefined;
+    setUsername(undefined);
+    setBearerToken(undefined);
+
+    return resolve();
+  }</code></pre>
+          <section id="disconnect">
+            <h1>disconnect</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">function</div><span>disconnect()</span>
+            </p>
+          </section>
+          <div class="description"><p>make sure to remove a promise</p> </div>
+          <pre><code class="language-javascript">function disconnect() {
+    return hoodie.remote.disconnect();
+  }
+
+  function cleanupAndTriggerSignOut() {
+    var username = account.username;
+    return cleanup().then(function() {
+      return account.trigger('signout', username);
+    });
+  }</code></pre>
+          <section id="userTypeAndId">
+            <h1>userTypeAndId</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">function</div><span>userTypeAndId()</span>
+            </p>
+          </section>
+          <div class="description"><p>depending on whether the user signedUp manually or has been signed up<br />anonymously the prefix in the CouchDB _users doc differentiates.<br />An anonymous user is characterized by its username, that equals<br />its hoodie.id (see <code>anonymousSignUp</code>)<br />We differentiate with <code>hasAnonymousAccount()</code>, because <code>userTypeAndId</code><br />is used within <code>signUp</code> method, so we need to be able to differentiate<br />between anonymous and normal users before an account has been created.</p> </div>
+          <pre><code class="language-javascript">function userTypeAndId(username) {
+    var type;
+
+    if (username === hoodie.id()) {
+      type = 'user_anonymous';
+    } else {
+      type = 'user';
+    }
+    return '' + type + '/' + username;
+  }</code></pre>
+          <section id="userDocKey">
+            <h1>userDocKey</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">function</div><span>userDocKey()</span>
+            </p>
+          </section>
+          <div class="description"><p>turn a username into a valid _users doc._id</p> </div>
+          <pre><code class="language-javascript">function userDocKey(username) {
+    var currentUsername = account.hasAnonymousAccount() ? hoodie.id() : account.username;
+
+    username = username || currentUsername;
+    return '' + userDocPrefix + ':' + userTypeAndId(username);
+  }</code></pre>
+          <section id="userDocUrl">
+            <h1>userDocUrl</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">function</div><span>userDocUrl()</span>
+            </p>
+          </section>
+          <div class="description"><p>get URL of my _users doc</p> </div>
+          <pre><code class="language-javascript">function userDocUrl(username) {
+    return '/_users/' + (encodeURIComponent(userDocKey(username)));
+  }</code></pre>
+          <section id="sendChangeUsernameAndPasswordRequest">
+            <h1>sendChangeUsernameAndPasswordRequest</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">function</div><span>sendChangeUsernameAndPasswordRequest()</span>
+            </p>
+          </section>
+          <div class="description"><p>update my _users doc.<br />If a new username has been passed, we set the special attribute $newUsername.<br />This will let the username change worker create create a new _users doc for<br />the new username and remove the current one<br />If a new password has been passed, salt and password_sha get removed<br />from _users doc and add the password in clear text. CouchDB will replace it with<br />according password_sha and a new salt server side</p> </div>
+          <pre><code class="language-javascript">function sendChangeUsernameAndPasswordRequest(currentPassword, newUsername, newPassword) {
+
+    return function() {
+      // prepare updated _users doc
+      var data = extend({}, userDoc);
+
+      if (newUsername) {
+        data.$newUsername = newUsername;
+      }
+
+      data.updatedAt = now();
+      data.signedUpAt = data.signedUpAt || now();
+
+      // trigger password update when newPassword set
+      if (newPassword !== undefined) {
+        delete data.salt;
+        delete data.password_sha;
+        data.password = newPassword;
+      }
+
+      var options = {
+        data: JSON.stringify(data),
+        contentType: 'application/json'
+      };
+
+      return withPreviousRequestsAborted('updateUsersDoc', function() {
+        var defer = getDefer();
+
+        account.request('PUT', userDocUrl(), options)
+        .done(defer.notify)
+        .then(handleChangeUsernameAndPasswordResponse(newUsername, newPassword || currentPassword))
+        .done(defer.resolve);
+
+        return defer.promise();
+      });
+
+    };
+  }</code></pre>
+          <section id="handleChangeUsernameAndPasswordResponse">
+            <h1>handleChangeUsernameAndPasswordResponse</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">function</div><span>handleChangeUsernameAndPasswordResponse()</span>
+            </p>
+          </section>
+          <div class="description"><p>depending on whether a newUsername has been passed, we can sign in right away<br />or have to wait until the worker removed the old account</p> </div>
+          <pre><code class="language-javascript">function handleChangeUsernameAndPasswordResponse(newUsername, newPassword) {
+    var currentUsername = account.hasAnonymousAccount() ? hoodie.id() : account.username;
+
+    return function() {
+      disconnect();
+
+      if (newUsername) {
+        // note that if username has been changed, newPassword is the current password.
+        // We always change either the one, or the other.
+        return awaitCurrentAccountRemoved(currentUsername, newPassword).then( function() {
+
+          // we do signOut explicitly although signOut is build into hoodie.signIn to
+          // work around trouble in case of local changes. See
+          // https://github.com/hoodiehq/hoodie.js/issues/256
+          return account.signOut({silent:true, moveData: true}).then(function() {
+            return account.signIn(newUsername, newPassword, {moveData: true, silent: true});
+          });
+        });
+      } else {
+        return account.signIn(currentUsername, newPassword, {silent: true});
+      }
+    };
+  }</code></pre>
+          <section id="awaitCurrentAccountRemoved">
+            <h1>awaitCurrentAccountRemoved</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">function</div><span>awaitCurrentAccountRemoved()</span>
+            </p>
+          </section>
+          <div class="description"><p>keep sending sign in requests until the server returns a 401</p> </div>
+          <pre><code class="language-javascript">function awaitCurrentAccountRemoved(username, password, defer) {
+    if (!defer) {
+      defer = getDefer();
+    }
+
+    var requestOptions = {
+      data: {
+        name: userTypeAndId(username),
+        password: password
+      }
+    };
+
+    withPreviousRequestsAborted('signIn', function() {
+      return account.request('POST', '/_session', requestOptions);
+    }).done(function() {
+      global.setTimeout(awaitCurrentAccountRemoved, 300, username, password, defer);
+    }).fail(function(error) {
+      if (error.status === 401) {
+        return defer.resolve();
+      }
+
+      defer.reject(error);
+    });
+
+    return defer.promise();
+  }</code></pre>
+          <section id="withPreviousRequestsAborted">
+            <h1>withPreviousRequestsAborted</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">function</div><span>withPreviousRequestsAborted()</span>
+            </p>
+          </section>
+          <div class="description"><p>make sure that the same request doesnt get sent twice<br />by cancelling the previous one.</p> </div>
+          <pre><code class="language-javascript">function withPreviousRequestsAborted(name, requestFunction) {
+    if (requests[name] !== undefined) {
+      if (typeof requests[name].abort === 'function') {
+        requests[name].abort();
+      }
+    }
+    requests[name] = requestFunction();
+    return requests[name];
+  }</code></pre>
+          <section id="withSingleRequest">
+            <h1>withSingleRequest</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">function</div><span>withSingleRequest()</span>
+            </p>
+          </section>
+          <div class="description"><p>if there is a pending request, return its promise instead<br />of sending another request</p> </div>
+          <pre><code class="language-javascript">function withSingleRequest(name, requestFunction) {
+
+    if (requests[name] !== undefined) {
+      if (typeof requests[name].state === 'function') {
+        if (requests[name].state() === 'pending') {
+          return requests[name];
+        }
+      }
+    }
+
+    requests[name] = requestFunction();
+    return requests[name];
+  }</code></pre>
+          <section id="pushLocalChanges">
+            <h1>pushLocalChanges</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">function</div><span>pushLocalChanges()</span>
+            </p>
+          </section>
+          <div class="description"><p>push local changes when user signs out, unless he enforces sign out<br />in any case with <code>{ignoreLocalChanges: true}</code></p> </div>
+          <pre><code class="language-javascript">function pushLocalChanges(options) {
+    if (hoodie.store.hasLocalChanges() &amp;&amp; !options.ignoreLocalChanges) {
+      return hoodie.remote.push();
+    }
+    return resolve();
+  }
+
+  function sendSignOutRequest() {
+    return withSingleRequest('signOut', function() {
+      return account.request('DELETE', '/_session');
+    });
+  }</code></pre>
+          <section id="sendSignInRequest">
+            <h1>sendSignInRequest</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">function</div><span>sendSignInRequest()</span>
+            </p>
+          </section>
+          <div class="description"><p>the sign in request that starts a CouchDB session if<br />it succeeds. We separated the actual sign in request from<br />the signIn method, as the latter also runs signOut internally<br />to clean up local data before starting a new session. But as<br />other methods like signUp or changePassword do also need to<br />sign in the user (again), these need to send the sign in<br />request but without a signOut beforehand, as the user remains<br />the same.</p> </div>
+          <pre><code class="language-javascript">function sendSignInRequest(username, password, options) {
+    var requestOptions = {
+      data: {
+        name: userTypeAndId(username),
+        password: password
+      }
+    };
+
+    return withPreviousRequestsAborted('signIn', function() {
+      var promise = account.request('POST', '/_session', requestOptions);
+
+      return promise.then(handleSignInSuccess(options));
+    });
+  }</code></pre>
+          <section id="sendSignUpRequest">
+            <h1>sendSignUpRequest</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">function</div><span>sendSignUpRequest()</span>
+            </p>
+          </section>
+          <div class="description"><p>Creates a /_users document that will techincally allow<br />to authenticate with passed username / password. But in<br />Hoodie there is also an &quot;unconfirmed&quot; state that is the<br />default state until the Hoodie Server creates the user<br />database and sets a confirmed flag + user roles.<br />sendSignUpRequest calls the progress callbacks when the<br />user doc got created, but does not resolve before the<br />user account got confirmed.</p> </div>
+          <pre><code class="language-javascript">function sendSignUpRequest (username, password) {
+    var defer = getDefer();
+    var options;
+
+    username = username.toLowerCase();
+    options = {
+      data: JSON.stringify({
+        _id: userDocKey(username),
+        name: userTypeAndId(username),
+        type: 'user',
+        roles: [],
+        password: password,
+        hoodieId: hoodie.id(),
+        database: account.db(),
+        updatedAt: now(),
+        createdAt: now(),
+        signedUpAt: username !== hoodie.id() ? now() : void 0
+      }),
+      contentType: 'application/json'
+    };
+    account.request('PUT', userDocUrl(username), options)
+    .done(defer.notify)
+    .then(handleSignUpSuccess(username, password), handleSignUpError(username))
+    .then(defer.resolve, defer.reject);
+
+    return defer.promise();
+  }
+
+
+  function now() {
+    return new Date();
+  }
+
+  hoodie.account = account;
+}
+
+module.exports = hoodieAccount;</code></pre>
+        </div>
+      </div>
+    </div>
+    <footer class="footer"></footer>
+    <script src="http://platform.twitter.com/widgets.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+    <script src="http://leaverou.github.com/prefixfree/prefixfree.js"></script>
+    <script src="http://getbootstrap.com/2.3.2/assets/js/bootstrap-transition.js"></script>
+    <script src="http://getbootstrap.com/2.3.2/assets/js/bootstrap-scrollspy.js"></script>
+    <script src="http://getbootstrap.com/2.3.2/assets/js/bootstrap-dropdown.js"></script>
+    <script src="http://getbootstrap.com/2.3.2/assets/js/bootstrap-collapse.js"></script>
+    <script src="http://getbootstrap.com/2.3.2/assets/js/bootstrap-affix.js"></script>
+    <script>
+      /**
+       * Prism: Lightweight, robust, elegant syntax highlighting
+       * MIT license http://www.opensource.org/licenses/mit-license.php/
+       * @author Lea Verou http://lea.verou.me
+       */(function(){var e=/\blang(?:uage)?-(?!\*)(\w+)\b/i,t=self.Prism={util:{type:function(e){return Object.prototype.toString.call(e).match(/\[object (\w+)\]/)[1]},clone:function(e){var n=t.util.type(e);switch(n){case"Object":var r={};for(var i in e)e.hasOwnProperty(i)&&(r[i]=t.util.clone(e[i]));return r;case"Array":return e.slice()}return e}},languages:{extend:function(e,n){var r=t.util.clone(t.languages[e]);for(var i in n)r[i]=n[i];return r},insertBefore:function(e,n,r,i){i=i||t.languages;var s=i[e],o={};for(var u in s)if(s.hasOwnProperty(u)){if(u==n)for(var a in r)r.hasOwnProperty(a)&&(o[a]=r[a]);o[u]=s[u]}return i[e]=o},DFS:function(e,n){for(var r in e){n.call(e,r,e[r]);t.util.type(e)==="Object"&&t.languages.DFS(e[r],n)}}},highlightAll:function(e,n){var r=document.querySelectorAll('code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code');for(var i=0,s;s=r[i++];)t.highlightElement(s,e===!0,n)},highlightElement:function(r,i,s){var o,u,a=r;while(a&&!e.test(a.className))a=a.parentNode;if(a){o=(a.className.match(e)||[,""])[1];u=t.languages[o]}if(!u)return;r.className=r.className.replace(e,"").replace(/\s+/g," ")+" language-"+o;a=r.parentNode;/pre/i.test(a.nodeName)&&(a.className=a.className.replace(e,"").replace(/\s+/g," ")+" language-"+o);var f=r.textContent;if(!f)return;f=f.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\u00a0/g," ");var l={element:r,language:o,grammar:u,code:f};t.hooks.run("before-highlight",l);if(i&&self.Worker){var c=new Worker(t.filename);c.onmessage=function(e){l.highlightedCode=n.stringify(JSON.parse(e.data));l.element.innerHTML=l.highlightedCode;s&&s.call(l.element);t.hooks.run("after-highlight",l)};c.postMessage(JSON.stringify({language:l.language,code:l.code}))}else{l.highlightedCode=t.highlight(l.code,l.grammar);l.element.innerHTML=l.highlightedCode;s&&s.call(r);t.hooks.run("after-highlight",l)}},highlight:function(e,r){return n.stringify(t.tokenize(e,r))},tokenize:function(e,n){var r=t.Token,i=[e],s=n.rest;if(s){for(var o in s)n[o]=s[o];delete n.rest}e:for(var o in n){if(!n.hasOwnProperty(o)||!n[o])continue;var u=n[o],a=u.inside,f=!!u.lookbehind||0;u=u.pattern||u;for(var l=0;l<i.length;l++){var c=i[l];if(i.length>e.length)break e;if(c instanceof r)continue;u.lastIndex=0;var h=u.exec(c);if(h){f&&(f=h[1].length);var p=h.index-1+f,h=h[0].slice(f),d=h.length,v=p+d,m=c.slice(0,p+1),g=c.slice(v+1),y=[l,1];m&&y.push(m);var b=new r(o,a?t.tokenize(h,a):h);y.push(b);g&&y.push(g);Array.prototype.splice.apply(i,y)}}}return i},hooks:{all:{},add:function(e,n){var r=t.hooks.all;r[e]=r[e]||[];r[e].push(n)},run:function(e,n){var r=t.hooks.all[e];if(!r||!r.length)return;for(var i=0,s;s=r[i++];)s(n)}}},n=t.Token=function(e,t){this.type=e;this.content=t};n.stringify=function(e){if(typeof e=="string")return e;if(Object.prototype.toString.call(e)=="[object Array]"){for(var r=0;r<e.length;r++)e[r]=n.stringify(e[r]);return e.join("")}var i={type:e.type,content:n.stringify(e.content),tag:"span",classes:["token",e.type],attributes:{}};i.type=="comment"&&(i.attributes.spellcheck="true");t.hooks.run("wrap",i);var s="";for(var o in i.attributes)s+=o+'="'+(i.attributes[o]||"")+'"';return"<"+i.tag+' class="'+i.classes.join(" ")+'" '+s+">"+i.content+"</"+i.tag+">"};if(!self.document){self.addEventListener("message",function(e){var n=JSON.parse(e.data),r=n.language,i=n.code;self.postMessage(JSON.stringify(t.tokenize(i,t.languages[r])));self.close()},!1);return}var r=document.getElementsByTagName("script");r=r[r.length-1];if(r){t.filename=r.src;document.addEventListener&&!r.hasAttribute("data-manual")&&document.addEventListener("DOMContentLoaded",t.highlightAll)}})();;
+      Prism.languages.markup={comment:/&lt;!--[\w\W]*?--(&gt;|&gt;)/g,prolog:/&lt;\?.+?\?&gt;/,doctype:/&lt;!DOCTYPE.+?&gt;/,cdata:/&lt;!\[CDATA\[[\w\W]+?]]&gt;/i,tag:{pattern:/&lt;\/?[\w:-]+\s*(?:\s+[\w:-]+(?:=(?:("|')(\\?[\w\W])*?\1|\w+))?\s*)*\/?&gt;/gi,inside:{tag:{pattern:/^&lt;\/?[\w:-]+/i,inside:{punctuation:/^&lt;\/?/,namespace:/^[\w-]+?:/}},"attr-value":{pattern:/=(?:('|")[\w\W]*?(\1)|[^\s>]+)/gi,inside:{punctuation:/=|&gt;|"/g}},punctuation:/\/?&gt;/g,"attr-name":{pattern:/[\w:-]+/g,inside:{namespace:/^[\w-]+?:/}}}},entity:/&amp;#?[\da-z]{1,8};/gi};Prism.hooks.add("wrap",function(e){e.type==="entity"&&(e.attributes.title=e.content.replace(/&amp;/,"&"))});;
+      Prism.languages.css={comment:/\/\*[\w\W]*?\*\//g,atrule:/@[\w-]+?(\s+[^;{]+)?(?=\s*{|\s*;)/gi,url:/url\((["']?).*?\1\)/gi,selector:/[^\{\}\s][^\{\}]*(?=\s*\{)/g,property:/(\b|\B)[a-z-]+(?=\s*:)/ig,string:/("|')(\\?.)*?\1/g,important:/\B!important\b/gi,ignore:/&(lt|gt|amp);/gi,punctuation:/[\{\};:]/g};Prism.languages.markup&&Prism.languages.insertBefore("markup","tag",{style:{pattern:/(&lt;|<)style[\w\W]*?(>|&gt;)[\w\W]*?(&lt;|<)\/style(>|&gt;)/ig,inside:{tag:{pattern:/(&lt;|<)style[\w\W]*?(>|&gt;)|(&lt;|<)\/style(>|&gt;)/ig,inside:Prism.languages.markup.tag.inside},rest:Prism.languages.css}}});;
+      Prism.languages.clike={comment:{pattern:/(^|[^\\])(\/\*[\w\W]*?\*\/|\/\/.*?(\r?\n|$))/g,lookbehind:!0},string:/("|')(\\?.)*?\1/g,keyword:/\b(if|else|while|do|for|return|in|instanceof|function|new|try|catch|finally|null|break|continue)\b/g,"boolean":/\b(true|false)\b/g,number:/\b-?(0x)?\d*\.?[\da-f]+\b/g,operator:/[-+]{1,2}|!|=?&lt;|=?&gt;|={1,2}|(&amp;){1,2}|\|?\||\?|\*|\//g,ignore:/&(lt|gt|amp);/gi,punctuation:/[{}[\];(),.:]/g};;
+      Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(var|let|if|else|while|do|for|return|in|instanceof|function|new|with|typeof|try|catch|finally|null|break|continue)\b/g,number:/\b(-?(0x)?\d*\.?[\da-f]+|NaN|-?Infinity)\b/g});Prism.languages.insertBefore("javascript","keyword",{regex:{pattern:/(^|[^/])\/(?!\/)(\[.+?]|\\.|[^/\r\n])+\/[gim]{0,3}(?=\s*($|[\r\n,.;})]))/g,lookbehind:!0}});Prism.languages.markup&&Prism.languages.insertBefore("markup","tag",{script:{pattern:/(&lt;|<)script[\w\W]*?(>|&gt;)[\w\W]*?(&lt;|<)\/script(>|&gt;)/ig,inside:{tag:{pattern:/(&lt;|<)script[\w\W]*?(>|&gt;)|(&lt;|<)\/script(>|&gt;)/ig,inside:Prism.languages.markup.tag.inside},rest:Prism.languages.javascript}}});;
+      
+    </script>
+    <!-- App js-->
+    <script>
+      $(function(){
+        var $window = $(window);
+        $('.scrollspy .nav').affix({
+          offset: {
+            top: function () { return $window.width() <= 980 ? 480 : 400 }
+          , bottom: 50
+          }
+        });
+      })
+      
+    </script>
+  </body>
+</html>

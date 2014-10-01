@@ -1,6 +1,3 @@
-// Hoodie.Account
-// ================
-
 var hoodieEvents = require('../lib/events');
 var extend = require('extend');
 var generateId = require('../utils/generate_id');
@@ -12,36 +9,23 @@ var resolve = require('../utils/promise/resolve');
 var rejectWith = require('../utils/promise/reject_with');
 var resolveWith = require('../utils/promise/resolve_with');
 
-//
 function hoodieAccount(hoodie) {
-  // public API
   var account = {};
-
-  // flag whether user is currently authenticated or not
   var authenticated;
-
-  // cache for CouchDB _users doc
   var userDoc = {};
-
-  // map of requestPromises. We maintain this list to avoid sending
-  // the same requests several times.
   var requests = {};
-
-  // default couchDB user doc prefix
   var userDocPrefix = 'org.couchdb.user';
 
-  // add events API
   hoodieEvents(hoodie, {
     context: account,
     namespace: 'account'
   });
 
-  // Authenticate
-  // --------------
-
-  // Use this method to assure that the user is authenticated:
-  // `hoodie.account.authenticate().done( doSomething ).fail( handleError )`
-  //
+  /**
+   * Use this method to assure that the user is authenticated:
+   * `hoodie.account.authenticate().done( doSomething ).fail( handleError )`
+   * @return     {Object} Promise
+   */
   account.authenticate = function authenticate() {
     var sendAndHandleAuthRequest;
 
@@ -87,11 +71,10 @@ function hoodieAccount(hoodie) {
   };
 
 
-  // hasValidSession
-  // -----------------
-
-  // returns true if the user is signed in, and has a valid cookie.
-  //
+  /**
+   * Returns true if the user is signed in, and has a valid cookie.
+   * @return     {Boolean}
+   */
   account.hasValidSession = function() {
     if (!account.hasAccount()) {
       return false;
@@ -101,11 +84,10 @@ function hoodieAccount(hoodie) {
   };
 
 
-  // hasInvalidSession
-  // -----------------
-
-  // returns true if the user is signed in, but does not have a valid cookie
-  //
+  /**
+   * Returns true if the user is signed in, but does not have a valid cookie
+   * @return     {Boolean}
+   */
   account.hasInvalidSession = function() {
     if (!account.hasAccount()) {
       return false;
@@ -114,16 +96,17 @@ function hoodieAccount(hoodie) {
     return authenticated === false;
   };
 
-
-  // sign up with username & password
-  // ----------------------------------
-
-  // uses standard CouchDB API to create a new document in _users db.
-  // The backend will automatically create a userDB based on the username
-  // address and approve the account by adding a 'confirmed' role to the
-  // user doc. The account confirmation might take a while, so we keep trying
-  // to sign in with a 300ms timeout.
-  //
+  /**
+   * Returns true if the user is signed in, but does not have a valid cookie
+   * uses standard CouchDB API to create a new document in _users db.
+   * The backend will automatically create a userDB based on the username
+   * address and approve the account by adding a 'confirmed' role to the
+   * user doc. The account confirmation might take a while, so we keep trying
+   * to sign in with a 300ms timeout.
+   * @param      {String}   username
+   * @param      {String}   password
+   * @return     {Boolean}
+   */
   account.signUp = function signUp(username, password) {
     if (password === undefined) {
       password = '';
@@ -150,17 +133,16 @@ function hoodieAccount(hoodie) {
   };
 
 
-  // anonymous sign up
-  // -------------------
-
-  // If the user did not sign up yet, but data needs to be transferred
-  // to the couch, e.g. to send an email or to share data, the anonymousSignUp
-  // method can be used. It generates a random password and stores it locally
-  // in the browser.
-  //
-  // If the user signs up for real later, we 'upgrade' the account, meaning we
-  // change the username and password internally instead of creating another user.
-  //
+  /**
+   * If the user did not sign up yet, but data needs to be transferred
+   * to the couch, e.g. to send an email or to share data, the anonymousSignUp
+   * method can be used. It generates a random password and stores it locally
+   * in the browser.
+   *
+   * If the user signs up for real later, we 'upgrade' the account, meaning we
+   * change the username and password internally instead of creating another user.
+   * @return     {Object} Promise
+   */
   account.anonymousSignUp = function anonymousSignUp() {
     var password, username;
 
@@ -177,37 +159,31 @@ function hoodieAccount(hoodie) {
   };
 
 
-  // hasAccount
-  // ---------------------
-
-  //
+  /**
+   * @return     {Object}
+   */
   account.hasAccount = function hasAccount() {
     var hasUsername = !!account.username;
     return hasUsername || account.hasAnonymousAccount();
   };
 
-
-  // hasAnonymousAccount
-  // ---------------------
-
-  // anonymous accounts get created when data needs to be
-  // synced without the user having an account. That happens
-  // automatically when the user creates a task, but can also
-  // be done manually using hoodie.account.anonymousSignUp(),
-  // e.g. to prevent data loss.
-  //
-  // To determine between anonymous and "real" accounts, we
-  // can compare the username to the hoodie.id, which is the
-  // same for anonymous accounts.
+  /**
+   * anonymous accounts get created when data needs to be
+   * synced without the user having an account. That happens
+   *  automatically when the user creates a task, but can also
+   * be done manually using hoodie.account.anonymousSignUp(),
+   * e.g. to prevent data loss.
+   * To determine between anonymous and "real" accounts, we
+   * can compare the username to the hoodie.id, which is the
+   * same for anonymous accounts.
+   *
+   * @return     {Object} Promise
+   */
   account.hasAnonymousAccount = function hasAnonymousAccount() {
-    return !! getAnonymousPassword();
+    return !!getAnonymousPassword();
   };
 
 
-  // set / get / remove anonymous password
-  // ---------------------------------------
-
-  //
   var anonymousPasswordKey = '_account.anonymousPassword';
 
   function setAnonymousPassword(password) {
@@ -230,22 +206,22 @@ function hoodieAccount(hoodie) {
     });
   }
 
-
-  // sign in with username & password
-  // ----------------------------------
-
-  // uses standard CouchDB API to create a new user session (POST /_session).
-  // Besides the standard sign in we also check if the account has been confirmed
-  // (roles include 'confirmed' role).
-  //
-  // When signing in, by default all local data gets cleared beforehand.
-  // Otherwise data that has been created beforehand (authenticated with another user
-  // account or anonymously) would be merged into the user account that signs in.
-  // That only applies if username isn't the same as current username.
-  //
-  // To prevent data loss, signIn can be called with options.moveData = true, that wll
-  // move all data from the anonymous account to the account the user signed into.
-  //
+  /**
+   * uses standard CouchDB API to create a new user session (POST /_session).
+   * Besides the standard sign in we also check if the account has been confirmed
+   * (roles include 'confirmed' role).
+   *
+   * When signing in, by default all local data gets cleared beforehand.
+   * Otherwise data that has been created beforehand (authenticated with another user
+   * account or anonymously) would be merged into the user account that signs in.
+   * That only applies if username isn't the same as current username.
+   * To prevent data loss, signIn can be called with options.moveData = true, that wll
+   * move all data from the anonymous account to the account the user signed into.
+   * @param      {String}   username
+   * @param      {String}   password
+   * @param      {Object}   options
+   * @return     {Object}   Promise
+   */
   account.signIn = function signIn(username, password, options) {
     var isReauthenticating = (username === account.username);
     var isSilent;
@@ -291,11 +267,13 @@ function hoodieAccount(hoodie) {
     });
   };
 
+  /**
+   * Uses standard CouchDB API to invalidate a user session (DELETE /_session)
+   * @param      {String}   password
+   * @param      {Object}   options
+   * @return     {Object}   Promise
+   */
 
-  // sign out
-  // ---------
-
-  // uses standard CouchDB API to invalidate a user session (DELETE /_session)
   //
   account.signOut = function signOut(options) {
     var cleanupMethod;
@@ -314,32 +292,24 @@ function hoodieAccount(hoodie) {
   };
 
 
-  // Request
-  // ---
-
-  // shortcut
-  //
   account.request = function accountRequest(type, path, options) {
     options = options || {};
     return hoodie.request.apply(hoodie, arguments);
   };
 
 
-  // db
-  // ----
-
-  // return name of db
-  //
+  /**
+   * @return     {String} UserDB Name
+   */
   account.db = function db() {
     return 'user/' + hoodie.id();
   };
 
 
-  // fetch
-  // -------
-
-  // fetches _users doc from CouchDB and caches it in _doc
-  //
+  /**
+   * fetches _users doc from CouchDB and caches it in _doc
+   * @return     {Object} user doc
+   */
   account.fetch = function fetch(username) {
     var currentUsername = account.hasAnonymousAccount() ? hoodie.id() : account.username;
 
@@ -362,14 +332,14 @@ function hoodieAccount(hoodie) {
     });
   };
 
-
-  // change password
-  // -----------------
-
-  // Note: the hoodie API requires the currentPassword for security reasons,
-  // but couchDb doesn't require it for a password change, so it's ignored
-  // in this implementation of the hoodie API.
-  //
+  /**
+   * Note: the hoodie API requires the currentPassword for security reasons,
+   * but couchDb doesn't require it for a password change, so it's ignored
+   * in this implementation of the hoodie API.
+   * @param      {String} currentPassword
+   * @param      {String} newPassword
+   * @return     {Object} Promise
+   */
   account.changePassword = function changePassword(currentPassword, newPassword) {
 
     if (!account.username) {
@@ -388,18 +358,16 @@ function hoodieAccount(hoodie) {
     });
   };
 
-
-  // reset password
-  // ----------------
-
-  // This is kind of a hack. We need to create an object anonymously
-  // that is not exposed to others. The only CouchDB API offering such
-  // functionality is the _users database.
-  //
-  // So we actually sign up a new couchDB user with some special attributes.
-  // It will be picked up by the password reset worker and removed
-  // once the password was reset.
-  //
+  /**
+   * This is kind of a hack. We need to create an object anonymously
+   * that is not exposed to others. The only CouchDB API offering such
+   * functionality is the _users database.
+   * So we actually sign up a new couchDB user with some special attributes.
+   * It will be picked up by the password reset worker and removed
+   * once the password was reset.
+   * @param      {String} username
+   * @return     {Object} Promise
+   */
   account.resetPassword = function resetPassword(username) {
     var data, key, options, resetPasswordId;
 
@@ -441,20 +409,17 @@ function hoodieAccount(hoodie) {
     });
   };
 
-  // checkPasswordReset
-  // ---------------------
-
-  // check for the status of a password reset. It might take
-  // a while until the password reset worker picks up the job
-  // and updates it
-  //
-  // If a password reset request was successful, the $passwordRequest
-  // doc gets removed from _users by the worker, therefore a 401 is
-  // what we are waiting for.
-  //
-  // Once called, it continues to request the status update with a
-  // one second timeout.
-  //
+  /**
+   * check for the status of a password reset. It might take
+   * a while until the password reset worker picks up the job
+   * and updates it
+   * If a password reset request was successful, the $passwordRequest
+   * doc gets removed from _users by the worker, therefore a 401 is
+   * what we are waiting for.
+   * Once called, it continues to request the status update with a
+   * one second timeout.
+   * @return     {Object} Promise
+   */
   account.checkPasswordReset = function checkPasswordReset() {
     var hash, options, resetPasswordId, url, username, couchUsername;
 
@@ -480,28 +445,32 @@ function hoodieAccount(hoodie) {
     };
 
     return withSingleRequest('passwordResetStatus', function() {
-      return account.request('GET', url, options).then(
-      handlePasswordResetStatusRequestSuccess, handlePasswordResetStatusRequestError(username)).fail(function(error) {
-        if (error.name === 'HoodiePendingError') {
-          global.setTimeout(account.checkPasswordReset, 1000);
-          return;
-        }
-        return account.trigger('error:passwordreset', error, username);
-      });
+      return account.request('GET', url, options)
+      .then(
+        handlePasswordResetStatusRequestSuccess,
+        handlePasswordResetStatusRequestError(username))
+        .fail(function(error) {
+          if (error.name === 'HoodiePendingError') {
+            global.setTimeout(account.checkPasswordReset, 1000);
+            return;
+          }
+          return account.trigger('error:passwordreset', error, username);
+        });
     });
   };
 
 
-  // change username
-  // -----------------
 
-  // Note: the hoodie API requires the current password for security reasons,
-  // but technically we cannot (yet) prevent the user to change the username
-  // without knowing the current password, so it's ignored in the current
-  // implementation.
-  //
-  // But the current password is needed to login with the new username.
-  //
+  /**
+   * Note: the hoodie API requires the current password for security reasons,
+   * but technically we cannot (yet) prevent the user to change the username
+   * without knowing the current password, so it is ignored in the current
+   * implementation.
+   * But the current password is needed to login with the new username.
+   * @param      {String} currentPassword
+   * @param      {String} newUsername
+   * @return     {Object} Promise
+   */
   account.changeUsername = function changeUsername(currentPassword, newUsername) {
     var currentUsername = account.hasAnonymousAccount() ? hoodie.id() : account.username;
 
@@ -520,11 +489,6 @@ function hoodieAccount(hoodie) {
   };
 
 
-  // destroy
-  // ---------
-
-  // destroys a user's account
-  //
   account.destroy = function destroy() {
     if (!account.hasAccount()) {
       return cleanupAndTriggerSignOut();
@@ -535,30 +499,33 @@ function hoodieAccount(hoodie) {
   };
 
 
-  //
-  // subscribe to events coming outside
-  //
+  /**
+   * subscribe to events coming outside
+   */
   function subscribeToOutsideEvents() {
     hoodie.on('remote:error:unauthenticated', reauthenticate);
   }
 
-  // allow to run this once from outside
+  /**
+   * allow to run this once from outside
+   */
   account.subscribeToOutsideEvents = function() {
     subscribeToOutsideEvents();
     delete account.subscribeToOutsideEvents;
   };
 
 
-  // PRIVATE
-  // ---------
-
-  // reauthenticate: force hoodie to reauthenticate
+  /**
+   * reauthenticate: force hoodie to reauthenticate
+   */
   function reauthenticate() {
     authenticated = undefined;
     return account.authenticate();
   }
 
-  // setters
+  /**
+   * setters
+   */
   function setUsername(newUsername) {
     if (account.username === newUsername) {
       return;
@@ -578,20 +545,18 @@ function hoodieAccount(hoodie) {
   }
 
 
-  //
-  // handle a successful authentication request.
-  //
-  // As long as there is no server error or internet connection issue,
-  // the authenticate request (GET /_session) does always return
-  // a 200 status. To differentiate whether the user is signed in or
-  // not, we check `userCtx.name` in the response. If the user is not
-  // signed in, it's null, otherwise the name the user signed in with
-  //
-  // If the user is not signed in, we differentiate between users that
-  // signed in with a username / password or anonymously. For anonymous
-  // users, the password is stored in local store, so we don't need
-  // to trigger an 'unauthenticated' error, but instead try to sign in.
-  //
+  /**
+  * handle a successful authentication request.
+  * As long as there is no server error or internet connection issue,
+  * the authenticate request (GET /_session) does always return
+  * a 200 status. To differentiate whether the user is signed in or
+  * not, we check `userCtx.name` in the response. If the user is not
+  * signed in, it's null, otherwise the name the user signed in with
+  * If the user is not signed in, we differentiate between users that
+  * signed in with a username / password or anonymously. For anonymous
+  * users, the password is stored in local store, so we don't need
+  * to trigger an 'unauthenticated' error, but instead try to sign in.
+  */
   function handleAuthenticateRequestSuccess(response) {
     if (response.userCtx.name) {
       authenticated = true;
@@ -608,16 +573,16 @@ function hoodieAccount(hoodie) {
   }
 
 
-  //
-  // handle response of a successful signUp request.
-  // Response looks like:
-  //
-  //     {
-  //         'ok': true,
-  //         'id': 'org.couchdb.user:joe',
-  //         'rev': '1-e8747d9ae9776706da92810b1baa4248'
-  //     }
-  //
+  /**
+   * ** handle response of a successful signUp request.
+  * Response looks like:
+  /
+  *  {
+  *    'ok': true,
+  *    'id': 'org.couchdb.user:joe',
+  *    'rev': '1-e8747d9ae9776706da92810b1baa4248'
+  *  }
+  */
   function handleSignUpSuccess(username, password) {
 
     return function(response) {
@@ -626,17 +591,16 @@ function hoodieAccount(hoodie) {
     };
   }
 
-  //
-  // handle response of a failed signUp request.
-  //
-  // In case of a conflict, reject with "username already exists" error
-  // https://github.com/hoodiehq/hoodie.js/issues/174
-  // Error passed for request looks like this
-  //
-  //     {
-  //         "name": "HoodieConflictError",
-  //         "message": "Object already exists."
-  //     }
+  /**
+   * handle response of a failed signUp request.
+   * In case of a conflict, reject with "username already exists" error
+   * https://github.com/hoodiehq/hoodie.js/issues/174
+   * Error passed for request looks like this
+   *     {
+   *         "name": "HoodieConflictError",
+   *         "message": "Object already exists."
+   *     }
+   */
   function handleSignUpError(username) {
 
     return function(error) {
@@ -648,14 +612,14 @@ function hoodieAccount(hoodie) {
   }
 
 
-  //
-  // a delayed sign in is used after sign up and after a
-  // username change.
-  //
+  /**
+   * a delayed sign in is used after sign up and after a
+   * username change.
+   */
   function delayedSignIn(username, password, options, defer) {
 
     // delayedSignIn might call itself, when the user account
-    // is pending. In this case it passes the original defer,
+    //is pending. In this case it passes the original defer,
     // to keep a reference and finally resolve / reject it
     // at some point
     if (!defer) {
@@ -667,7 +631,6 @@ function hoodieAccount(hoodie) {
       promise.done(defer.resolve);
       promise.fail(function(error) {
         if (error.name === 'HoodieAccountUnconfirmedError') {
-
           // It might take a bit until the account has been confirmed
           delayedSignIn(username, password, options, defer);
         } else {
@@ -681,23 +644,21 @@ function hoodieAccount(hoodie) {
   }
 
 
-  //
-  // parse a successful sign in response from couchDB.
-  // Response looks like:
-  //
-  //     {
-  //         'ok': true,
-  //         'name': 'test1',
-  //         'roles': [
-  //             'mvu85hy',
-  //             'confirmed'
-  //         ],
-  //         'bearerToken': 'dXNlci2Mjow9N2Rh2WyZfioB1ubEsc5n9taWNoaWVsMjo1MzkxOEQKpdFA'
-  //     }
-  //
-  // we want to turn it into 'test1', 'mvu85hy', 'dXNlci2Mjow9N2Rh2WyZfioB1ubEsc5n9taWNoaWVsMjo1MzkxOEQKpdFA'
-  // or reject the promise in case an error occurred ('roles' array contains 'error' or is empty)
-  //
+  /**
+  * parse a successful sign in response from couchDB.
+  * Response looks like:
+  *     {
+  *         'ok': true,
+  *         'name': 'test1',
+  *         'roles': [
+  *             'mvu85hy',
+  *             'confirmed'
+  *         ],
+  *        'bearerToken': 'dXNlci2Mjow9N2Rh2WyZfioB1ubEsc5n9taWNoaWVsMjo1MzkxOEQKpdFA'
+  *     }
+  ** we want to turn it into 'test1', 'mvu85hy', 'dXNlci2Mjow9N2Rh2WyZfioB1ubEsc5n9taWNoaWVsMjo1MzkxOEQKpdFA'
+  ** or reject the promise in case an error occurred ('roles' array contains 'error' or is empty)
+  */
   function handleSignInSuccess(options) {
     options = options || {};
 
@@ -715,7 +676,7 @@ function hoodieAccount(hoodie) {
       // and adds the 'error' role to the users doc object. If the user has the
       // 'error' role, we need to fetch his _users doc to find out what the error
       // is, before we can reject the promise.
-      //
+
       // TODO:
       // In that case we reject the sign in, but towards the backend we still get
       // a new session, and the old one gets removed. That leads to a state like
@@ -752,15 +713,15 @@ function hoodieAccount(hoodie) {
   }
 
 
-  //
-  // If the request was successful there might have occurred an
-  // error, which the worker stored in the special $error attribute.
-  // If that happens, we return a rejected promise with the error
-  // Otherwise reject the promise with a 'pending' error,
-  // as we are not waiting for a success full response, but a 401
-  // error, indicating that our password was changed and our
-  // current session has been invalidated
-  //
+  /**
+   * If the request was successful there might have occurred an
+   * error, which the worker stored in the special $error attribute.
+   * If that happens, we return a rejected promise with the error
+   * Otherwise reject the promise with a 'pending' error,
+   * as we are not waiting for a success full response, but a 401
+   * error, indicating that our password was changed and our
+   * current session has been invalidated
+   */
   function handlePasswordResetStatusRequestSuccess(passwordResetObject) {
     var error;
 
@@ -778,10 +739,10 @@ function hoodieAccount(hoodie) {
   }
 
 
-  //
-  // If the error is a 401, it's exactly what we've been waiting for.
-  // In this case we resolve the promise.
-  //
+  /**
+   * If the error is a 401, it's exactly what we've been waiting for.
+   * In this case we resolve the promise.
+   */
   function handlePasswordResetStatusRequestError(username) {
     return function(error) {
       if (error.name === 'HoodieUnauthorizedError') {
@@ -796,10 +757,10 @@ function hoodieAccount(hoodie) {
   }
 
 
-  //
-  // wait until a password reset gets either completed or marked as failed
-  // and resolve / reject respectively
-  //
+  /**
+   * wait until a password reset gets either completed or marked as failed
+   * and resolve / reject respectively
+   */
   function awaitPasswordResetResult() {
     var defer = getDefer();
 
@@ -817,15 +778,15 @@ function hoodieAccount(hoodie) {
     return defer.promise();
   }
 
-  //
-  // when a password reset fails, remove it from /_users
-  //
+  /**
+   * when a password reset fails, remove it from /_users
+   */
   function removePasswordResetObject (error) {
     var passwordResetObject = error.object;
 
     // get username & password for authentication
     var username = passwordResetObject.name; // $passwordReset/username/randomhash
-    var password = username.substr(15); // => // username/randomhash
+    var password = username.substr(15); // => ** username/randomhash
     var url = '/_users/' + (encodeURIComponent(userDocPrefix + ':' + username));
     var hash = btoa(username + ':' + password);
 
@@ -845,14 +806,13 @@ function hoodieAccount(hoodie) {
     config.unset('_account.resetPasswordId');
   }
 
-  //
-  // change username and password in 3 steps
-  //
-  // 1. assure we have a valid session
-  // 2. update _users doc with new username and new password (if provided)
-  // 3. if username changed, wait until current _users doc got removed
-  // 3. sign in with new credentials to create new session.
-  //
+  /**
+   * change username and password in 3 steps
+   * 1. assure we have a valid session
+   * 2. update _users doc with new username and new password (if provided)
+   * 3. if username changed, wait until current _users doc got removed
+   * 3. sign in with new credentials to create new session.
+   */
   function changeUsernameAndPassword(currentPassword, newUsername, newPassword) {
     var currentUsername = account.hasAnonymousAccount() ? hoodie.id() : account.username;
 
@@ -862,14 +822,12 @@ function hoodieAccount(hoodie) {
     });
   }
 
-
-  //
-  // turn an anonymous account into a real account. Internally, this is what happens:
-  //
-  // 1. rename the username from `<hoodieId>` to `username`
-  // 2. Set password to `password`
-  // 3.
-  //
+  /**
+   * turn an anonymous account into a real account. Internally, this is what happens:
+   * 1. rename the username from `<hoodieId>` to `username`
+   * 2. Set password to `password`
+   * 3.
+   */
   function upgradeAnonymousAccount(username, password) {
     var currentPassword = getAnonymousPassword();
 
@@ -880,10 +838,10 @@ function hoodieAccount(hoodie) {
   }
 
 
-  //
-  // we now can be sure that we fetched the latest _users doc, so we can update it
-  // without a potential conflict error.
-  //
+  /**
+   * we now can be sure that we fetched the latest _users doc, so we can update it
+   * without a potential conflict error.
+   */
   function handleFetchBeforeDestroySuccess() {
 
     disconnect();
@@ -897,14 +855,14 @@ function hoodieAccount(hoodie) {
     });
   }
 
-  //
-  // dependant on what kind of error we get, we want to ignore
-  // it or not.
-  // When we get a 'HoodieNotFoundError' it means that the _users doc have
-  // been removed already, so we don't need to do it anymore, but
-  // still want to finish the destroy locally, so we return a
-  // resolved promise
-  //
+  /**
+   * dependant on what kind of error we get, we want to ignore
+   * it or not.
+   * When we get a `HoodieNotFoundError` it means that the _users doc have
+   * been removed already, so we dont need to do it anymore, but
+   * still want to finish the destroy locally, so we return a
+   * resolved promise
+   */
   function handleFetchBeforeDestroyError(error) {
     if (error.name === 'HoodieNotFoundError') {
       return resolve();
@@ -913,10 +871,10 @@ function hoodieAccount(hoodie) {
     }
   }
 
-  //
-  // remove everything form the current account, so a new account can be initiated.
-  // make sure to remove a promise.
-  //
+  /**
+   * remove everything form the current account, so a new account can be initiated.
+   * make sure to remove a promise.
+   */
   function cleanup() {
 
     // allow other modules to clean up local data & caches
@@ -928,15 +886,13 @@ function hoodieAccount(hoodie) {
     return resolve();
   }
 
-  //
-  // make sure to remove a promise
-  //
+  /**
+   * make sure to remove a promise
+   */
   function disconnect() {
     return hoodie.remote.disconnect();
   }
 
-
-  //
   function cleanupAndTriggerSignOut() {
     var username = account.username;
     return cleanup().then(function() {
@@ -945,16 +901,15 @@ function hoodieAccount(hoodie) {
   }
 
 
-  //
-  // depending on whether the user signedUp manually or has been signed up
-  // anonymously the prefix in the CouchDB _users doc differentiates.
-  // An anonymous user is characterized by its username, that equals
-  // its hoodie.id (see `anonymousSignUp`)
-  //
-  // We differentiate with `hasAnonymousAccount()`, because `userTypeAndId`
-  // is used within `signUp` method, so we need to be able to differentiate
-  // between anonymous and normal users before an account has been created.
-  //
+  /**
+   * depending on whether the user signedUp manually or has been signed up
+   * anonymously the prefix in the CouchDB _users doc differentiates.
+   * An anonymous user is characterized by its username, that equals
+   * its hoodie.id (see `anonymousSignUp`)
+   * We differentiate with `hasAnonymousAccount()`, because `userTypeAndId`
+   * is used within `signUp` method, so we need to be able to differentiate
+   * between anonymous and normal users before an account has been created.
+   */
   function userTypeAndId(username) {
     var type;
 
@@ -967,9 +922,9 @@ function hoodieAccount(hoodie) {
   }
 
 
-  //
-  // turn a username into a valid _users doc._id
-  //
+  /**
+   * turn a username into a valid _users doc._id
+   */
   function userDocKey(username) {
     var currentUsername = account.hasAnonymousAccount() ? hoodie.id() : account.username;
 
@@ -977,25 +932,23 @@ function hoodieAccount(hoodie) {
     return '' + userDocPrefix + ':' + userTypeAndId(username);
   }
 
-  //
-  // get URL of my _users doc
-  //
+  /**
+   * get URL of my _users doc
+   */
   function userDocUrl(username) {
     return '/_users/' + (encodeURIComponent(userDocKey(username)));
   }
 
 
-  //
-  // update my _users doc.
-  //
-  // If a new username has been passed, we set the special attribute $newUsername.
-  // This will let the username change worker create create a new _users doc for
-  // the new username and remove the current one
-  //
-  // If a new password has been passed, salt and password_sha get removed
-  // from _users doc and add the password in clear text. CouchDB will replace it with
-  // according password_sha and a new salt server side
-  //
+  /**
+   * update my _users doc.
+   * If a new username has been passed, we set the special attribute $newUsername.
+   * This will let the username change worker create create a new _users doc for
+   * the new username and remove the current one
+   * If a new password has been passed, salt and password_sha get removed
+   * from _users doc and add the password in clear text. CouchDB will replace it with
+   * according password_sha and a new salt server side
+   */
   function sendChangeUsernameAndPasswordRequest(currentPassword, newUsername, newPassword) {
 
     return function() {
@@ -1036,10 +989,10 @@ function hoodieAccount(hoodie) {
   }
 
 
-  //
-  // depending on whether a newUsername has been passed, we can sign in right away
-  // or have to wait until the worker removed the old account
-  //
+  /**
+   * depending on whether a newUsername has been passed, we can sign in right away
+   * or have to wait until the worker removed the old account
+   */
   function handleChangeUsernameAndPasswordResponse(newUsername, newPassword) {
     var currentUsername = account.hasAnonymousAccount() ? hoodie.id() : account.username;
 
@@ -1064,9 +1017,9 @@ function hoodieAccount(hoodie) {
     };
   }
 
-  //
-  // keep sending sign in requests until the server returns a 401
-  //
+  /**
+   * keep sending sign in requests until the server returns a 401
+   */
   function awaitCurrentAccountRemoved(username, password, defer) {
     if (!defer) {
       defer = getDefer();
@@ -1095,10 +1048,10 @@ function hoodieAccount(hoodie) {
   }
 
 
-  //
-  // make sure that the same request doesn't get sent twice
-  // by cancelling the previous one.
-  //
+  /**
+   * make sure that the same request doesnt get sent twice
+   * by cancelling the previous one.
+   */
   function withPreviousRequestsAborted(name, requestFunction) {
     if (requests[name] !== undefined) {
       if (typeof requests[name].abort === 'function') {
@@ -1110,10 +1063,10 @@ function hoodieAccount(hoodie) {
   }
 
 
-  //
-  // if there is a pending request, return its promise instead
-  // of sending another request
-  //
+  /**
+   * if there is a pending request, return its promise instead
+   * of sending another request
+   */
   function withSingleRequest(name, requestFunction) {
 
     if (requests[name] !== undefined) {
@@ -1129,10 +1082,10 @@ function hoodieAccount(hoodie) {
   }
 
 
-  //
-  // push local changes when user signs out, unless he enforces sign out
-  // in any case with `{ignoreLocalChanges: true}`
-  //
+  /**
+   * push local changes when user signs out, unless he enforces sign out
+   * in any case with `{ignoreLocalChanges: true}`
+   */
   function pushLocalChanges(options) {
     if (hoodie.store.hasLocalChanges() && !options.ignoreLocalChanges) {
       return hoodie.remote.push();
@@ -1140,24 +1093,22 @@ function hoodieAccount(hoodie) {
     return resolve();
   }
 
-  //
   function sendSignOutRequest() {
     return withSingleRequest('signOut', function() {
       return account.request('DELETE', '/_session');
     });
   }
 
-
-  //
-  // the sign in request that starts a CouchDB session if
-  // it succeeds. We separated the actual sign in request from
-  // the signIn method, as the latter also runs signOut internally
-  // to clean up local data before starting a new session. But as
-  // other methods like signUp or changePassword do also need to
-  // sign in the user (again), these need to send the sign in
-  // request but without a signOut beforehand, as the user remains
-  // the same.
-  //
+  /**
+   * the sign in request that starts a CouchDB session if
+   * it succeeds. We separated the actual sign in request from
+   * the signIn method, as the latter also runs signOut internally
+   * to clean up local data before starting a new session. But as
+   * other methods like signUp or changePassword do also need to
+   * sign in the user (again), these need to send the sign in
+   * request but without a signOut beforehand, as the user remains
+   * the same.
+   */
   function sendSignInRequest(username, password, options) {
     var requestOptions = {
       data: {
@@ -1173,17 +1124,16 @@ function hoodieAccount(hoodie) {
     });
   }
 
-  //
-  // Creates a /_users document that will techincally allow
-  // to authenticate with passed username / password. But in
-  // Hoodie there is also an "unconfirmed" state that is the
-  // default state until the Hoodie Server creates the user
-  // database and sets a confirmed flag + user roles.
-  //
-  // sendSignUpRequest calls the progress callbacks when the
-  // user doc got created, but does not resolve before the
-  // user account got confirmed.
-  //
+  /**
+   * Creates a /_users document that will techincally allow
+   * to authenticate with passed username / password. But in
+   * Hoodie there is also an "unconfirmed" state that is the
+   * default state until the Hoodie Server creates the user
+   * database and sets a confirmed flag + user roles.
+   * sendSignUpRequest calls the progress callbacks when the
+   * user doc got created, but does not resolve before the
+   * user account got confirmed.
+   */
   function sendSignUpRequest (username, password) {
     var defer = getDefer();
     var options;
@@ -1213,14 +1163,10 @@ function hoodieAccount(hoodie) {
   }
 
 
-  //
   function now() {
     return new Date();
   }
 
-  //
-  // expose public account API
-  //
   hoodie.account = account;
 }
 

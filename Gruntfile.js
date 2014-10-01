@@ -146,6 +146,17 @@ module.exports = function(grunt) {
         ],
         pushTo: 'origin master'
       }
+    },
+    doxx: {
+      all: {
+        src: 'src',
+        target: 'docs',
+        options: {
+          title: 'Hoodie.js',
+          readme: 'README.md',
+          template: 'build/templates/doxx.jade'
+        }
+      }
     }
 
   });

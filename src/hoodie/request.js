@@ -1,7 +1,3 @@
-//
-// hoodie.request
-// ================
-
 // Hoodie's central place to send request to its backend.
 // At the moment, it's a wrapper around jQuery's ajax method,
 // but we might get rid of this dependency in the future.
@@ -22,20 +18,17 @@ var hoodiefyRequestErrorName = require('../utils/hoodiefy_request_error_name');
 var extend = require('extend');
 var rejectWith = require('../utils/promise/reject_with');
 
-function hoodieRequest(hoodie) {
+module.exports = function (hoodie) {
   var $ajax = $.ajax;
 
   // Hoodie backend listens to requests prefixed by /_api,
   // so we prefix all requests with relative URLs
   var API_PATH = '/_api';
 
-  // Requests
-  // ----------
-
-  // sends requests to the hoodie backend.
-  //
-  //     promise = hoodie.request('GET', '/user_database/doc_id')
-  //
+  /**
+   * sends requests to the hoodie backend.
+   * `promise = hoodie.request('GET', '/user_database/doc_id')`
+   */
   function request(type, url, options) {
     var defaults, requestPromise, pipedPromise;
 
@@ -45,8 +38,6 @@ function hoodieRequest(hoodie) {
       type: type,
       dataType: 'json'
     };
-
-    // if absolute path passed, set CORS headers
 
     // if relative path passed, prefix with baseUrl
     if (!/^http/.test(url)) {
@@ -82,9 +73,8 @@ function hoodieRequest(hoodie) {
     return pipedPromise;
   }
 
-  //
-  //
-  //
+  /**
+   */
   function handleRequestError(xhr) {
     var error;
 
@@ -106,18 +96,16 @@ function hoodieRequest(hoodie) {
     return rejectWith(error).promise();
   }
 
-  //
-  // CouchDB returns errors in JSON format, with the properties
-  // `error` and `reason`. Hoodie uses JavaScript's native Error
-  // properties `name` and `message` instead, so we are normalizing
-  // that.
-  //
-  // Besides the renaming we also do a matching with a map of known
-  // errors to make them more clear. For reference, see
-  // https://wiki.apache.org/couchdb/Default_http_errors &
-  // https://github.com/apache/couchdb/blob/master/src/couchdb/couch_httpd.erl#L807
-  //
-
+  /**
+   * CouchDB returns errors in JSON format, with the properties
+   * `error` and `reason`. Hoodie uses JavaScript's native Error
+   * properties `name` and `message` instead, so we are normalizing
+   * that.
+   * Besides the renaming we also do a matching with a map of known
+   * errors to make them more clear. For reference, see
+   * https://wiki.apache.org/couchdb/Default_http_errors &
+   * https://github.com/apache/couchdb/blob/master/src/couchdb/couch_httpd.erl#L807
+   */
   function parseErrorFromResponse(xhr) {
     var error = JSON.parse(xhr.responseText);
 
@@ -150,10 +138,9 @@ function hoodieRequest(hoodie) {
     500: 'HoodieServerError'
   };
 
-  //
-  // public API
-  //
+  /**
+   * public API
+   */
   hoodie.request = request;
-}
+};
 
-module.exports = hoodieRequest;

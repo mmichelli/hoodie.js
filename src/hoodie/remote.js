@@ -1,21 +1,16 @@
-// AccountRemote
-// ===============
-
-// Connection / Socket to our couch
-//
-// AccountRemote is using CouchDB's `_changes` feed to
-// listen to changes and `_bulk_docs` to push local changes
-//
-// When hoodie.remote is continuously syncing (default),
-// it will continuously  synchronize with local store,
-// otherwise sync, pull or push can be called manually
-//
-// Note that hoodieRemote must be initialized before the
-// API is available:
-//
-//     hoodieRemote(hoodie);
-//     hoodie.remote.init();
-//
+/** AccountRemote
+* ===============
+* Connection / Socket to our couch
+* AccountRemote is using CouchDB's `_changes` feed to
+* listen to changes and `_bulk_docs` to push local changes
+* When hoodie.remote is continuously syncing (default),
+* it will continuously  synchronize with local store,
+* otherwise sync, pull or push can be called manually
+* Note that hoodieRemote must be initialized before the
+* API is available:
+*     hoodieRemote(hoodie);
+*     hoodie.remote.init();
+*/
 
 var config = require('../utils/config');
 var rejectWith = require('../utils/promise/reject_with');
@@ -30,27 +25,26 @@ function hoodieRemote (hoodie) {
     // do not prefix files for my own remote
     prefix: '',
 
-    //
     since: sinceNrCallback,
 
     //
     defaultObjectsToPush: hoodie.store.changedObjects,
 
-    //
     knownObjects: hoodie.store.index().map( function(key) {
       var typeAndId = key.split(/\//);
-      return { type: typeAndId[0], id: typeAndId[1]};
+      return {
+        type: typeAndId[0],
+        id: typeAndId[1]
+      };
     })
   });
 
-  // Connect
-  // ---------
-
-  // we slightly extend the original remote.connect method
-  // provided by `hoodieRemoteStore`, to check if the user
-  // has an account beforehand. We also hardcode the right
-  // name for remote (current user's database name)
-  //
+  /**
+  * we slightly extend the original remote.connect method
+  * provided by `hoodieRemoteStore`, to check if the user
+  * has an account beforehand. We also hardcode the right
+  * name for remote (current user's database name)
+  */
   var originalConnectMethod = remote.connect;
   remote.connect = function connect() {
     if (! hoodie.account.hasAccount() ) {
@@ -59,10 +53,9 @@ function hoodieRemote (hoodie) {
     return originalConnectMethod( hoodie.account.db() );
   };
 
-  // trigger
-  // ---------
-
-  // proxies to hoodie.trigger
+  /**
+   *  proxies to hoodie.trigger
+   */
   remote.trigger = function trigger() {
     var eventName;
 
@@ -74,31 +67,26 @@ function hoodieRemote (hoodie) {
   };
 
 
-  // on
-  // ---------
-
-  // proxies to hoodie.on
+  /**
+  * proxies to hoodie.on
+  */
   remote.on = function on(eventName, data) {
     eventName = eventName.replace(/(^| )([^ ]+)/g, '$1'+'remote:$2');
     return hoodie.on(eventName, data);
   };
 
 
-  // unbind
-  // ---------
-
-  // proxies to hoodie.unbind
+  /**
+  * proxies to hoodie.unbind
+  */
   remote.unbind = function unbind(eventName, callback) {
     eventName = eventName.replace(/(^| )([^ ]+)/g, '$1'+'remote:$2');
     return hoodie.unbind(eventName, callback);
   };
 
 
-  // Private
-  // ---------
-
-  // getter / setter for since number
-  //
+  /**
+   */
   function sinceNrCallback(sinceNr) {
     if (sinceNr) {
       return config.set('_remote.since', sinceNr);
@@ -107,9 +95,9 @@ function hoodieRemote (hoodie) {
     return config.get('_remote.since') || 0;
   }
 
-  //
-  // subscribe to events coming from outside
-  //
+  /**
+  * subscribe to events coming from outside
+  */
   function subscribeToOutsideEvents() {
 
     hoodie.on('remote:connect', function() {
@@ -134,19 +122,21 @@ function hoodieRemote (hoodie) {
     hoodie.on('account:signout', remote.disconnect);
   }
 
-  // allow to run this once from outside
+  /**
+   * allow to run this once from outside
+   */
   remote.subscribeToOutsideEvents = function() {
     subscribeToOutsideEvents();
     delete remote.subscribeToOutsideEvents;
   };
 
-  //
   // expose remote API
-  //
   hoodie.remote = remote;
 }
 
-function hoodieRemoteFactory(hoodie) {
+/**
+ */
+module.exports = function (hoodie) {
 
   var init = function() {
     hoodieRemote(hoodie);
@@ -155,6 +145,4 @@ function hoodieRemoteFactory(hoodie) {
   hoodie.remote = {
     init: init
   };
-}
-
-module.exports = hoodieRemoteFactory;
+};

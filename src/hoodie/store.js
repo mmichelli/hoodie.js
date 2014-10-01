@@ -1,7 +1,3 @@
-// LocalStore
-// ============
-
-//
 var hoodieStoreApi = require('../lib/store/api');
 var HoodieObjectTypeError = require('../lib/error/object_type');
 var HoodieObjectIdError = require('../lib/error/object_id');
@@ -15,8 +11,7 @@ var resolveWith = require('../utils/promise/resolve_with');
 
 var localStorageWrapper = require('../utils/local_storage_wrapper');
 
-//
-function hoodieStore (hoodie) {
+module.exports = function (hoodie) {
 
   var localStore = {};
 
@@ -41,24 +36,21 @@ function hoodieStore (hoodie) {
 
 
 
-  // ------
-  //
-  // saves the passed object into the store and replaces
-  // an eventually existing object with same type & id.
-  //
-  // When id is undefined, it gets generated an new object gets saved
-  //
-  // It also adds timestamps along the way:
-  //
-  // * `createdAt` unless it already exists
-  // * `updatedAt` every time
-  // * `_syncedAt`  if changes comes from remote
-  //
-  // example usage:
-  //
-  //     store.save('car', undefined, {color: 'red'})
-  //     store.save('car', 'abc4567', {color: 'red'})
-  //
+  /**
+   * saves the passed object into the store and replaces
+   * an eventually existing object with same type & id.
+   * When id is undefined, it gets generated an new object gets saved
+   * It also adds timestamps along the way:
+   * `createdAt` unless it already exists
+   * `updatedAt` every time
+   * `_syncedAt`  if changes comes from remote
+   *
+   * example usage:
+   * ```
+   * store.save('car', undefined, {color: 'red'})
+   * store.save('car', 'abc4567', {color: 'red'})
+   * ```
+   */
   localStore.save = function save(object, options) {
     var currentObject, defer, error, event, isNew, key;
 
@@ -152,14 +144,12 @@ function hoodieStore (hoodie) {
   };
 
 
-  // find
-  // ------
-
-  // loads one object from Store, specified by `type` and `id`
-  //
-  // example usage:
-  //
-  //     store.find('car', 'abc4567')
+  /**
+   * loads one object from Store, specified by `type` and `id`
+   *
+   * `store.find('car', 'abc4567')`
+   *
+   */
   localStore.find = function(type, id) {
     var error, object;
 
@@ -185,18 +175,14 @@ function hoodieStore (hoodie) {
   };
 
 
-  // findAll
-  // ---------
-
-  // returns all objects from store.
-  // Can be optionally filtered by a type or a function
-  //
-  // example usage:
-  //
-  //     store.findAll()
-  //     store.findAll('car')
-  //     store.findAll(function(obj) { return obj.brand == 'Tesla' })
-  //
+  /**
+   * returns all objects from store.
+   * Can be optionally filtered by a type or a function
+   * example usage:
+   *    store.findAll()
+   *    store.findAll('car')
+   *    store.findAll(function(obj) { return obj.brand == 'Tesla' })
+   */
   localStore.findAll = function findAll(filter) {
     var currentType, defer, error, id, key, keys, obj, results, type;
 
@@ -270,13 +256,12 @@ function hoodieStore (hoodie) {
   };
 
 
-  // Remove
-  // --------
-
-  // Removes one object specified by `type` and `id`.
-  //
-  // when object has been synced before, mark it as deleted.
-  // Otherwise remove it from Store.
+  /**
+   * Removes one object specified by `type` and `id`.
+   *
+   * when object has been synced before, mark it as deleted.
+   *Otherwise remove it from Store.
+   */
   localStore.remove = function remove(type, id, options) {
     var key, object, objectWasMarkedAsDeleted;
 
@@ -338,13 +323,12 @@ function hoodieStore (hoodie) {
   };
 
 
-  // Remove all
-  // ----------
-
-  // Removes one object specified by `type` and `id`.
-  //
-  // when object has been synced before, mark it as deleted.
-  // Otherwise remove it from Store.
+  /**
+   * Removes one object specified by `type` and `id`.
+   *
+   * when object has been synced before, mark it as deleted.
+   * Otherwise remove it from Store.
+   */
   localStore.removeAll = function removeAll(type, options) {
     return store.findAll(type).then(function(objects) {
       var object, _i, _len, results;
@@ -360,10 +344,8 @@ function hoodieStore (hoodie) {
   };
 
 
-  // validate
-  // ----------
-
-  //
+  /**
+   */
   function validate (object) {
 
     if (HoodieObjectTypeError.isInvalid(object.type)) {
@@ -397,17 +379,10 @@ function hoodieStore (hoodie) {
     }
   });
 
-
-
-  // extended public API
-  // ---------------------
-
-
-  // index
-  // -------
-
-  // object key index
-  // TODO: make this cachy
+  /**
+   *
+   * object key index
+   */
   store.index = function index() {
     var i, key, keys, _i, _ref;
     keys = [];
@@ -420,11 +395,9 @@ function hoodieStore (hoodie) {
     return keys;
   };
 
-
-  // changed objects
-  // -----------------
-
-  // returns an Array of all dirty documents
+  /**
+   * returns an Array of all dirty documents
+   */
   store.changedObjects = function changedObjects() {
     var id, key, object, type, _ref, _ref1, _results;
 
@@ -446,14 +419,12 @@ function hoodieStore (hoodie) {
   };
 
 
-  // Is dirty?
-  // ----------
-
-  // When no arguments passed, returns `true` or `false` depending on if there are
-  // dirty objects in the store.
-  //
-  // Otherwise it returns `true` or `false` for the passed object. An object is dirty
-  // if it has no `_syncedAt` attribute or if `updatedAt` is more recent than `_syncedAt`
+  /**
+   * When no arguments passed, returns `true` or `false` depending on if there are
+   * dirty objects in the store.
+   * Otherwise it returns `true` or `false` for the passed object. An object is dirty
+   * if it has no `_syncedAt` attribute or if `updatedAt` is more recent than `_syncedAt`
+   */
   store.hasLocalChanges = function(type, id) {
     if (!type) {
       return !$.isEmptyObject(dirty);
@@ -466,12 +437,11 @@ function hoodieStore (hoodie) {
   };
 
 
-  // Clear
-  // ------
-
-  // clears localStorage and cache
-  // TODO: do not clear entire localStorage, clear only the items that have been stored
-  //       using `hoodie.store` before.
+  /**
+   * clears localStorage and cache
+   * TODO: do not clear entire localStorage, clear only the items that have been stored
+   * using `hoodie.store` before.
+   */
   store.clear = function clear() {
     var defer, key, keys, results;
     defer = getDefer();
@@ -499,38 +469,41 @@ function hoodieStore (hoodie) {
   };
 
 
-  // isBootstrapping
-  // -----------------
-
-  // returns true if store is currently bootstrapping data from remote,
-  // otherwise false.
+  /**
+   * returns true if store is currently bootstrapping data from remote,
+   * otherwise false.
+   */
   var bootstrapping = false;
   store.isBootstrapping = function isBootstrapping() {
     return bootstrapping;
   };
 
 
-  // isPersistent
+  /**
+   */
   store.isPersistent = function isPersistent() {
     return localStorageWrapper.isPersistent;
   };
 
-  //
-  // Private methods
-  // -----------------
-  //
 
-
-  // Cache
-  // -------
-
-  // loads an object specified by `type` and `id` only once from localStorage
-  // and caches it for faster future access. Updates cache when `value` is passed.
-  //
-  // Also checks if object needs to be synched (dirty) or not
-  //
-  // Pass `options.remote = true` when object comes from remote
-  // Pass 'options.silent = true' to avoid events from being triggered.
+  /**
+   * loads an object specified by `type` and `id` only once from localStorage
+   * and caches it for faster future access. Updates cache when `value` is passed.
+   *
+   * Also checks if object needs to be synched (dirty) or not
+   *
+   * Pass `options.remote = true` when object comes from remote
+   * Pass 'options.silent = true' to avoid events from being triggered.
+   * @param   {String} type
+   * @param   {String} id
+   * @param   {Object} object
+   * @param   {Object} options
+   *
+   * @returns {Object}
+   *
+   * @private
+   *
+   */
   function cache(type, id, object, options) {
     var key, storedObject;
 
@@ -613,11 +586,14 @@ function hoodieStore (hoodie) {
     return extend(true, {}, object);
   }
 
-
-  // bootstrapping dirty objects, to make sure
-  // that removed objects get pushed after
-  // page reload.
-  //
+  /**
+   * bootstrapping dirty objects, to make sure
+   * that removed objects get pushed after
+   * page reload.
+   *
+   * @private
+   *
+   */
   function bootstrapDirtyObjects() {
     var id, keys, obj, type, _i, _len, _ref;
     keys = localStorageWrapper.getItem('_dirty');
@@ -635,10 +611,11 @@ function hoodieStore (hoodie) {
     }
   }
 
-
-  //
-  // subscribe to events coming from account & our remote store.
-  //
+  /**
+   * subscribe to events coming from account & our remote store.
+   * @private
+   *
+   */
   function subscribeToOutsideEvents() {
 
     // account events
@@ -661,10 +638,11 @@ function hoodieStore (hoodie) {
   };
 
 
-  //
-  // Marks object as changed (dirty). Triggers a `store:dirty` event immediately and a
-  // `store:idle` event once there is no change within 2 seconds
-  //
+  /**
+   * Marks object as changed (dirty). Triggers a `store:dirty` event immediately and a
+   * `store:idle` event once there is no change within 2 seconds
+   * @private
+   */
   function markAsChanged(type, id, object, options) {
     var key;
 
@@ -681,11 +659,11 @@ function hoodieStore (hoodie) {
     triggerDirtyAndIdleEvents();
   }
 
-  // Clear changed
-  // ---------------
-
-  // removes an object from the list of objects that are flagged to by synched (dirty)
-  // and triggers a `store:dirty` event
+  /**
+   * removes an object from the list of objects that are flagged to by synched (dirty)
+   * and triggers a `store:dirty` event
+   * @private
+   */
   function clearChanged(type, id) {
     var key;
     if (type && id) {
@@ -699,11 +677,11 @@ function hoodieStore (hoodie) {
   }
 
 
-  // Mark all as changed
-  // ------------------------
-
-  // Marks all local object as changed (dirty) to make them sync
-  // with remote
+  /**
+   * Marks all local object as changed (dirty) to make them sync
+   * with remote
+   * @private
+   */
   function markAllAsChanged() {
     return store.findAll().pipe(function(objects) {
       var key, object, _i, _len;
@@ -720,9 +698,12 @@ function hoodieStore (hoodie) {
   }
 
 
-  // when a change comes from our remote store, we differentiate
-  // whether an object has been removed or added / updated and
-  // reflect the change in our local store.
+  /**
+   * when a change comes from our remote store, we differentiate
+   * whether an object has been removed or added / updated and
+   * reflect the change in our local store.
+   * @private
+   */
   function handleRemoteChange(typeOfChange, object) {
     if (typeOfChange === 'remove') {
       store.remove(object.type, object.id, {
@@ -737,11 +718,14 @@ function hoodieStore (hoodie) {
   }
 
 
-  //
-  // all local changes get bulk pushed. For each object with local
-  // changes that have been pushed we trigger a sync event.
-  // Besides that, we also remove objects that have only been marked
-  // as _deleted and mark the others as synced.
+  /**
+   * all local changes get bulk pushed. For each object with local
+   * changes that have been pushed we trigger a sync event.
+   * Besides that, we also remove objects that have only been marked
+   * as _deleted and mark the others as synced.
+   *
+   * @private
+   */
   function handlePushedObject(object) {
     triggerEvents('sync', object);
 
@@ -758,7 +742,11 @@ function hoodieStore (hoodie) {
     }
   }
 
-  // store IDs of dirty objects
+  /**
+   * store IDs of dirty objects
+   *
+   * @private
+   */
   function saveDirtyIds() {
     try {
       if ($.isEmptyObject(dirty)) {
@@ -770,20 +758,27 @@ function hoodieStore (hoodie) {
     } catch(e) {}
   }
 
-  //
+  /**
+   * @private
+   */
   function now() {
     return JSON.stringify(new Date()).replace(/['"]/g, '');
   }
 
-
-  // a semantic key consists of a valid type & id, separated by a "/"
+  /**
+   * a semantic key consists of a valid type & id, separated by a "/"
+   * @private
+   */
   var semanticIdPattern = new RegExp(/^[a-z$][a-z0-9-]+\/[a-z0-9]+$/);
   function isSemanticKey(key) {
     return semanticIdPattern.test(key);
   }
 
-  // `hasLocalChanges` returns true if there is a local change that
-  // has not been synced yet.
+  /**
+   * `hasLocalChanges` returns true if there is a local change that
+   * has not been synced yet.
+   * @private
+   */
   function hasLocalChanges(object) {
     if (!object.updatedAt) {
       return false;
@@ -794,13 +789,18 @@ function hoodieStore (hoodie) {
     return object._syncedAt < object.updatedAt;
   }
 
-  //
+  /**
+   * @private
+   */
   function isMarkedAsDeleted(object) {
     return object._deleted === true;
   }
 
-  // this is where all the store events get triggered,
-  // like add:task, change:note:abc4567, remove, etc.
+  /**
+   * this is where all the store events get triggered,
+   * like add:task, change:note:abc4567, remove, etc.
+   * @private
+   */
   function triggerEvents(eventName, object, options) {
     store.trigger(eventName, extend(true, {}, object), options);
     store.trigger(object.type + ':' + eventName, extend(true, {}, object), options);
@@ -860,13 +860,17 @@ function hoodieStore (hoodie) {
     }, idleTimeout);
   }
 
-  //
+  /**
+   * @private
+   */
   function startBootstrappingMode() {
     bootstrapping = true;
     store.trigger('bootstrap:start');
   }
 
-  //
+  /**
+   * @private
+   */
   function endBootstrappingMode() {
     var methodCall, method, args, defer;
 
@@ -882,7 +886,10 @@ function hoodieStore (hoodie) {
     store.trigger('bootstrap:end');
   }
 
-  //
+  /**
+   * @private
+   *
+   */
   function abortBootstrappingMode(error) {
     var methodCall, defer;
 
@@ -896,17 +903,25 @@ function hoodieStore (hoodie) {
     store.trigger('bootstrap:error', error);
   }
 
-  //
+  /**
+   *
+   * @private
+   *
+   */
   function enqueue(method, args) {
     var defer = getDefer();
     queue.push([method, args, defer]);
     return defer.promise();
   }
 
-  //
-  // 1. we store all existing data and config in memory
-  // 2. we write it back on signin, with new hoodieId/username
-  //
+  /**
+   *
+   * 1. we store all existing data and config in memory
+   * 2. we write it back on signin, with new hoodieId/username
+   *
+   * @private
+   *
+   */
   function moveData () {
     var oldObjects = [];
     var oldHoodieId;
@@ -933,16 +948,8 @@ function hoodieStore (hoodie) {
     });
   }
 
-  //
-  // initialization
-  // ----------------
-  //
-
   // if browser does not support local storage persistence,
   // e.g. Safari in private mode, overwrite the respective methods.
-
-
-
   //
   // expose public API
   //
@@ -954,6 +961,5 @@ function hoodieStore (hoodie) {
     bootstrapDirtyObjects();
     delete store.bootstrapDirtyObjects;
   };
-}
+};
 
-module.exports = hoodieStore;

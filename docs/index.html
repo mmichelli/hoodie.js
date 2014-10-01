@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width" charset="utf-8">
+    <title>Hoodie.js</title>
+    <link rel="stylesheet" href="http://getbootstrap.com/2.3.2/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="http://getbootstrap.com/2.3.2/assets/css/bootstrap-responsive.css">
+    <link rel="stylesheet" href="http://getbootstrap.com/2.3.2/assets/css/docs.css">
+    <style>
+      .bs-docs-sidenav.affix {
+        box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.5);
+        z-index: 10;
+      }
+      
+      .bs-docs-sidenav i{
+        width: 8px;
+        height: 8px;
+        padding: 0px;
+        margin: 0px;
+        display: inline-block;
+        margin-right:0.5em;
+      }
+      
+      .bs-docs-sidenav > li > a {
+          word-wrap: break-word;
+      }
+      
+      .bs-docs-sidenav > li:first-child > a {
+        border-top-right-radius: 6px;
+        border-top-left-radius: 6px;
+      }
+      
+      code[class*="language-"],pre[class*="language-"]{color:black;text-shadow:0 1px white;font-family:Consolas,Monaco,'Andale Mono',monospace;direction:ltr;text-align:left;white-space:pre;word-spacing:normal;-moz-tab-size:2;-o-tab-size:2;tab-size2;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*="language-"]{padding:1em;margin:.5em 0;overflow:auto}:not(pre)>code[class*="language-"],pre[class*="language-"]{background:#f5f2f0}:not(pre)>code[class*="language-"]{padding:.1em;border-radius:.3em}.token.comment,.token.prolog,.token.doctype,.token.cdata{color:slategray}.token.punctuation{color:#999}.namespace{opacity:.7}.token.property,.token.tag,.token.boolean,.token.number{color:#905}.token.selector,.token.attr-name,.token.string{color:#690}.token.operator,.token.entity,.token.url,.language-css .token.string,.style .token.string{color:#a67f59;background:hsla(0,0%,100%,.5)}.token.atrule,.token.attr-value,.token.keyword{color:#07a}.token.regex,.token.important{color:#e90}.token.important{font-weight:bold}.token.entity{cursor:help}
+      div.description {margin: 14px 0; padding-top: 14px; border-bottom:1px solid #eee; }
+      .tags {}
+      .ctx-type {
+        display:inline-block;
+        margin-right:0.5em;
+        //- float:right; margin-top:8px
+      }
+      
+      footer iframe{vertical-align:middle;}
+      
+    </style>
+  </head>
+  <body data-spy="scroll" data-target=".scrollspy">
+    <header id="overview" class="jumbotron subhead">
+      <div class="container">
+        <h1>Hoodie.js</h1>
+        <p class="lead"></p>
+      </div>
+    </header>
+    <div class="container">
+      <div class="row">
+        <div class="span3 bs-docs-sidebar">
+          <ul class="nav nav-list bs-docs-sidenav affix-top">
+            <li class="active"><a href="index.html">Main</a></li>
+            <li><a href="hoodie/account.js.html">hoodie/account.js</a></li>
+            <li><a href="hoodie/connection.js.html">hoodie/connection.js</a></li>
+            <li><a href="hoodie/id.js.html">hoodie/id.js</a></li>
+            <li><a href="hoodie/open.js.html">hoodie/open.js</a></li>
+            <li><a href="hoodie/remote.js.html">hoodie/remote.js</a></li>
+            <li><a href="hoodie/request.js.html">hoodie/request.js</a></li>
+            <li><a href="hoodie/store.js.html">hoodie/store.js</a></li>
+            <li><a href="hoodie/task.js.html">hoodie/task.js</a></li>
+            <li><a href="hoodie.js.html">hoodie.js</a></li>
+            <li><a href="lib/error/error.js.html">lib/error/error.js</a></li>
+            <li><a href="lib/error/index.js.html">lib/error/index.js</a></li>
+            <li><a href="lib/error/object_id.js.html">lib/error/object_id.js</a></li>
+            <li><a href="lib/error/object_type.js.html">lib/error/object_type.js</a></li>
+            <li><a href="lib/events.js.html">lib/events.js</a></li>
+            <li><a href="lib/index.js.html">lib/index.js</a></li>
+            <li><a href="lib/store/api.js.html">lib/store/api.js</a></li>
+            <li><a href="lib/store/index.js.html">lib/store/index.js</a></li>
+            <li><a href="lib/store/remote.js.html">lib/store/remote.js</a></li>
+            <li><a href="lib/store/scoped.js.html">lib/store/scoped.js</a></li>
+            <li><a href="lib/task/index.js.html">lib/task/index.js</a></li>
+            <li><a href="lib/task/scoped.js.html">lib/task/scoped.js</a></li>
+            <li><a href="utils/config.js.html">utils/config.js</a></li>
+            <li><a href="utils/generate_id.js.html">utils/generate_id.js</a></li>
+            <li><a href="utils/hoodiefy_request_error_name.js.html">utils/hoodiefy_request_error_name.js</a></li>
+            <li><a href="utils/index.js.html">utils/index.js</a></li>
+            <li><a href="utils/local_storage_wrapper.js.html">utils/local_storage_wrapper.js</a></li>
+            <li><a href="utils/promise/defer.js.html">utils/promise/defer.js</a></li>
+            <li><a href="utils/promise/index.js.html">utils/promise/index.js</a></li>
+            <li><a href="utils/promise/is_promise.js.html">utils/promise/is_promise.js</a></li>
+            <li><a href="utils/promise/reject.js.html">utils/promise/reject.js</a></li>
+            <li><a href="utils/promise/reject_with.js.html">utils/promise/reject_with.js</a></li>
+            <li><a href="utils/promise/resolve.js.html">utils/promise/resolve.js</a></li>
+            <li><a href="utils/promise/resolve_with.js.html">utils/promise/resolve_with.js</a></li>
+          </ul>
+          <div class="scrollspy">
+            <ul class="nav nav-list bs-docs-sidenav affix-top">
+            </ul>
+          </div>
+        </div>
+        <div class="span9">
+          <section id="Main"><h1 id="hoodie-power-to-the-frontend-build-status-https-travis-ci-org-hoodiehq-hoodie-js-png-branch-master-https-travis-ci-org-hoodiehq-hoodie-js-">Hoodie ✪ power to the frontend! <a href="https://travis-ci.org/hoodiehq/hoodie.js"><img src="https://travis-ci.org/hoodiehq/hoodie.js.png?branch=master" alt="Build Status"></a></h1>
+<p>Hoodie is a JavaScript library for the browser.</p>
+<p>It offers you the following pieces of functionality right out of the box:</p>
+<ul>
+<li>user accounts and authentication</li>
+<li>data storage and sync</li>
+<li>background tasks</li>
+<li>sharing</li>
+<li>emails</li>
+<li>and so much more</li>
+</ul>
+<p>And here is what it looks like:</p>
+<h3 id="user-accounts-authentication">user accounts &amp; authentication</h3>
+<pre><code class="lang-javascript">  // user signup
+  hoodie.account.signUp(&#39;joe@example.com&#39;, &#39;secret&#39;);
+
+  // user signIn
+  hoodie.account.signIn(&#39;joe@example.com&#39;, &#39;secret&#39;);
+
+  // user password change
+  hoodie.account.changePassword(&#39;secret&#39;, &#39;new_secret&#39;);
+
+  // user name change
+  hoodie.account.changeUsername(&#39;secret&#39;, &#39;newusername&#39;);
+
+  // user signout
+  hoodie.account.signOut();
+
+  // user password reset
+  hoodie.account.resetPassword(&#39;joe@example.com&#39;);</code></pre>
+<h3 id="store-data-it-will-sync-to-wherever-your-users-sign-in-">store data (it will sync to wherever your users sign in)</h3>
+<pre><code class="lang-javascript">
+  // add a new document of type &#39;task&#39;
+  hoodie.store.add(&#39;task&#39;, {
+    title: &#39;build sweetMasterApp tomorrow.&#39;
+  });
+
+  // find all &#39;task&#39; documents
+  hoodie.store.findAll(&#39;task&#39;);
+
+  // update a &#39;task&#39; document
+  hoodie.store.update(&#39;task&#39;, &#39;123&#39;, {
+    done: true
+  });
+
+  // remove a &#39;task&#39; document
+  hoodie.store.remove(&#39;task&#39;, &#39;123&#39;);
+
+  // listen to and act upon document events
+  hoodie.store.on(&#39;add:task&#39;, function(object) {
+    alert(&#39;new Task added: &#39; + object.task)
+  });</code></pre>
+<h3 id="tasks">Tasks</h3>
+<p>Tasks get picked up by backend workers in the background. You can think<br>of them as special objects that describe specific tasks, for which you<br>want backend logic.</p>
+<p>If a task has been completed successfully, it gets removed. If there<br>is an error, it stays in the task store to be handled or removed.</p>
+<pre><code class="lang-js">  // start a new task. Once it was finished, the success callback gets
+  // called. If something went wrong, error callback gets called instead
+  hoodie.task.start(&#39;message&#39;, {to: &#39;joe&#39;, text: &#39;Do you want to party?&#39;})
+    .then( showMessageSent, showMessageError )
+
+  // abort a pending task
+  hoodie.task.abort(&#39;message&#39;, &#39;123&#39;)
+
+  // restart a pending or aborted task
+  hoodie.task.restart(&#39;message&#39;, &#39;123&#39;, { extraProperty: &#39;value&#39; })
+
+  // aborted all pending tasks
+  hoodie.task.restartAll()
+
+  // restart all pending or aborted tasks
+  hoodie.task.restartAll()</code></pre>
+<p>You can also subscribe to the following task events</p>
+<ul>
+<li>start</li>
+<li>abort</li>
+<li>error</li>
+<li>success</li>
+</ul>
+<pre><code class="lang-javascript">  // listen to new tasks
+  hoodie.task.on(&#39;start&#39;, function (newTask) {});
+
+  // task aborted
+  hoodie.task.on(&#39;abort&#39;, function (abortedTask) {});
+
+  // task could not be completed
+  hoodie.task.on(&#39;error&#39;, function (errorMessage, task) {});
+
+  // task completed successfully
+  hoodie.task.on(&#39;success&#39;, function (completedTask) {});
+
+  // all listeners can be filtered by type
+  hoodie.task.on(&#39;message:start&#39;,   function (newMessageTask, options) {});
+  hoodie.task.on(&#39;message:abort&#39;,  function (abortedMessageTask, options) {});
+  hoodie.task.on(&#39;message:error&#39;,   function (errorMessage, messageTask, options) {});
+  hoodie.task.on(&#39;message:success&#39;, function (completedMessageTask, options) {});
+  hoodie.task.on(&#39;message:change&#39;,  function (eventName, messageTask, options) {});
+
+  // ... and by type and id
+  hoodie.task.on(&#39;message:start:123&#39;,   function (newMessageTask, options) {});
+  hoodie.task.on(&#39;message:abort:123&#39;,  function (abortedMessageTask, options) {});
+  hoodie.task.on(&#39;message:error:123&#39;,   function (errorMessage, messageTask, options) {});
+  hoodie.task.on(&#39;message:success:123&#39;, function (completedMessageTask, options) {});
+  hoodie.task.on(&#39;message:change:123&#39;,  function (eventName, messageTask, options) {});</code></pre>
+<p><strong>note</strong>: if <code>change</code> event is <code>&quot;error&quot;</code>, the error message gets passed as options.error</p>
+<h3 id="publish-share-data-work-in-progress-">publish &amp; share data (work in progress)</h3>
+<pre><code class="lang-javascript">
+  // find all &#39;task&#39; documents and publish them
+  hoodie.store.findAll(&#39;task&#39;).publish();
+
+  // find all documents that belong to a given user
+  hoodie.user( username ).findAll();
+
+  // find a given task and share it
+  hoodie.store.find(&#39;task&#39;, &#39;456&#39;).share();
+
+  // find a all documents on a given share
+  hoodie.share(shareId).findAll();
+
+  // subscribe to a given share
+  hoodie.share(shareId).subscribe();</code></pre>
+<h3 id="sending-emails-work-in-progress-">sending emails (work in progress)</h3>
+<pre><code class="lang-javascript">
+  // define an email object
+  var magic = hoodie.email.send({
+    to      : [&#39;susan@example.com&#39;],
+    cc      : [&#39;bill@example.com&#39;],
+    subject : &#39;rule the world&#39;,
+    body    : &#39;we can do it!\nSigned, Joe&#39;
+  });
+
+  magic.done(function(mail) {
+    alert(&#39;Mail has been sent to &#39; + mail.to);
+  });
+
+  magic.fail(function(error) {
+    alert(&#39;Sorry, but something went wrong: &#39; + error.reason);
+  });</code></pre>
+<h2 id="but-how-does-it-work-">But … how does it work?</h2>
+<p>Every app gets its own hoodie. You need to set one up, because that&#39;s <code>whereTheMagicHappens</code>:</p>
+<pre><code class="lang-html">  &lt;script src=&quot;hoodie.js&quot;&gt;&lt;/script&gt;
+  &lt;script&gt;
+    whereTheMagicHappens = &#39;https://yourapp.hood.ie&#39;;
+    hoodie = new Hoodie(whereTheMagicHappens);
+  &lt;/script&gt;</code></pre>
+<p>For more in-depth documentation, head over to <a href="http://hood.ie">hood.ie</a>.</p>
+<h2 id="contact">Contact</h2>
+<p>Have a question?</p>
+<ul>
+<li><a href="http://webchat.freenode.net/?channels=hoodie">#hoodie</a> on Freenode</li>
+<li><a href="https://twitter.com/hoodiehq">@hoodiehq</a> on Twitter</li>
+</ul>
+<h2 id="contributing-to-this-project">Contributing to this project</h2>
+<p>Anyone and everyone is welcome to contribute. Please take a moment to<br>review the <a href="CONTRIBUTING.md">guidelines for contributing</a>.</p>
+<ul>
+<li><a href="CONTRIBUTING.md#bugs">Bug reports</a></li>
+<li><a href="CONTRIBUTING.md#features">Feature requests</a></li>
+<li><a href="CONTRIBUTING.md#pull-requests">Pull requests</a></li>
+</ul>
+<h2 id="license-copyright">License &amp; Copyright</h2>
+<p>Copyright 2012-2014 <a href="https://github.com/hoodiehq/">https://github.com/hoodiehq/</a> and other contributors</p>
+<p>Licensed under the Apache License 2.0.</p>
+</section>
+        </div>
+      </div>
+    </div>
+    <footer class="footer"></footer>
+    <script src="http://platform.twitter.com/widgets.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+    <script src="http://leaverou.github.com/prefixfree/prefixfree.js"></script>
+    <script src="http://getbootstrap.com/2.3.2/assets/js/bootstrap-transition.js"></script>
+    <script src="http://getbootstrap.com/2.3.2/assets/js/bootstrap-scrollspy.js"></script>
+    <script src="http://getbootstrap.com/2.3.2/assets/js/bootstrap-dropdown.js"></script>
+    <script src="http://getbootstrap.com/2.3.2/assets/js/bootstrap-collapse.js"></script>
+    <script src="http://getbootstrap.com/2.3.2/assets/js/bootstrap-affix.js"></script>
+    <script>
+      /**
+       * Prism: Lightweight, robust, elegant syntax highlighting
+       * MIT license http://www.opensource.org/licenses/mit-license.php/
+       * @author Lea Verou http://lea.verou.me
+       */(function(){var e=/\blang(?:uage)?-(?!\*)(\w+)\b/i,t=self.Prism={util:{type:function(e){return Object.prototype.toString.call(e).match(/\[object (\w+)\]/)[1]},clone:function(e){var n=t.util.type(e);switch(n){case"Object":var r={};for(var i in e)e.hasOwnProperty(i)&&(r[i]=t.util.clone(e[i]));return r;case"Array":return e.slice()}return e}},languages:{extend:function(e,n){var r=t.util.clone(t.languages[e]);for(var i in n)r[i]=n[i];return r},insertBefore:function(e,n,r,i){i=i||t.languages;var s=i[e],o={};for(var u in s)if(s.hasOwnProperty(u)){if(u==n)for(var a in r)r.hasOwnProperty(a)&&(o[a]=r[a]);o[u]=s[u]}return i[e]=o},DFS:function(e,n){for(var r in e){n.call(e,r,e[r]);t.util.type(e)==="Object"&&t.languages.DFS(e[r],n)}}},highlightAll:function(e,n){var r=document.querySelectorAll('code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code');for(var i=0,s;s=r[i++];)t.highlightElement(s,e===!0,n)},highlightElement:function(r,i,s){var o,u,a=r;while(a&&!e.test(a.className))a=a.parentNode;if(a){o=(a.className.match(e)||[,""])[1];u=t.languages[o]}if(!u)return;r.className=r.className.replace(e,"").replace(/\s+/g," ")+" language-"+o;a=r.parentNode;/pre/i.test(a.nodeName)&&(a.className=a.className.replace(e,"").replace(/\s+/g," ")+" language-"+o);var f=r.textContent;if(!f)return;f=f.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\u00a0/g," ");var l={element:r,language:o,grammar:u,code:f};t.hooks.run("before-highlight",l);if(i&&self.Worker){var c=new Worker(t.filename);c.onmessage=function(e){l.highlightedCode=n.stringify(JSON.parse(e.data));l.element.innerHTML=l.highlightedCode;s&&s.call(l.element);t.hooks.run("after-highlight",l)};c.postMessage(JSON.stringify({language:l.language,code:l.code}))}else{l.highlightedCode=t.highlight(l.code,l.grammar);l.element.innerHTML=l.highlightedCode;s&&s.call(r);t.hooks.run("after-highlight",l)}},highlight:function(e,r){return n.stringify(t.tokenize(e,r))},tokenize:function(e,n){var r=t.Token,i=[e],s=n.rest;if(s){for(var o in s)n[o]=s[o];delete n.rest}e:for(var o in n){if(!n.hasOwnProperty(o)||!n[o])continue;var u=n[o],a=u.inside,f=!!u.lookbehind||0;u=u.pattern||u;for(var l=0;l<i.length;l++){var c=i[l];if(i.length>e.length)break e;if(c instanceof r)continue;u.lastIndex=0;var h=u.exec(c);if(h){f&&(f=h[1].length);var p=h.index-1+f,h=h[0].slice(f),d=h.length,v=p+d,m=c.slice(0,p+1),g=c.slice(v+1),y=[l,1];m&&y.push(m);var b=new r(o,a?t.tokenize(h,a):h);y.push(b);g&&y.push(g);Array.prototype.splice.apply(i,y)}}}return i},hooks:{all:{},add:function(e,n){var r=t.hooks.all;r[e]=r[e]||[];r[e].push(n)},run:function(e,n){var r=t.hooks.all[e];if(!r||!r.length)return;for(var i=0,s;s=r[i++];)s(n)}}},n=t.Token=function(e,t){this.type=e;this.content=t};n.stringify=function(e){if(typeof e=="string")return e;if(Object.prototype.toString.call(e)=="[object Array]"){for(var r=0;r<e.length;r++)e[r]=n.stringify(e[r]);return e.join("")}var i={type:e.type,content:n.stringify(e.content),tag:"span",classes:["token",e.type],attributes:{}};i.type=="comment"&&(i.attributes.spellcheck="true");t.hooks.run("wrap",i);var s="";for(var o in i.attributes)s+=o+'="'+(i.attributes[o]||"")+'"';return"<"+i.tag+' class="'+i.classes.join(" ")+'" '+s+">"+i.content+"</"+i.tag+">"};if(!self.document){self.addEventListener("message",function(e){var n=JSON.parse(e.data),r=n.language,i=n.code;self.postMessage(JSON.stringify(t.tokenize(i,t.languages[r])));self.close()},!1);return}var r=document.getElementsByTagName("script");r=r[r.length-1];if(r){t.filename=r.src;document.addEventListener&&!r.hasAttribute("data-manual")&&document.addEventListener("DOMContentLoaded",t.highlightAll)}})();;
+      Prism.languages.markup={comment:/&lt;!--[\w\W]*?--(&gt;|&gt;)/g,prolog:/&lt;\?.+?\?&gt;/,doctype:/&lt;!DOCTYPE.+?&gt;/,cdata:/&lt;!\[CDATA\[[\w\W]+?]]&gt;/i,tag:{pattern:/&lt;\/?[\w:-]+\s*(?:\s+[\w:-]+(?:=(?:("|')(\\?[\w\W])*?\1|\w+))?\s*)*\/?&gt;/gi,inside:{tag:{pattern:/^&lt;\/?[\w:-]+/i,inside:{punctuation:/^&lt;\/?/,namespace:/^[\w-]+?:/}},"attr-value":{pattern:/=(?:('|")[\w\W]*?(\1)|[^\s>]+)/gi,inside:{punctuation:/=|&gt;|"/g}},punctuation:/\/?&gt;/g,"attr-name":{pattern:/[\w:-]+/g,inside:{namespace:/^[\w-]+?:/}}}},entity:/&amp;#?[\da-z]{1,8};/gi};Prism.hooks.add("wrap",function(e){e.type==="entity"&&(e.attributes.title=e.content.replace(/&amp;/,"&"))});;
+      Prism.languages.css={comment:/\/\*[\w\W]*?\*\//g,atrule:/@[\w-]+?(\s+[^;{]+)?(?=\s*{|\s*;)/gi,url:/url\((["']?).*?\1\)/gi,selector:/[^\{\}\s][^\{\}]*(?=\s*\{)/g,property:/(\b|\B)[a-z-]+(?=\s*:)/ig,string:/("|')(\\?.)*?\1/g,important:/\B!important\b/gi,ignore:/&(lt|gt|amp);/gi,punctuation:/[\{\};:]/g};Prism.languages.markup&&Prism.languages.insertBefore("markup","tag",{style:{pattern:/(&lt;|<)style[\w\W]*?(>|&gt;)[\w\W]*?(&lt;|<)\/style(>|&gt;)/ig,inside:{tag:{pattern:/(&lt;|<)style[\w\W]*?(>|&gt;)|(&lt;|<)\/style(>|&gt;)/ig,inside:Prism.languages.markup.tag.inside},rest:Prism.languages.css}}});;
+      Prism.languages.clike={comment:{pattern:/(^|[^\\])(\/\*[\w\W]*?\*\/|\/\/.*?(\r?\n|$))/g,lookbehind:!0},string:/("|')(\\?.)*?\1/g,keyword:/\b(if|else|while|do|for|return|in|instanceof|function|new|try|catch|finally|null|break|continue)\b/g,"boolean":/\b(true|false)\b/g,number:/\b-?(0x)?\d*\.?[\da-f]+\b/g,operator:/[-+]{1,2}|!|=?&lt;|=?&gt;|={1,2}|(&amp;){1,2}|\|?\||\?|\*|\//g,ignore:/&(lt|gt|amp);/gi,punctuation:/[{}[\];(),.:]/g};;
+      Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(var|let|if|else|while|do|for|return|in|instanceof|function|new|with|typeof|try|catch|finally|null|break|continue)\b/g,number:/\b(-?(0x)?\d*\.?[\da-f]+|NaN|-?Infinity)\b/g});Prism.languages.insertBefore("javascript","keyword",{regex:{pattern:/(^|[^/])\/(?!\/)(\[.+?]|\\.|[^/\r\n])+\/[gim]{0,3}(?=\s*($|[\r\n,.;})]))/g,lookbehind:!0}});Prism.languages.markup&&Prism.languages.insertBefore("markup","tag",{script:{pattern:/(&lt;|<)script[\w\W]*?(>|&gt;)[\w\W]*?(&lt;|<)\/script(>|&gt;)/ig,inside:{tag:{pattern:/(&lt;|<)script[\w\W]*?(>|&gt;)|(&lt;|<)\/script(>|&gt;)/ig,inside:Prism.languages.markup.tag.inside},rest:Prism.languages.javascript}}});;
+      
+    </script>
+    <!-- App js-->
+    <script>
+      $(function(){
+        var $window = $(window);
+        $('.scrollspy .nav').affix({
+          offset: {
+            top: function () { return $window.width() <= 980 ? 480 : 400 }
+          , bottom: 50
+          }
+        });
+      })
+      
+    </script>
+  </body>
+</html>

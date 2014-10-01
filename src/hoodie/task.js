@@ -1,6 +1,3 @@
-// Tasks
-// ============
-
 // This class defines the hoodie.task API.
 //
 // The returned API provides the following methods:
@@ -28,8 +25,7 @@ var extend = require('extend');
 
 var getDefer = require('../utils/promise/defer');
 
-//
-function hoodieTask(hoodie) {
+module.exports = function hoodieTask(hoodie) {
 
   // public API
   var api = function api(type, id) {
@@ -46,13 +42,11 @@ function hoodieTask(hoodie) {
   });
 
 
-  // start
-  // -------
-
-  // start a new task. If the user has no account yet, hoodie tries to sign up
-  // for an anonymous account in the background. If that fails, the returned
-  // promise will be rejected.
-  //
+  /**
+   * start a new task. If the user has no account yet, hoodie tries to sign up
+   * for an anonymous account in the background. If that fails, the returned
+   * promise will be rejected.
+   */
   api.start = function(type, properties) {
     if (hoodie.account.hasAccount()) {
       return hoodie.store.add('$' + type, properties).then(handleNewTask);
@@ -64,24 +58,19 @@ function hoodieTask(hoodie) {
   };
 
 
-  // abort
-  // -------
-
-  // abort a running task
-  //
+  /**
+   * abort a running task
+   */
   api.abort = function(type, id) {
     return hoodie.store.update('$' + type, id, {
       abortedAt: now()
     }).then(handleAbortedTaskObject);
   };
 
-
-  // restart
-  // ---------
-
-  // first, we try to abort a running task. If that succeeds, we start
-  // a new one with the same properties as the original
-  //
+  /**
+   * first, we try to abort a running task. If that succeeds, we start
+   * a new one with the same properties as the original
+   */
   api.restart = function(type, id, update) {
     var start = function(object) {
       extend(object, update);
@@ -93,18 +82,14 @@ function hoodieTask(hoodie) {
     return api.abort(type, id).then(start);
   };
 
-  // abortAll
-  // -----------
-
-  //
+  /**
+   */
   api.abortAll = function(type) {
     return findAll(type).then(abortTaskObjects);
   };
 
-  // restartAll
-  // -----------
-
-  //
+  /**
+   */
   api.restartAll = function(type, update) {
 
     if (typeof type === 'object') {
@@ -117,27 +102,28 @@ function hoodieTask(hoodie) {
   };
 
 
-  //
-  // subscribe to store events
-  // we subscribe to all store changes, pipe through the task ones,
-  // making a few changes along the way.
-  //
+  /**
+   * subscribe to store events
+   * we subscribe to all store changes, pipe through the task ones,
+   * making a few changes along the way.
+   */
   function subscribeToOutsideEvents() {
-    // account events
     hoodie.on('store:change', handleStoreChange);
   }
 
-  // allow to run this only once from outside (during Hoodie initialization)
+  /**
+   * allow to run this only once from outside (during Hoodie initialization)
+   */
   api.subscribeToOutsideEvents = function() {
     subscribeToOutsideEvents();
     delete api.subscribeToOutsideEvents;
   };
 
 
-  // Private
-  // -------
-
-  //
+  /**
+   *
+   * @private
+   */
   function handleNewTask(object) {
     var defer = getDefer();
     var taskStore = hoodie.store(object.type, object.id);
@@ -181,7 +167,10 @@ function hoodieTask(hoodie) {
     return defer.promise();
   }
 
-  //
+  /**
+   *
+   * @private
+   */
   function handleAbortedTaskObject(taskObject) {
     var defer;
     var type = taskObject.type; // no need to prefix with $, it's already prefixed.
@@ -200,7 +189,10 @@ function hoodieTask(hoodie) {
     return defer.promise();
   }
 
-  //
+  /**
+   *
+   * @private
+   */
   function handleStoreChange(eventName, object, options) {
     if (object.type[0] !== '$') {
       return;
@@ -210,7 +202,10 @@ function hoodieTask(hoodie) {
     triggerEvents(eventName, object, options);
   }
 
-  //
+  /**
+   *
+   * @private
+   */
   function findAll(type) {
     var startsWith = '$';
     var filter;
@@ -224,22 +219,32 @@ function hoodieTask(hoodie) {
     return hoodie.store.findAll(filter);
   }
 
-  //
+  /**
+   *
+   * @private
+   */
   function abortTaskObjects(taskObjects) {
     return taskObjects.map(function(taskObject) {
       return api.abort(taskObject.type.substr(1), taskObject.id);
     });
   }
 
-  //
+  /**
+   *
+   * @private
+   */
   function restartTaskObjects(taskObjects, update) {
     return taskObjects.map(function(taskObject) {
       return api.restart(taskObject.type.substr(1), taskObject.id, update);
     });
   }
 
-  // this is where all the task events get triggered,
-  // like add:message, change:message:abc4567, remove, etc.
+  /**
+   *
+   * this is where all the task events get triggered,
+   * like add:message, change:message:abc4567, remove, etc.
+   * @private
+   */
   function triggerEvents(eventName, task, options) {
     var error;
 
@@ -296,13 +301,17 @@ function hoodieTask(hoodie) {
     }
   }
 
-  //
+  /**
+   * return json data string
+   *
+   * @private
+   */
   function now() {
     return JSON.stringify(new Date()).replace(/['"]/g, '');
   }
 
   // extend hoodie
   hoodie.task = api;
-}
 
-module.exports = hoodieTask;
+};
+

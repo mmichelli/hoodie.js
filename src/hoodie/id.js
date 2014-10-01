@@ -1,16 +1,13 @@
-// hoodie.id
-// =========
-
 var generateId = require('../utils/generate_id');
 var config = require('../utils/config');
 
 // generates a random id and persists using config
 // until the user signs out or deletes local data
-function hoodieId (hoodie) {
+module.exports = function (hoodie) {
   var id;
 
   function getId() {
-    if (! id) {
+    if (!id) {
       setId( generateId() );
     }
     return id;
@@ -18,7 +15,6 @@ function hoodieId (hoodie) {
 
   function setId(newId) {
     id = newId;
-    
     config.set('_hoodieId', newId);
   }
 
@@ -34,7 +30,7 @@ function hoodieId (hoodie) {
     id = config.get('_hoodieId');
 
     // DEPRECATED, remove before 1.0
-    if (! id) {
+    if (!id) {
       id = config.get('_account.ownerHash');
     }
   }
@@ -66,6 +62,4 @@ function hoodieId (hoodie) {
   // Public API
   //
   hoodie.id = getId;
-}
-
-module.exports = hoodieId;
+};
