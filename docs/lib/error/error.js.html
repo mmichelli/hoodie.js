@@ -39,8 +39,6 @@
         //- float:right; margin-top:8px
       }
       
-      footer iframe{vertical-align:middle;}
-      
     </style>
   </head>
   <body data-spy="scroll" data-target=".scrollspy">
@@ -91,47 +89,41 @@
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
+              <li><a href="#HoodieError"><i class="alert alert-success"></i><span>HoodieError</span></a>
+              </li>
             </ul>
           </div>
         </div>
         <div class="span9">
-          <div class="description"> </div>
-          <pre><code class="language-javascript">// Hoodie Error
-// -------------
+          <section id="HoodieError">
+            <h1>HoodieError</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-success radius ctx-type">declaration</div><span>HoodieError</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>properties</td>
+                <td>Object</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>With the custom hoodie error function  we normalize all errors the get returned<br />when using hoodie&#39;s rejectWith</p><p>The native JavaScript error method has a name &amp; a message property. HoodieError<br />requires these, but on top allows for unlimited custom properties.</p><p>Instead of being initialized with just the message, HoodieError expects an<br />object with properties. The <code>message</code> property is required. The name will<br />fallback to <code>error</code>.</p><p><code>message</code> can also contain placeholders in the form of `{{propertyName}}`` which<br />will get replaced automatically with passed extra properties.</p><h3>Error Conventions</h3>
+<p>We follow JavaScript&#39;s native error conventions, meaning that error names<br />are camelCase with the first letter uppercase as well, and the message<br />starting with an uppercase letter.</p> </div>
+          <pre><code class="language-javascript">var HoodieError = module.exports = function (properties) {
 
-// With the custom hoodie error function
-// we normalize all errors the get returned
-// when using hoodie's rejectWith
-//
-// The native JavaScript error method has
-// a name &amp; a message property. HoodieError
-// requires these, but on top allows for
-// unlimited custom properties.
-//
-// Instead of being initialized with just
-// the message, HoodieError expects an
-// object with properties. The `message`
-// property is required. The name will
-// fallback to `error`.
-//
-// `message` can also contain placeholders
-// in the form of `{{propertyName}}`` which
-// will get replaced automatically with passed
-// extra properties.
-//
-// ### Error Conventions
-//
-// We follow JavaScript's native error conventions,
-// meaning that error names are camelCase with the
-// first letter uppercase as well, and the message
-// starting with an uppercase letter.
-//
-var errorMessageReplacePattern = /\{\{\s*\w+\s*\}\}/g;
-var errorMessageFindPropertyPattern = /\w+/;
-
-var extend = require('extend');
-
-function HoodieError(properties) {
+  var errorMessageReplacePattern = /\{\{\s*\w+\s*\}\}/g;
+  var errorMessageFindPropertyPattern = /\w+/;
 
   // normalize arguments
   if (typeof properties === 'string') {
@@ -140,25 +132,26 @@ function HoodieError(properties) {
     };
   }
 
-  if (! properties.message) {
+  if (!properties.message) {
     properties.message = 'Something went wrong';
   }
 
   // must check for properties, as this.name is always set.
-  if (! properties.name) {
+  if (!properties.name) {
     properties.name = 'HoodieError';
   }
 
-  properties.message = properties.message.replace(errorMessageReplacePattern, function(match) {
-    var property = match.match(errorMessageFindPropertyPattern)[0];
-    return properties[property];
+  properties.message = properties.message.replace(
+    errorMessageReplacePattern, function(match) {
+      var property = match.match(errorMessageFindPropertyPattern)[0];
+      return properties[property];
   });
-  extend(this, properties);
-}
-HoodieError.prototype = new Error();
-HoodieError.prototype.constructor = HoodieError;
 
-module.exports = HoodieError;</code></pre>
+  extend(this, properties);
+};
+
+HoodieError.prototype = new Error();
+HoodieError.prototype.constructor = HoodieError;</code></pre>
         </div>
       </div>
     </div>
@@ -181,19 +174,6 @@ module.exports = HoodieError;</code></pre>
       Prism.languages.css={comment:/\/\*[\w\W]*?\*\//g,atrule:/@[\w-]+?(\s+[^;{]+)?(?=\s*{|\s*;)/gi,url:/url\((["']?).*?\1\)/gi,selector:/[^\{\}\s][^\{\}]*(?=\s*\{)/g,property:/(\b|\B)[a-z-]+(?=\s*:)/ig,string:/("|')(\\?.)*?\1/g,important:/\B!important\b/gi,ignore:/&(lt|gt|amp);/gi,punctuation:/[\{\};:]/g};Prism.languages.markup&&Prism.languages.insertBefore("markup","tag",{style:{pattern:/(&lt;|<)style[\w\W]*?(>|&gt;)[\w\W]*?(&lt;|<)\/style(>|&gt;)/ig,inside:{tag:{pattern:/(&lt;|<)style[\w\W]*?(>|&gt;)|(&lt;|<)\/style(>|&gt;)/ig,inside:Prism.languages.markup.tag.inside},rest:Prism.languages.css}}});;
       Prism.languages.clike={comment:{pattern:/(^|[^\\])(\/\*[\w\W]*?\*\/|\/\/.*?(\r?\n|$))/g,lookbehind:!0},string:/("|')(\\?.)*?\1/g,keyword:/\b(if|else|while|do|for|return|in|instanceof|function|new|try|catch|finally|null|break|continue)\b/g,"boolean":/\b(true|false)\b/g,number:/\b-?(0x)?\d*\.?[\da-f]+\b/g,operator:/[-+]{1,2}|!|=?&lt;|=?&gt;|={1,2}|(&amp;){1,2}|\|?\||\?|\*|\//g,ignore:/&(lt|gt|amp);/gi,punctuation:/[{}[\];(),.:]/g};;
       Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(var|let|if|else|while|do|for|return|in|instanceof|function|new|with|typeof|try|catch|finally|null|break|continue)\b/g,number:/\b(-?(0x)?\d*\.?[\da-f]+|NaN|-?Infinity)\b/g});Prism.languages.insertBefore("javascript","keyword",{regex:{pattern:/(^|[^/])\/(?!\/)(\[.+?]|\\.|[^/\r\n])+\/[gim]{0,3}(?=\s*($|[\r\n,.;})]))/g,lookbehind:!0}});Prism.languages.markup&&Prism.languages.insertBefore("markup","tag",{script:{pattern:/(&lt;|<)script[\w\W]*?(>|&gt;)[\w\W]*?(&lt;|<)\/script(>|&gt;)/ig,inside:{tag:{pattern:/(&lt;|<)script[\w\W]*?(>|&gt;)|(&lt;|<)\/script(>|&gt;)/ig,inside:Prism.languages.markup.tag.inside},rest:Prism.languages.javascript}}});;
-      
-    </script>
-    <!-- App js-->
-    <script>
-      $(function(){
-        var $window = $(window);
-        $('.scrollspy .nav').affix({
-          offset: {
-            top: function () { return $window.width() <= 980 ? 480 : 400 }
-          , bottom: 50
-          }
-        });
-      })
       
     </script>
   </body>

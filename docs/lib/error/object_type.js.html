@@ -39,8 +39,6 @@
         //- float:right; margin-top:8px
       }
       
-      footer iframe{vertical-align:middle;}
-      
     </style>
   </head>
   <body data-spy="scroll" data-target=".scrollspy">
@@ -91,43 +89,54 @@
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
+              <li><a href="#HoodieObjectTypeError"><i class="alert alert-success"></i><span>HoodieObjectTypeError</span></a>
+              </li>
             </ul>
           </div>
         </div>
         <div class="span9">
-          <div class="description"> </div>
-          <pre><code class="language-javascript">// Hoodie Invalid Type Or Id Error
-// -------------------------------
-
-// only lowercase letters, numbers and dashes
-// are allowed for object types, plus must start
-// with a letter.
-//
-var HoodieError = require('./error');
-
-// Hoodie Invalid Type Or Id Error
-// -------------------------------
-
-// only lowercase letters, numbers and dashes
-// are allowed for object types, plus must start
-// with a letter.
-//
-function HoodieObjectTypeError(properties) {
+          <section id="HoodieObjectTypeError">
+            <h1>HoodieObjectTypeError</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-success radius ctx-type">declaration</div><span>HoodieObjectTypeError</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>properties</td>
+                <td>Object</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>only lowercase letters, numbers and dashes are allowed for object types,<br />plus must start with a letter.</p> </div>
+          <pre><code class="language-javascript">var HoodieObjectTypeError = module.exports = function (properties) {
   properties.name = 'HoodieObjectTypeError';
   properties.message = '&quot;{{type}}&quot; is invalid object type. {{rules}}.';
 
-  return new HoodieError(properties);
-}
-var validTypePattern = /^[a-z$][a-z0-9-]+$/;
-HoodieObjectTypeError.isInvalid = function(type, customPattern) {
-  return !(customPattern || validTypePattern).test(type || '');
-};
-HoodieObjectTypeError.isValid = function(type, customPattern) {
-  return (customPattern || validTypePattern).test(type || '');
-};
-HoodieObjectTypeError.prototype.rules = 'lowercase letters, numbers and dashes allowed only. Must start with a letter';
+  this.validTypePattern = /^[a-z$][a-z0-9-]+$/;
 
-module.exports = HoodieObjectTypeError;</code></pre>
+  return new HoodieError(properties);
+};
+
+HoodieObjectTypeError.isInvalid = function(type, customPattern) {
+  return !(customPattern || this.validTypePattern).test(type || '');
+};
+
+HoodieObjectTypeError.isValid = function(type, customPattern) {
+  return (customPattern || this.validTypePattern).test(type || '');
+};
+
+HoodieObjectTypeError.prototype.rules = 'lowercase letters, numbers and dashes allowed only. Must start with a letter';</code></pre>
         </div>
       </div>
     </div>
@@ -150,19 +159,6 @@ module.exports = HoodieObjectTypeError;</code></pre>
       Prism.languages.css={comment:/\/\*[\w\W]*?\*\//g,atrule:/@[\w-]+?(\s+[^;{]+)?(?=\s*{|\s*;)/gi,url:/url\((["']?).*?\1\)/gi,selector:/[^\{\}\s][^\{\}]*(?=\s*\{)/g,property:/(\b|\B)[a-z-]+(?=\s*:)/ig,string:/("|')(\\?.)*?\1/g,important:/\B!important\b/gi,ignore:/&(lt|gt|amp);/gi,punctuation:/[\{\};:]/g};Prism.languages.markup&&Prism.languages.insertBefore("markup","tag",{style:{pattern:/(&lt;|<)style[\w\W]*?(>|&gt;)[\w\W]*?(&lt;|<)\/style(>|&gt;)/ig,inside:{tag:{pattern:/(&lt;|<)style[\w\W]*?(>|&gt;)|(&lt;|<)\/style(>|&gt;)/ig,inside:Prism.languages.markup.tag.inside},rest:Prism.languages.css}}});;
       Prism.languages.clike={comment:{pattern:/(^|[^\\])(\/\*[\w\W]*?\*\/|\/\/.*?(\r?\n|$))/g,lookbehind:!0},string:/("|')(\\?.)*?\1/g,keyword:/\b(if|else|while|do|for|return|in|instanceof|function|new|try|catch|finally|null|break|continue)\b/g,"boolean":/\b(true|false)\b/g,number:/\b-?(0x)?\d*\.?[\da-f]+\b/g,operator:/[-+]{1,2}|!|=?&lt;|=?&gt;|={1,2}|(&amp;){1,2}|\|?\||\?|\*|\//g,ignore:/&(lt|gt|amp);/gi,punctuation:/[{}[\];(),.:]/g};;
       Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(var|let|if|else|while|do|for|return|in|instanceof|function|new|with|typeof|try|catch|finally|null|break|continue)\b/g,number:/\b(-?(0x)?\d*\.?[\da-f]+|NaN|-?Infinity)\b/g});Prism.languages.insertBefore("javascript","keyword",{regex:{pattern:/(^|[^/])\/(?!\/)(\[.+?]|\\.|[^/\r\n])+\/[gim]{0,3}(?=\s*($|[\r\n,.;})]))/g,lookbehind:!0}});Prism.languages.markup&&Prism.languages.insertBefore("markup","tag",{script:{pattern:/(&lt;|<)script[\w\W]*?(>|&gt;)[\w\W]*?(&lt;|<)\/script(>|&gt;)/ig,inside:{tag:{pattern:/(&lt;|<)script[\w\W]*?(>|&gt;)|(&lt;|<)\/script(>|&gt;)/ig,inside:Prism.languages.markup.tag.inside},rest:Prism.languages.javascript}}});;
-      
-    </script>
-    <!-- App js-->
-    <script>
-      $(function(){
-        var $window = $(window);
-        $('.scrollspy .nav').affix({
-          offset: {
-            top: function () { return $window.width() <= 980 ? 480 : 400 }
-          , bottom: 50
-          }
-        });
-      })
       
     </script>
   </body>

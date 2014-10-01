@@ -1,36 +1,3 @@
-// Store
-// ============
-
-// This class defines the API that hoodie.store (local store) and hoodie.open
-// (remote store) implement to assure a coherent API. It also implements some
-// basic validations.
-//
-// The returned API provides the following methods:
-//
-// * validate
-// * save
-// * add
-// * find
-// * findOrAdd
-// * findAll
-// * update
-// * updateAll
-// * remove
-// * removeAll
-// * decoratePromises
-// * trigger
-// * on
-// * unbind
-//
-// At the same time, the returned API can be called as function returning a
-// store scoped by the passed type, for example
-//
-//     var taskStore = hoodie.store('task');
-//     taskStore.findAll().then( showAllTasks );
-//     taskStore.update('id123', {done: true});
-//
-
-//
 var hoodieScopedStoreApi = require('./scoped');
 var hoodieEvents = require('../events');
 var HoodieError = require('../error/error');
@@ -43,8 +10,37 @@ var rejectWith = require('../../utils/promise/reject_with');
 var resolveWith = require('../../utils/promise/resolve_with');
 var isPromise = require('../../utils/promise/is_promise');
 
-//
-function hoodieStoreApi(hoodie, options) {
+/** This class defines the API that hoodie.store (local store) and hoodie.open
+ * (remote store) implement to assure a coherent API. It also implements some
+ *  basic validations.
+ *
+ *  The returned API provides the following methods:
+ *
+ *  * validate
+ *  * save
+ *  * add
+ *  * find
+ *  * findOrAdd
+ *  * findAll
+ *  * update
+ *  * updateAll
+ *  * remove
+ *  * removeAll
+ *  * decoratePromises
+ *  * trigger
+ *  * on
+ *  * unbind
+ *
+ *  At the same time, the returned API can be called as function returning a
+ *  store scoped by the passed type, for example
+ *
+ *      var taskStore = hoodie.store('task');
+ *      taskStore.findAll().then( showAllTasks );
+ *      taskStore.update('id123', {done: true});
+ *
+ * @private
+ */
+module.exports = function (hoodie, options) {
 
   // persistence logic
   var backend = {};
@@ -74,17 +70,11 @@ function hoodieStoreApi(hoodie, options) {
     namespace: storeName
   });
 
-
-  // Validate
-  // --------------
-
-  // by default, we only check for a valid type & id.
-  // the validate method can be overwritten by passing
-  // options.validate
-  //
-  // if `validate` returns nothing, the passed object is
-  // valid. Otherwise it returns an error
-  //
+  /**
+   * by default, we only check for a valid type & id.  the validate method can
+   * be overwritten by passing options.validate if `validate` returns
+   * nothing, the passed object is valid. Otherwise it returns an error
+   */
   api.validate = options.validate;
 
   if (!options.validate) {
@@ -119,19 +109,21 @@ function hoodieStoreApi(hoodie, options) {
 
   }
 
-  // Save
-  // --------------
-
-  // creates or replaces an an eventually existing object in the store
-  // with same type & id.
-  //
-  // When id is undefined, it gets generated and a new object gets saved
-  //
-  // example usage:
-  //
-  //     store.save('car', undefined, {color: 'red'})
-  //     store.save('car', 'abc4567', {color: 'red'})
-  //
+  /**
+  * creates or replaces an an eventually existing object in the store with same
+  * type & id. When id is undefined, it gets generated and a new object gets saved.
+  *
+  * Example:
+  *   store.save('car', undefined, {color: 'red'})
+  *   store.save('car', 'abc4567', {color: 'red'})
+  *
+  * @param {String} type
+  * @param {String} id
+  * @param {Object} properties
+  * @param {Object} options
+  *
+  * @return {Object} promise
+  */
   api.save = function save(type, id, properties, options) {
 
     if (options) {
@@ -157,12 +149,17 @@ function hoodieStoreApi(hoodie, options) {
   };
 
 
-  // Add
-  // -------------------
-
-  // `.add` is an alias for `.save`, with the difference that there is no id argument.
-  // Internally it simply calls `.save(type, undefined, object).
-  //
+  /**
+   * `.add` is an alias for `.save`, with the difference that there is no id argument.
+   * Internally it simply calls `.save(type, undefined, object).
+   *
+   * @param {String} type
+   * @param {Object} properties
+   * @param {Object} options
+   *
+   * @return {Object} promise
+   *
+   */
   api.add = function add(type, properties, options) {
 
     if (properties === undefined) {
@@ -174,24 +171,29 @@ function hoodieStoreApi(hoodie, options) {
     return api.save(type, properties.id, properties, options);
   };
 
-
-  // find
-  // ------
-
-  //
+  /**
+   *
+   * @param {String} type
+   * @param {String} id
+   *
+   * @return {Object}
+   *
+   */
   api.find = function find(type, id) {
-
     return decoratePromise(backend.find(type, id));
   };
 
-
-  // find or add
-  // -------------
-
-  // 1. Try to find a share by given id
-  // 2. If share could be found, return it
-  // 3. If not, add one and return it.
-  //
+  /**
+   *
+   * 1. Try to find a share by given id
+   * 2. If share could be found, return it
+   * 3. If not, add one and return it.
+   * @param {String} type
+   * @param {String} id
+   * @param {Object} properties
+   *
+   * @return {Object}
+   */
   api.findOrAdd = function findOrAdd(type, id, properties) {
 
     if (properties === null) {
@@ -213,31 +215,41 @@ function hoodieStoreApi(hoodie, options) {
   };
 
 
-  // findAll
-  // ------------
-
-  // returns all objects from store.
-  // Can be optionally filtered by a type or a function
-  //
+  /**
+   *
+   * returns all objects from store.  Can be optionally filtered by a type
+   * or a function
+   * @param {String} type
+   * @param {Object} options
+   *
+   * @return {Object}
+   */
   api.findAll = function findAll(type, options) {
     return decoratePromise( backend.findAll(type, options) );
   };
 
 
-  // Update
-  // -------------------
 
-  // In contrast to `.save`, the `.update` method does not replace the stored object,
-  // but only changes the passed attributes of an existing object, if it exists
-  //
-  // both a hash of key/values or a function that applies the update to the passed
-  // object can be passed.
-  //
-  // example usage
-  //
-  // hoodie.store.update('car', 'abc4567', {sold: true})
-  // hoodie.store.update('car', 'abc4567', function(obj) { obj.sold = true })
-  //
+  /**
+   *
+   * In contrast to `.save`, the `.update` method does not replace the stored object,
+   * but only changes the passed attributes of an existing object, if it exists
+   *
+   * both a hash of key/values or a function that applies the update to the passed
+   * object can be passed.
+   *
+   *   example usage
+   *
+   *   hoodie.store.update('car', 'abc4567', {sold: true})
+   *   hoodie.store.update('car', 'abc4567', function(obj) { obj.sold = true })
+   *
+   * @param {String} type
+   * @param {String} id
+   * @param {Object} objectUpdate
+   * @param {Object} options
+   *
+   * @return {Object}
+   */
   api.update = function update(type, id, objectUpdate, options) {
 
     function handleFound(currentObject) {
@@ -287,12 +299,18 @@ function hoodieStoreApi(hoodie, options) {
   };
 
 
-  // updateOrAdd
-  // -------------
-
-  // same as `.update()`, but in case the object cannot be found,
-  // it gets created
-  //
+  /**
+   *
+   * same as `.update()`, but in case the object cannot be found,
+   * it gets created
+   * @param {String} type
+   * @param {String} id
+   * @param {Object} objectUpdate
+   * @param {Object} options
+   *
+   * @return {Object}
+   *
+   */
   api.updateOrAdd = function updateOrAdd(type, id, objectUpdate, options) {
     function handleNotFound() {
       var properties = extend(true, {}, objectUpdate, {
@@ -307,17 +325,20 @@ function hoodieStoreApi(hoodie, options) {
     return decoratePromise(promise);
   };
 
-
-  // updateAll
-  // -----------------
-
-  // update all objects in the store, can be optionally filtered by a function
-  // As an alternative, an array of objects can be passed
-  //
-  // example usage
-  //
-  // hoodie.store.updateAll()
-  //
+  /**
+   *
+   * update all objects in the store, can be optionally filtered by a function
+   * As an alternative, an array of objects can be passed
+   *
+   * example usage
+   *
+   *  hoodie.store.updateAll()
+   * @param {Object} filterOrObjects
+   * @param {Object} objectUpdate
+   * @param {Object} options
+   *
+   * @return {Object}
+   */
   api.updateAll = function updateAll(filterOrObjects, objectUpdate, options) {
     var promise;
 
@@ -366,34 +387,45 @@ function hoodieStoreApi(hoodie, options) {
     return decoratePromise(promise);
   };
 
-
-  // Remove
-  // ------------
-
-  // Removes one object specified by `type` and `id`.
-  //
-  // when object has been synced before, mark it as deleted.
-  // Otherwise remove it from Store.
-  //
+  /**
+   * Removes one object specified by `type` and `id`.
+   *
+   *  when object has been synced before, mark it as deleted.
+   *  Otherwise remove it from Store.
+   * @param {String} type
+   * @param {String} id
+   * @param {Object} options
+   *
+   * @return {Object}
+   *
+   */
   api.remove = function remove(type, id, options) {
     return decoratePromise(backend.remove(type, id, options || {}));
   };
 
-
-  // removeAll
-  // -----------
-
-  // Destroy all objects. Can be filtered by a type
-  //
+  /**
+   *
+   * Destroy all objects. Can be filtered by a type
+   *
+   * @param {String} type
+   * @param {Object} options
+   *
+   * @return {Object}
+   *
+   */
   api.removeAll = function removeAll(type, options) {
     return decoratePromise(backend.removeAll(type, options || {}));
   };
 
-
-  // decorate promises
-  // -------------------
-
-  // extend promises returned by store.api
+  /**
+   *
+   * extend promises returned by store.api
+   *
+   * @param {String} methods
+   *
+   * @return {Object}
+   *
+   */
   api.decoratePromises = function decoratePromises(methods) {
     return extend(promiseApi, methods);
   };
@@ -431,6 +463,5 @@ function hoodieStoreApi(hoodie, options) {
   }
 
   return api;
-}
+};
 
-module.exports = hoodieStoreApi;

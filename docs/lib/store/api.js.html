@@ -39,8 +39,6 @@
         //- float:right; margin-top:8px
       }
       
-      footer iframe{vertical-align:middle;}
-      
     </style>
   </head>
   <body data-spy="scroll" data-target=".scrollspy">
@@ -91,10 +89,46 @@
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
+              <li><a href="#validate"><i class="alert alert-success"></i><span>validate</span></a>
+              </li>
+              <li><a href="#save"><i class="alert alert-info"></i><span>save</span></a>
+              </li>
+              <li><a href="#add"><i class="alert alert-info"></i><span>add</span></a>
+              </li>
+              <li><a href="#find"><i class="alert alert-info"></i><span>find</span></a>
+              </li>
+              <li><a href="#findOrAdd"><i class="alert alert-info"></i><span>findOrAdd</span></a>
+              </li>
+              <li><a href="#findAll"><i class="alert alert-info"></i><span>findAll</span></a>
+              </li>
+              <li><a href="#update"><i class="alert alert-info"></i><span>update</span></a>
+              </li>
+              <li><a href="#updateOrAdd"><i class="alert alert-info"></i><span>updateOrAdd</span></a>
+              </li>
+              <li><a href="#updateAll"><i class="alert alert-info"></i><span>updateAll</span></a>
+              </li>
+              <li><a href="#remove"><i class="alert alert-info"></i><span>remove</span></a>
+              </li>
+              <li><a href="#removeAll"><i class="alert alert-info"></i><span>removeAll</span></a>
+              </li>
+              <li><a href="#decoratePromises"><i class="alert alert-info"></i><span>decoratePromises</span></a>
+              </li>
             </ul>
           </div>
         </div>
         <div class="span9">
+          <section id="validate">
+            <h1>validate</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-success radius ctx-type">property</div><span>api.validate</span>
+            </p>
+          </section>
+          <div class="description"><p>by default, we only check for a valid type &amp; id.  the validate method can<br />be overwritten by passing options.validate if <code>validate</code> returns<br />nothing, the passed object is valid. Otherwise it returns an error</p> </div>
+          <pre><code class="language-javascript">api.validate = options.validate;
+
+  if (!options.validate) {
+    api.validate = function(object</code></pre>
           <div class="description"><p>options</p> </div>
           <pre><code class="language-javascript">) {
 
@@ -125,22 +159,47 @@
 
     };
 
-  }
-
-  // Save
-  // --------------
-
-  // creates or replaces an an eventually existing object in the store
-  // with same type &amp; id.
-  //
-  // When id is undefined, it gets generated and a new object gets saved
-  //
-  // example usage:
-  //
-  //     store.save('car', undefined, {color: 'red'})
-  //     store.save('car', 'abc4567', {color: 'red'})
-  //
-  api.save = function save(type, id, properties, options) {
+  }</code></pre>
+          <section id="save">
+            <h1>save</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>api.save()</span> -><span>Object</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>type</td>
+                <td>String</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>id</td>
+                <td>String</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>properties</td>
+                <td>Object</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>options</td>
+                <td>Object</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>creates or replaces an an eventually existing object in the store with same<br />type &amp; id. When id is undefined, it gets generated and a new object gets saved.</p><p>Example:<br />  store.save(&#39;car&#39;, undefined, {color: &#39;red&#39;})<br />  store.save(&#39;car&#39;, &#39;abc4567&#39;, {color: &#39;red&#39;})</p> </div>
+          <pre><code class="language-javascript">api.save = function save(type, id, properties, options) {
 
     if (options) {
       options = extend(true, {}, options);
@@ -162,16 +221,42 @@
     }
 
     return decoratePromise(backend.save(object, options || {}));
-  };
-
-
-  // Add
-  // -------------------
-
-  // `.add` is an alias for `.save`, with the difference that there is no id argument.
-  // Internally it simply calls `.save(type, undefined, object).
-  //
-  api.add = function add(type, properties, options) {
+  };</code></pre>
+          <section id="add">
+            <h1>add</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>api.add()</span> -><span>Object</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>type</td>
+                <td>String</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>properties</td>
+                <td>Object</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>options</td>
+                <td>Object</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p><code>.add</code> is an alias for <code>.save</code>, with the difference that there is no id argument.<br />Internally it simply calls `.save(type, undefined, object).</p> </div>
+          <pre><code class="language-javascript">api.add = function add(type, properties, options) {
 
     if (properties === undefined) {
       properties = {};
@@ -180,27 +265,74 @@
     options = options || {};
 
     return api.save(type, properties.id, properties, options);
-  };
-
-
-  // find
-  // ------
-
-  //
-  api.find = function find(type, id) {
-
+  };</code></pre>
+          <section id="find">
+            <h1>find</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>api.find()</span> -><span>Object</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>id</td>
+                <td>String</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>@param {String} type</p> </div>
+          <pre><code class="language-javascript">api.find = function find(type, id) {
     return decoratePromise(backend.find(type, id));
-  };
-
-
-  // find or add
-  // -------------
-
-  // 1. Try to find a share by given id
-  // 2. If share could be found, return it
-  // 3. If not, add one and return it.
-  //
-  api.findOrAdd = function findOrAdd(type, id, properties) {
+  };</code></pre>
+          <section id="findOrAdd">
+            <h1>findOrAdd</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>api.findOrAdd()</span> -><span>Object</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>type</td>
+                <td>String</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>id</td>
+                <td>String</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>properties</td>
+                <td>Object</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><ol>
+<li>Try to find a share by given id</li>
+<li>If share could be found, return it</li>
+<li>If not, add one and return it.</li>
+</ol>
+ </div>
+          <pre><code class="language-javascript">api.findOrAdd = function findOrAdd(type, id, properties) {
 
     if (properties === null) {
       properties = {};
@@ -218,35 +350,79 @@
     // that's why we need to decorate the find's promise again.
     var promise = api.find(type, id).then(null, handleNotFound);
     return decoratePromise(promise);
-  };
-
-
-  // findAll
-  // ------------
-
-  // returns all objects from store.
-  // Can be optionally filtered by a type or a function
-  //
-  api.findAll = function findAll(type, options) {
+  };</code></pre>
+          <section id="findAll">
+            <h1>findAll</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>api.findAll()</span> -><span>Object</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>type</td>
+                <td>String</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>options</td>
+                <td>Object</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>returns all objects from store.  Can be optionally filtered by a type<br />or a function</p> </div>
+          <pre><code class="language-javascript">api.findAll = function findAll(type, options) {
     return decoratePromise( backend.findAll(type, options) );
-  };
-
-
-  // Update
-  // -------------------
-
-  // In contrast to `.save`, the `.update` method does not replace the stored object,
-  // but only changes the passed attributes of an existing object, if it exists
-  //
-  // both a hash of key/values or a function that applies the update to the passed
-  // object can be passed.
-  //
-  // example usage
-  //
-  // hoodie.store.update('car', 'abc4567', {sold: true})
-  // hoodie.store.update('car', 'abc4567', function(obj) { obj.sold = true })
-  //
-  api.update = function update(type, id, objectUpdate, options) {
+  };</code></pre>
+          <section id="update">
+            <h1>update</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>api.update()</span> -><span>Object</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>type</td>
+                <td>String</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>id</td>
+                <td>String</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>objectUpdate</td>
+                <td>Object</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>options</td>
+                <td>Object</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>In contrast to <code>.save</code>, the <code>.update</code> method does not replace the stored object,<br />but only changes the passed attributes of an existing object, if it exists</p><p>both a hash of key/values or a function that applies the update to the passed<br />object can be passed.</p><p>  example usage</p><p>  hoodie.store.update(&#39;car&#39;, &#39;abc4567&#39;, {sold: true})<br />  hoodie.store.update(&#39;car&#39;, &#39;abc4567&#39;, function(obj) { obj.sold = true })</p> </div>
+          <pre><code class="language-javascript">api.update = function update(type, id, objectUpdate, options) {
 
     function handleFound(currentObject) {
       var changedProperties, newObj, value;
@@ -292,16 +468,47 @@
     // that's why we need to decorate the find's promise again.
     var promise = api.find(type, id).then(handleFound);
     return decoratePromise(promise);
-  };
-
-
-  // updateOrAdd
-  // -------------
-
-  // same as `.update()`, but in case the object cannot be found,
-  // it gets created
-  //
-  api.updateOrAdd = function updateOrAdd(type, id, objectUpdate, options) {
+  };</code></pre>
+          <section id="updateOrAdd">
+            <h1>updateOrAdd</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>api.updateOrAdd()</span> -><span>Object</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>type</td>
+                <td>String</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>id</td>
+                <td>String</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>objectUpdate</td>
+                <td>Object</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>options</td>
+                <td>Object</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>same as <code>.update()</code>, but in case the object cannot be found,<br />it gets created</p> </div>
+          <pre><code class="language-javascript">api.updateOrAdd = function updateOrAdd(type, id, objectUpdate, options) {
     function handleNotFound() {
       var properties = extend(true, {}, objectUpdate, {
         id: id
@@ -313,20 +520,42 @@
     var promise = api.update(type, id, objectUpdate, options).then(null, handleNotFound);
 
     return decoratePromise(promise);
-  };
-
-
-  // updateAll
-  // -----------------
-
-  // update all objects in the store, can be optionally filtered by a function
-  // As an alternative, an array of objects can be passed
-  //
-  // example usage
-  //
-  // hoodie.store.updateAll()
-  //
-  api.updateAll = function updateAll(filterOrObjects, objectUpdate, options) {
+  };</code></pre>
+          <section id="updateAll">
+            <h1>updateAll</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>api.updateAll()</span> -><span>Object</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>filterOrObjects</td>
+                <td>Object</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>objectUpdate</td>
+                <td>Object</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>options</td>
+                <td>Object</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>update all objects in the store, can be optionally filtered by a function<br />As an alternative, an array of objects can be passed</p><p>example usage</p><p> hoodie.store.updateAll()</p> </div>
+          <pre><code class="language-javascript">api.updateAll = function updateAll(filterOrObjects, objectUpdate, options) {
     var promise;
 
     options = options || {};
@@ -372,37 +601,101 @@
     });
 
     return decoratePromise(promise);
-  };
-
-
-  // Remove
-  // ------------
-
-  // Removes one object specified by `type` and `id`.
-  //
-  // when object has been synced before, mark it as deleted.
-  // Otherwise remove it from Store.
-  //
-  api.remove = function remove(type, id, options) {
+  };</code></pre>
+          <section id="remove">
+            <h1>remove</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>api.remove()</span> -><span>Object</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>type</td>
+                <td>String</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>id</td>
+                <td>String</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>options</td>
+                <td>Object</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Removes one object specified by <code>type</code> and <code>id</code>.</p><p> when object has been synced before, mark it as deleted.<br /> Otherwise remove it from Store.</p> </div>
+          <pre><code class="language-javascript">api.remove = function remove(type, id, options) {
     return decoratePromise(backend.remove(type, id, options || {}));
-  };
-
-
-  // removeAll
-  // -----------
-
-  // Destroy all objects. Can be filtered by a type
-  //
-  api.removeAll = function removeAll(type, options) {
+  };</code></pre>
+          <section id="removeAll">
+            <h1>removeAll</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>api.removeAll()</span> -><span>Object</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>type</td>
+                <td>String</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>options</td>
+                <td>Object</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Destroy all objects. Can be filtered by a type</p> </div>
+          <pre><code class="language-javascript">api.removeAll = function removeAll(type, options) {
     return decoratePromise(backend.removeAll(type, options || {}));
-  };
-
-
-  // decorate promises
-  // -------------------
-
-  // extend promises returned by store.api
-  api.decoratePromises = function decoratePromises(methods) {
+  };</code></pre>
+          <section id="decoratePromises">
+            <h1>decoratePromises</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>api.decoratePromises()</span> -><span>Object</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>methods</td>
+                <td>String</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>extend promises returned by store.api</p> </div>
+          <pre><code class="language-javascript">api.decoratePromises = function decoratePromises(methods) {
     return extend(promiseApi, methods);
   };
 
@@ -439,9 +732,7 @@
   }
 
   return api;
-}
-
-module.exports = hoodieStoreApi;</code></pre>
+};</code></pre>
         </div>
       </div>
     </div>
@@ -464,19 +755,6 @@ module.exports = hoodieStoreApi;</code></pre>
       Prism.languages.css={comment:/\/\*[\w\W]*?\*\//g,atrule:/@[\w-]+?(\s+[^;{]+)?(?=\s*{|\s*;)/gi,url:/url\((["']?).*?\1\)/gi,selector:/[^\{\}\s][^\{\}]*(?=\s*\{)/g,property:/(\b|\B)[a-z-]+(?=\s*:)/ig,string:/("|')(\\?.)*?\1/g,important:/\B!important\b/gi,ignore:/&(lt|gt|amp);/gi,punctuation:/[\{\};:]/g};Prism.languages.markup&&Prism.languages.insertBefore("markup","tag",{style:{pattern:/(&lt;|<)style[\w\W]*?(>|&gt;)[\w\W]*?(&lt;|<)\/style(>|&gt;)/ig,inside:{tag:{pattern:/(&lt;|<)style[\w\W]*?(>|&gt;)|(&lt;|<)\/style(>|&gt;)/ig,inside:Prism.languages.markup.tag.inside},rest:Prism.languages.css}}});;
       Prism.languages.clike={comment:{pattern:/(^|[^\\])(\/\*[\w\W]*?\*\/|\/\/.*?(\r?\n|$))/g,lookbehind:!0},string:/("|')(\\?.)*?\1/g,keyword:/\b(if|else|while|do|for|return|in|instanceof|function|new|try|catch|finally|null|break|continue)\b/g,"boolean":/\b(true|false)\b/g,number:/\b-?(0x)?\d*\.?[\da-f]+\b/g,operator:/[-+]{1,2}|!|=?&lt;|=?&gt;|={1,2}|(&amp;){1,2}|\|?\||\?|\*|\//g,ignore:/&(lt|gt|amp);/gi,punctuation:/[{}[\];(),.:]/g};;
       Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(var|let|if|else|while|do|for|return|in|instanceof|function|new|with|typeof|try|catch|finally|null|break|continue)\b/g,number:/\b(-?(0x)?\d*\.?[\da-f]+|NaN|-?Infinity)\b/g});Prism.languages.insertBefore("javascript","keyword",{regex:{pattern:/(^|[^/])\/(?!\/)(\[.+?]|\\.|[^/\r\n])+\/[gim]{0,3}(?=\s*($|[\r\n,.;})]))/g,lookbehind:!0}});Prism.languages.markup&&Prism.languages.insertBefore("markup","tag",{script:{pattern:/(&lt;|<)script[\w\W]*?(>|&gt;)[\w\W]*?(&lt;|<)\/script(>|&gt;)/ig,inside:{tag:{pattern:/(&lt;|<)script[\w\W]*?(>|&gt;)|(&lt;|<)\/script(>|&gt;)/ig,inside:Prism.languages.markup.tag.inside},rest:Prism.languages.javascript}}});;
-      
-    </script>
-    <!-- App js-->
-    <script>
-      $(function(){
-        var $window = $(window);
-        $('.scrollspy .nav').affix({
-          offset: {
-            top: function () { return $window.width() <= 980 ? 480 : 400 }
-          , bottom: 50
-          }
-        });
-      })
       
     </script>
   </body>
