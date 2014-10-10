@@ -5,125 +5,98 @@ mixin labelForSymbolType(symbol)
   div(class=["label", "label-"+(symbol.gtype === "function" || symbol.gtype === "method" ? "info":"success"), "radius", "ctx-type"])= symbol.ctx.type
 
 doctype html
-html
+html(class="no-js")
   head
-    meta(name='viewport', content='width=device-width', charset='utf-8')
-    title= title
-    link(rel="stylesheet", href="http://getbootstrap.com/2.3.2/assets/css/bootstrap.css")
-    link(rel="stylesheet", href="http://getbootstrap.com/2.3.2/assets/css/bootstrap-responsive.css")
-    link(rel="stylesheet", href="http://getbootstrap.com/2.3.2/assets/css/docs.css")
-    style.
-      .bs-docs-sidenav.affix {
-        box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.5);
-        z-index: 10;
-      }
+    base(target='http://0.0.0.0:1337')
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible' content='IE=edge,chrome=1')
+    meta(name='viewport' content='width=device-width, initial-scale=1')
 
-      .bs-docs-sidenav i{
-        width: 8px;
-        height: 8px;
-        padding: 0px;
-        margin: 0px;
-        display: inline-block;
-        margin-right:0.5em;
-      }
+    link(rel='stylesheet' href='http://0.0.0.0:1337/dist/css/hoodie.css')
+    link(rel='stylesheet' href='http://fonts.googleapis.com/css?family=Fira+Sans:300,500|Fira+Mono' type='text/css')
 
-      .bs-docs-sidenav > li > a {
-          word-wrap: break-word;
-      }
+  body(class='orange')
+    header
+      section(id='nav')
+        div(id='logo'): img(src='http://0.0.0.0:1337/dist/img/logo.svg' width='135' alt='')
+        nav(id='main-nav' aria-role='navigation')
+          a(href='#') Intro
+          a(href='#') Contribute
+          a(href='#') Get help
+          a(href='#') About
+          a(href='#') Community
+          a(href='#') Zoo
+          a(href='#') Contact
+        ul(id='meta-nav')
+          li: a(href='#') Blog
+          li: a(href='#') Docs
+          li: a(href='#') try
+          li: a(href='#') FAQ
+      section(class='hid')
+        ul(id='sub-nav')
+          li: a(href='/#') Team
+          li: a(href='/#') wear hoodie
+          li: a(href='/#') give money
+          li: a(href='/#') hire us
+          li: a(href='/#') contributors
+          li: a(href='/#') friends
+          li: a(href='/#') initiatives
+          li: a(href='/#') tools
 
-      .bs-docs-sidenav > li:first-child > a {
-        border-top-right-radius: 6px;
-        border-top-left-radius: 6px;
-      }
+    div(id='content')
+      div(class='box')
+        section(class='cb teaser')
+          h1 Docs
+          aside
+            ul
+              each file in files
+                li(class=(file.name !== currentName ? "":"active"))
+                  a(href=file.relName) #{file.name}
+          article: each symbol in dox
+              if symbol.ctx.name
+                section(id=symbol.ctx.name)
+                    h1= symbol.ctx.name
+                    h5.subheader
+                    if !symbol.gtype && symbol.type
+                      p
+                        div(class=["label", "label-inverse", "radius", "ctx-type"])= symbol.type
+                    else
+                      p
+                        mixin labelForSymbolType(symbol)
+                        if symbol.ctx.string
+                          span= symbol.ctx.string
+                        if symbol.return
+                          |  ->
+                          span= symbol.return
 
-      code[class*="language-"],pre[class*="language-"]{color:black;text-shadow:0 1px white;font-family:Consolas,Monaco,'Andale Mono',monospace;direction:ltr;text-align:left;white-space:pre;word-spacing:normal;-moz-tab-size:2;-o-tab-size:2;tab-size2;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*="language-"]{padding:1em;margin:.5em 0;overflow:auto}:not(pre)>code[class*="language-"],pre[class*="language-"]{background:#f5f2f0}:not(pre)>code[class*="language-"]{padding:.1em;border-radius:.3em}.token.comment,.token.prolog,.token.doctype,.token.cdata{color:slategray}.token.punctuation{color:#999}.namespace{opacity:.7}.token.property,.token.tag,.token.boolean,.token.number{color:#905}.token.selector,.token.attr-name,.token.string{color:#690}.token.operator,.token.entity,.token.url,.language-css .token.string,.style .token.string{color:#a67f59;background:hsla(0,0%,100%,.5)}.token.atrule,.token.attr-value,.token.keyword{color:#07a}.token.regex,.token.important{color:#e90}.token.important{font-weight:bold}.token.entity{cursor:help}
-      div.description {margin: 14px 0; padding-top: 14px; border-bottom:1px solid #eee; }
-      .tags {}
-      .ctx-type {
-        display:inline-block;
-        margin-right:0.5em;
-        //- float:right; margin-top:8px
-      }
+              if symbol.hasParams
+                table.table.table-bordered.table-striped
+                  thead
+                    tr
+                      th(style="width:20%") Option name
+                      th(style="width:20%") Type
+                      th Description
+                  tbody
+                    each tag in symbol.tags
+                      if tag.type == 'param'
+                        tr
+                          td= tag.name
+                          td= tag.types
+                          td= tag.description
 
-  body(data-spy="scroll", data-target=".scrollspy")
+              .description !{symbol.description.full} !{symbol.description.extra}
+              if symbol.code
+                pre
+                  code.language-javascript
+                    = symbol.code
 
-    header.jumbotron.subhead#overview
-      div.container
-        h1= title
-        p.lead
 
-    .container
-      .row
-        .span3.bs-docs-sidebar
-          ul.nav.nav-list.bs-docs-sidenav.affix-top
-            each file in files
-              li(class=(file.name !== currentName ? "":"active"))
-                a(href=file.relName) #{file.name}
+          br(class='clear')
 
-          .scrollspy
-            ul.nav.nav-list.bs-docs-sidenav.affix-top
-              each symbol in symbols
-                li
-                  if name === currentName
-                    a(href='#'+symbol.name)
-                      mixin iForSymbolType(symbol)
-                      span #{symbol.name}
-                  else
-                    a(href=symbol.targetFile+'#'+symbol.name)
-                      mixin iForSymbolType(symbol)
-                      span #{symbol.name}
-
-        .span9
-          if locals.readme
-            section(id=name) !{readme}
-          each symbol in dox
-            if symbol.ctx.name
-              section(id=symbol.ctx.name)
-                  h1= symbol.ctx.name
-                  h5.subheader
-                  if !symbol.gtype && symbol.type
-                    p
-                      div(class=["label", "label-inverse", "radius", "ctx-type"])= symbol.type
-                  else
-                    p
-                      mixin labelForSymbolType(symbol)
-                      if symbol.ctx.string
-                        span= symbol.ctx.string
-                      if symbol.return
-                        |  ->
-                        span= symbol.return
-
-            if symbol.hasParams
-              table.table.table-bordered.table-striped
-                thead
-                  tr
-                    th(style="width:20%") Option name
-                    th(style="width:20%") Type
-                    th Description
-                tbody
-                  each tag in symbol.tags
-                    if tag.type == 'param'
-                      tr
-                        td= tag.name
-                        td= tag.types
-                        td= tag.description
-
-            .description !{symbol.description.full} !{symbol.description.extra}
-            if symbol.code
-              pre
-                code.language-javascript
-                  = symbol.code
-
-    footer.footer
-
-    script(src="http://platform.twitter.com/widgets.js")
-    script(src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js")
-    script(src="http://leaverou.github.com/prefixfree/prefixfree.js")
-    script(src="http://getbootstrap.com/2.3.2/assets/js/bootstrap-transition.js")
-    script(src="http://getbootstrap.com/2.3.2/assets/js/bootstrap-scrollspy.js")
-    script(src="http://getbootstrap.com/2.3.2/assets/js/bootstrap-dropdown.js")
-    script(src="http://getbootstrap.com/2.3.2/assets/js/bootstrap-collapse.js")
-    script(src="http://getbootstrap.com/2.3.2/assets/js/bootstrap-affix.js")
+    footer
+      div(class='footer')
+        section(class='cb sitemap')
+        br(class='clear')
 
     script.
       /**
@@ -135,4 +108,5 @@ html
       Prism.languages.css={comment:/\/\*[\w\W]*?\*\//g,atrule:/@[\w-]+?(\s+[^;{]+)?(?=\s*{|\s*;)/gi,url:/url\((["']?).*?\1\)/gi,selector:/[^\{\}\s][^\{\}]*(?=\s*\{)/g,property:/(\b|\B)[a-z-]+(?=\s*:)/ig,string:/("|')(\\?.)*?\1/g,important:/\B!important\b/gi,ignore:/&(lt|gt|amp);/gi,punctuation:/[\{\};:]/g};Prism.languages.markup&&Prism.languages.insertBefore("markup","tag",{style:{pattern:/(&lt;|<)style[\w\W]*?(>|&gt;)[\w\W]*?(&lt;|<)\/style(>|&gt;)/ig,inside:{tag:{pattern:/(&lt;|<)style[\w\W]*?(>|&gt;)|(&lt;|<)\/style(>|&gt;)/ig,inside:Prism.languages.markup.tag.inside},rest:Prism.languages.css}}});;
       Prism.languages.clike={comment:{pattern:/(^|[^\\])(\/\*[\w\W]*?\*\/|\/\/.*?(\r?\n|$))/g,lookbehind:!0},string:/("|')(\\?.)*?\1/g,keyword:/\b(if|else|while|do|for|return|in|instanceof|function|new|try|catch|finally|null|break|continue)\b/g,"boolean":/\b(true|false)\b/g,number:/\b-?(0x)?\d*\.?[\da-f]+\b/g,operator:/[-+]{1,2}|!|=?&lt;|=?&gt;|={1,2}|(&amp;){1,2}|\|?\||\?|\*|\//g,ignore:/&(lt|gt|amp);/gi,punctuation:/[{}[\];(),.:]/g};;
       Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(var|let|if|else|while|do|for|return|in|instanceof|function|new|with|typeof|try|catch|finally|null|break|continue)\b/g,number:/\b(-?(0x)?\d*\.?[\da-f]+|NaN|-?Infinity)\b/g});Prism.languages.insertBefore("javascript","keyword",{regex:{pattern:/(^|[^/])\/(?!\/)(\[.+?]|\\.|[^/\r\n])+\/[gim]{0,3}(?=\s*($|[\r\n,.;})]))/g,lookbehind:!0}});Prism.languages.markup&&Prism.languages.insertBefore("markup","tag",{script:{pattern:/(&lt;|<)script[\w\W]*?(>|&gt;)[\w\W]*?(&lt;|<)\/script(>|&gt;)/ig,inside:{tag:{pattern:/(&lt;|<)script[\w\W]*?(>|&gt;)|(&lt;|<)\/script(>|&gt;)/ig,inside:Prism.languages.markup.tag.inside},rest:Prism.languages.javascript}}});;
+
 

@@ -1,145 +1,92 @@
 <!DOCTYPE html>
-<html>
+<html class="no-js">
   <head>
-    <meta name="viewport" content="width=device-width" charset="utf-8">
-    <title>Hoodie.js</title>
-    <link rel="stylesheet" href="http://getbootstrap.com/2.3.2/assets/css/bootstrap.css">
-    <link rel="stylesheet" href="http://getbootstrap.com/2.3.2/assets/css/bootstrap-responsive.css">
-    <link rel="stylesheet" href="http://getbootstrap.com/2.3.2/assets/css/docs.css">
-    <style>
-      .bs-docs-sidenav.affix {
-        box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.5);
-        z-index: 10;
-      }
-      
-      .bs-docs-sidenav i{
-        width: 8px;
-        height: 8px;
-        padding: 0px;
-        margin: 0px;
-        display: inline-block;
-        margin-right:0.5em;
-      }
-      
-      .bs-docs-sidenav > li > a {
-          word-wrap: break-word;
-      }
-      
-      .bs-docs-sidenav > li:first-child > a {
-        border-top-right-radius: 6px;
-        border-top-left-radius: 6px;
-      }
-      
-      code[class*="language-"],pre[class*="language-"]{color:black;text-shadow:0 1px white;font-family:Consolas,Monaco,'Andale Mono',monospace;direction:ltr;text-align:left;white-space:pre;word-spacing:normal;-moz-tab-size:2;-o-tab-size:2;tab-size2;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*="language-"]{padding:1em;margin:.5em 0;overflow:auto}:not(pre)>code[class*="language-"],pre[class*="language-"]{background:#f5f2f0}:not(pre)>code[class*="language-"]{padding:.1em;border-radius:.3em}.token.comment,.token.prolog,.token.doctype,.token.cdata{color:slategray}.token.punctuation{color:#999}.namespace{opacity:.7}.token.property,.token.tag,.token.boolean,.token.number{color:#905}.token.selector,.token.attr-name,.token.string{color:#690}.token.operator,.token.entity,.token.url,.language-css .token.string,.style .token.string{color:#a67f59;background:hsla(0,0%,100%,.5)}.token.atrule,.token.attr-value,.token.keyword{color:#07a}.token.regex,.token.important{color:#e90}.token.important{font-weight:bold}.token.entity{cursor:help}
-      div.description {margin: 14px 0; padding-top: 14px; border-bottom:1px solid #eee; }
-      .tags {}
-      .ctx-type {
-        display:inline-block;
-        margin-right:0.5em;
-        //- float:right; margin-top:8px
-      }
-      
-    </style>
+    <base target="http://0.0.0.0:1337">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://0.0.0.0:1337/dist/css/hoodie.css">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Fira+Sans:300,500|Fira+Mono" type="text/css">
   </head>
-  <body data-spy="scroll" data-target=".scrollspy">
-    <header id="overview" class="jumbotron subhead">
-      <div class="container">
-        <h1>Hoodie.js</h1>
-        <p class="lead"></p>
-      </div>
+  <body class="orange">
+    <header>
+      <section id="nav">
+        <div id="logo"><img src="http://0.0.0.0:1337/dist/img/logo.svg" width="135" alt=""></div>
+        <nav id="main-nav" aria-role="navigation"><a href="#">Intro</a><a href="#">Contribute</a><a href="#">Get help</a><a href="#">About</a><a href="#">Community</a><a href="#">Zoo</a><a href="#">Contact</a></nav>
+        <ul id="meta-nav">
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Docs</a></li>
+          <li><a href="#">try</a></li>
+          <li><a href="#">FAQ</a></li>
+        </ul>
+      </section>
+      <section class="hid">
+        <ul id="sub-nav">
+          <li><a href="/#">Team</a></li>
+          <li><a href="/#">wear hoodie</a></li>
+          <li><a href="/#">give money</a></li>
+          <li><a href="/#">hire us</a></li>
+          <li><a href="/#">contributors</a></li>
+          <li><a href="/#">friends</a></li>
+          <li><a href="/#">initiatives</a></li>
+          <li><a href="/#">tools</a></li>
+        </ul>
+      </section>
     </header>
-    <div class="container">
-      <div class="row">
-        <div class="span3 bs-docs-sidebar">
-          <ul class="nav nav-list bs-docs-sidenav affix-top">
-            <li><a href="../index.html">Main</a></li>
-            <li><a href="../hoodie/account.js.html">hoodie/account.js</a></li>
-            <li><a href="../hoodie/connection.js.html">hoodie/connection.js</a></li>
-            <li><a href="../hoodie/id.js.html">hoodie/id.js</a></li>
-            <li><a href="../hoodie/open.js.html">hoodie/open.js</a></li>
-            <li><a href="../hoodie/remote.js.html">hoodie/remote.js</a></li>
-            <li><a href="../hoodie/request.js.html">hoodie/request.js</a></li>
-            <li class="active"><a href="../hoodie/store.js.html">hoodie/store.js</a></li>
-            <li><a href="../hoodie/task.js.html">hoodie/task.js</a></li>
-            <li><a href="../hoodie.js.html">hoodie.js</a></li>
-            <li><a href="../lib/error/error.js.html">lib/error/error.js</a></li>
-            <li><a href="../lib/error/index.js.html">lib/error/index.js</a></li>
-            <li><a href="../lib/error/object_id.js.html">lib/error/object_id.js</a></li>
-            <li><a href="../lib/error/object_type.js.html">lib/error/object_type.js</a></li>
-            <li><a href="../lib/events.js.html">lib/events.js</a></li>
-            <li><a href="../lib/index.js.html">lib/index.js</a></li>
-            <li><a href="../lib/store/api.js.html">lib/store/api.js</a></li>
-            <li><a href="../lib/store/index.js.html">lib/store/index.js</a></li>
-            <li><a href="../lib/store/remote.js.html">lib/store/remote.js</a></li>
-            <li><a href="../lib/store/scoped.js.html">lib/store/scoped.js</a></li>
-            <li><a href="../lib/task/index.js.html">lib/task/index.js</a></li>
-            <li><a href="../lib/task/scoped.js.html">lib/task/scoped.js</a></li>
-            <li><a href="../utils/config.js.html">utils/config.js</a></li>
-            <li><a href="../utils/generate_id.js.html">utils/generate_id.js</a></li>
-            <li><a href="../utils/hoodiefy_request_error_name.js.html">utils/hoodiefy_request_error_name.js</a></li>
-            <li><a href="../utils/index.js.html">utils/index.js</a></li>
-            <li><a href="../utils/local_storage_wrapper.js.html">utils/local_storage_wrapper.js</a></li>
-            <li><a href="../utils/promise/defer.js.html">utils/promise/defer.js</a></li>
-            <li><a href="../utils/promise/index.js.html">utils/promise/index.js</a></li>
-            <li><a href="../utils/promise/is_promise.js.html">utils/promise/is_promise.js</a></li>
-            <li><a href="../utils/promise/reject.js.html">utils/promise/reject.js</a></li>
-            <li><a href="../utils/promise/reject_with.js.html">utils/promise/reject_with.js</a></li>
-            <li><a href="../utils/promise/resolve.js.html">utils/promise/resolve.js</a></li>
-            <li><a href="../utils/promise/resolve_with.js.html">utils/promise/resolve_with.js</a></li>
-          </ul>
-          <div class="scrollspy">
-            <ul class="nav nav-list bs-docs-sidenav affix-top">
-              <li><a href="#save"><i class="alert alert-info"></i><span>save</span></a>
-              </li>
-              <li><a href="#find"><i class="alert alert-info"></i><span>find</span></a>
-              </li>
-              <li><a href="#findAll"><i class="alert alert-info"></i><span>findAll</span></a>
-              </li>
-              <li><a href="#remove"><i class="alert alert-info"></i><span>remove</span></a>
-              </li>
-              <li><a href="#removeAll"><i class="alert alert-info"></i><span>removeAll</span></a>
-              </li>
-              <li><a href="#validate"><i class="alert alert-info"></i><span>validate</span></a>
-              </li>
-              <li><a href="#index"><i class="alert alert-info"></i><span>index</span></a>
-              </li>
-              <li><a href="#changedObjects"><i class="alert alert-info"></i><span>changedObjects</span></a>
-              </li>
-              <li><a href="#hasLocalChanges"><i class="alert alert-info"></i><span>hasLocalChanges</span></a>
-              </li>
-              <li><a href="#clear"><i class="alert alert-info"></i><span>clear</span></a>
-              </li>
-              <li><a href="#bootstrapping"><i class="alert alert-success"></i><span>bootstrapping</span></a>
-              </li>
-              <li><a href="#isPersistent"><i class="alert alert-info"></i><span>isPersistent</span></a>
-              </li>
-              <li><a href="#now"><i class="alert alert-info"></i><span>now</span></a>
-              </li>
-              <li><a href="#isMarkedAsDeleted"><i class="alert alert-info"></i><span>isMarkedAsDeleted</span></a>
-              </li>
-              <li><a href="#startBootstrappingMode"><i class="alert alert-info"></i><span>startBootstrappingMode</span></a>
-              </li>
-              <li><a href="#endBootstrappingMode"><i class="alert alert-info"></i><span>endBootstrappingMode</span></a>
-              </li>
-              <li><a href="#abortBootstrappingMode"><i class="alert alert-info"></i><span>abortBootstrappingMode</span></a>
-              </li>
-              <li><a href="#enqueue"><i class="alert alert-info"></i><span>enqueue</span></a>
-              </li>
+    <div id="content">
+      <div class="box">
+        <section class="cb teaser">
+          <h1>Docs</h1>
+          <aside>
+            <ul>
+              <li><a href="../index.html">Main</a></li>
+              <li><a href="../hoodie/account.js.html">hoodie/account.js</a></li>
+              <li><a href="../hoodie/connection.js.html">hoodie/connection.js</a></li>
+              <li><a href="../hoodie/id.js.html">hoodie/id.js</a></li>
+              <li><a href="../hoodie/open.js.html">hoodie/open.js</a></li>
+              <li><a href="../hoodie/remote.js.html">hoodie/remote.js</a></li>
+              <li><a href="../hoodie/request.js.html">hoodie/request.js</a></li>
+              <li class="active"><a href="../hoodie/store.js.html">hoodie/store.js</a></li>
+              <li><a href="../hoodie/task.js.html">hoodie/task.js</a></li>
+              <li><a href="../hoodie.js.html">hoodie.js</a></li>
+              <li><a href="../lib/error/error.js.html">lib/error/error.js</a></li>
+              <li><a href="../lib/error/index.js.html">lib/error/index.js</a></li>
+              <li><a href="../lib/error/object_id.js.html">lib/error/object_id.js</a></li>
+              <li><a href="../lib/error/object_type.js.html">lib/error/object_type.js</a></li>
+              <li><a href="../lib/events.js.html">lib/events.js</a></li>
+              <li><a href="../lib/index.js.html">lib/index.js</a></li>
+              <li><a href="../lib/store/api.js.html">lib/store/api.js</a></li>
+              <li><a href="../lib/store/index.js.html">lib/store/index.js</a></li>
+              <li><a href="../lib/store/remote.js.html">lib/store/remote.js</a></li>
+              <li><a href="../lib/store/scoped.js.html">lib/store/scoped.js</a></li>
+              <li><a href="../lib/task/index.js.html">lib/task/index.js</a></li>
+              <li><a href="../lib/task/scoped.js.html">lib/task/scoped.js</a></li>
+              <li><a href="../utils/config.js.html">utils/config.js</a></li>
+              <li><a href="../utils/generate_id.js.html">utils/generate_id.js</a></li>
+              <li><a href="../utils/hoodiefy_request_error_name.js.html">utils/hoodiefy_request_error_name.js</a></li>
+              <li><a href="../utils/index.js.html">utils/index.js</a></li>
+              <li><a href="../utils/local_storage_wrapper.js.html">utils/local_storage_wrapper.js</a></li>
+              <li><a href="../utils/promise/defer.js.html">utils/promise/defer.js</a></li>
+              <li><a href="../utils/promise/index.js.html">utils/promise/index.js</a></li>
+              <li><a href="../utils/promise/is_promise.js.html">utils/promise/is_promise.js</a></li>
+              <li><a href="../utils/promise/reject.js.html">utils/promise/reject.js</a></li>
+              <li><a href="../utils/promise/reject_with.js.html">utils/promise/reject_with.js</a></li>
+              <li><a href="../utils/promise/resolve.js.html">utils/promise/resolve.js</a></li>
+              <li><a href="../utils/promise/resolve_with.js.html">utils/promise/resolve_with.js</a></li>
             </ul>
-          </div>
-        </div>
-        <div class="span9">
-          <section id="save">
-            <h1>save</h1>
-            <h5 class="subheader"></h5>
-            <p>
-              <div class="label label-info radius ctx-type">method</div><span>localStore.save()</span>
-            </p>
-          </section>
-          <div class="description"><p>saves the passed object into the store and replaces<br />an eventually existing object with same type &amp; id.<br />When id is undefined, it gets generated an new object gets saved<br />It also adds timestamps along the way:<br /><code>createdAt</code> unless it already exists<br /><code>updatedAt</code> every time<br /><code>_syncedAt</code>  if changes comes from remote</p><p>example usage:</p><pre><code>store.save(&#39;car&#39;, undefined, {color: &#39;red&#39;})
+          </aside>
+          <article>
+            <section id="save">
+              <h1>save</h1>
+              <h5 class="subheader"></h5>
+              <p>
+                <div class="label label-info radius ctx-type">method</div><span>localStore.save()</span>
+              </p>
+            </section>
+            <div class="description"><p>saves the passed object into the store and replaces<br />an eventually existing object with same type &amp; id.<br />When id is undefined, it gets generated an new object gets saved<br />It also adds timestamps along the way:<br /><code>createdAt</code> unless it already exists<br /><code>updatedAt</code> every time<br /><code>_syncedAt</code>  if changes comes from remote</p><p>example usage:</p><pre><code>store.save(&#39;car&#39;, undefined, {color: &#39;red&#39;})
 store.save(&#39;car&#39;, &#39;abc4567&#39;, {color: &#39;red&#39;})
 </code></pre> </div>
-          <pre><code class="language-javascript">localStore.save = function save(object, options) {
+            <pre><code class="language-javascript">localStore.save = function save(object, options) {
     var currentObject, defer, error, event, isNew, key;
 
     options = options || {};
@@ -230,15 +177,15 @@ store.save(&#39;car&#39;, &#39;abc4567&#39;, {color: &#39;red&#39;})
 
     return defer.promise();
   };</code></pre>
-          <section id="find">
-            <h1>find</h1>
-            <h5 class="subheader"></h5>
-            <p>
-              <div class="label label-info radius ctx-type">method</div><span>localStore.find()</span>
-            </p>
-          </section>
-          <div class="description"><p>loads one object from Store, specified by <code>type</code> and <code>id</code></p><p><code>store.find(&#39;car&#39;, &#39;abc4567&#39;)</code></p> </div>
-          <pre><code class="language-javascript">localStore.find = function(type, id) {
+            <section id="find">
+              <h1>find</h1>
+              <h5 class="subheader"></h5>
+              <p>
+                <div class="label label-info radius ctx-type">method</div><span>localStore.find()</span>
+              </p>
+            </section>
+            <div class="description"><p>loads one object from Store, specified by <code>type</code> and <code>id</code></p><p><code>store.find(&#39;car&#39;, &#39;abc4567&#39;)</code></p> </div>
+            <pre><code class="language-javascript">localStore.find = function(type, id) {
     var error, object;
 
     // if store is currently bootstrapping data from remote,
@@ -261,15 +208,15 @@ store.save(&#39;car&#39;, &#39;abc4567&#39;, {color: &#39;red&#39;})
       return rejectWith(error);
     }
   };</code></pre>
-          <section id="findAll">
-            <h1>findAll</h1>
-            <h5 class="subheader"></h5>
-            <p>
-              <div class="label label-info radius ctx-type">method</div><span>localStore.findAll()</span>
-            </p>
-          </section>
-          <div class="description"><p>returns all objects from store.<br />Can be optionally filtered by a type or a function<br />example usage:<br />   store.findAll()<br />   store.findAll(&#39;car&#39;)<br />   store.findAll(function(obj) { return obj.brand == &#39;Tesla&#39; })</p> </div>
-          <pre><code class="language-javascript">localStore.findAll = function findAll(filter) {
+            <section id="findAll">
+              <h1>findAll</h1>
+              <h5 class="subheader"></h5>
+              <p>
+                <div class="label label-info radius ctx-type">method</div><span>localStore.findAll()</span>
+              </p>
+            </section>
+            <div class="description"><p>returns all objects from store.<br />Can be optionally filtered by a type or a function<br />example usage:<br />   store.findAll()<br />   store.findAll(&#39;car&#39;)<br />   store.findAll(function(obj) { return obj.brand == &#39;Tesla&#39; })</p> </div>
+            <pre><code class="language-javascript">localStore.findAll = function findAll(filter) {
     var currentType, defer, error, id, key, keys, obj, results, type;
 
 
@@ -340,15 +287,15 @@ store.save(&#39;car&#39;, &#39;abc4567&#39;, {color: &#39;red&#39;})
     }
     return defer.promise();
   };</code></pre>
-          <section id="remove">
-            <h1>remove</h1>
-            <h5 class="subheader"></h5>
-            <p>
-              <div class="label label-info radius ctx-type">method</div><span>localStore.remove()</span>
-            </p>
-          </section>
-          <div class="description"><p>Removes one object specified by <code>type</code> and <code>id</code>.</p><p>when object has been synced before, mark it as deleted.<br />Otherwise remove it from Store.</p> </div>
-          <pre><code class="language-javascript">localStore.remove = function remove(type, id, options) {
+            <section id="remove">
+              <h1>remove</h1>
+              <h5 class="subheader"></h5>
+              <p>
+                <div class="label label-info radius ctx-type">method</div><span>localStore.remove()</span>
+              </p>
+            </section>
+            <div class="description"><p>Removes one object specified by <code>type</code> and <code>id</code>.</p><p>when object has been synced before, mark it as deleted.<br />Otherwise remove it from Store.</p> </div>
+            <pre><code class="language-javascript">localStore.remove = function remove(type, id, options) {
     var key, object, objectWasMarkedAsDeleted;
 
     options = options || {};
@@ -407,15 +354,15 @@ store.save(&#39;car&#39;, &#39;abc4567&#39;, {color: &#39;red&#39;})
     triggerEvents('remove', object, options);
     return resolveWith(object);
   };</code></pre>
-          <section id="removeAll">
-            <h1>removeAll</h1>
-            <h5 class="subheader"></h5>
-            <p>
-              <div class="label label-info radius ctx-type">method</div><span>localStore.removeAll()</span>
-            </p>
-          </section>
-          <div class="description"><p>Removes one object specified by <code>type</code> and <code>id</code>.</p><p>when object has been synced before, mark it as deleted.<br />Otherwise remove it from Store.</p> </div>
-          <pre><code class="language-javascript">localStore.removeAll = function removeAll(type, options) {
+            <section id="removeAll">
+              <h1>removeAll</h1>
+              <h5 class="subheader"></h5>
+              <p>
+                <div class="label label-info radius ctx-type">method</div><span>localStore.removeAll()</span>
+              </p>
+            </section>
+            <div class="description"><p>Removes one object specified by <code>type</code> and <code>id</code>.</p><p>when object has been synced before, mark it as deleted.<br />Otherwise remove it from Store.</p> </div>
+            <pre><code class="language-javascript">localStore.removeAll = function removeAll(type, options) {
     return store.findAll(type).then(function(objects) {
       var object, _i, _len, results;
 
@@ -428,15 +375,15 @@ store.save(&#39;car&#39;, &#39;abc4567&#39;, {color: &#39;red&#39;})
       return results;
     });
   };</code></pre>
-          <section id="validate">
-            <h1>validate</h1>
-            <h5 class="subheader"></h5>
-            <p>
-              <div class="label label-info radius ctx-type">function</div><span>validate()</span>
-            </p>
-          </section>
-          <div class="description"> </div>
-          <pre><code class="language-javascript">function validate (object) {
+            <section id="validate">
+              <h1>validate</h1>
+              <h5 class="subheader"></h5>
+              <p>
+                <div class="label label-info radius ctx-type">function</div><span>validate()</span>
+              </p>
+            </section>
+            <div class="description"> </div>
+            <pre><code class="language-javascript">function validate (object) {
 
     if (HoodieObjectTypeError.isInvalid(object.type)) {
       return new HoodieObjectTypeError({
@@ -468,15 +415,15 @@ store.save(&#39;car&#39;, &#39;abc4567&#39;, {color: &#39;red&#39;})
       removeAll: localStore.removeAll,
     }
   });</code></pre>
-          <section id="index">
-            <h1>index</h1>
-            <h5 class="subheader"></h5>
-            <p>
-              <div class="label label-info radius ctx-type">method</div><span>store.index()</span>
-            </p>
-          </section>
-          <div class="description"><p>object key index</p> </div>
-          <pre><code class="language-javascript">store.index = function index() {
+            <section id="index">
+              <h1>index</h1>
+              <h5 class="subheader"></h5>
+              <p>
+                <div class="label label-info radius ctx-type">method</div><span>store.index()</span>
+              </p>
+            </section>
+            <div class="description"><p>object key index</p> </div>
+            <pre><code class="language-javascript">store.index = function index() {
     var i, key, keys, _i, _ref;
     keys = [];
     for (i = _i = 0, _ref = localStorageWrapper.length(); 0 &lt;= _ref ? _i &lt; _ref : _i &gt; _ref; i = 0 &lt;= _ref ? ++_i : --_i) {
@@ -487,15 +434,15 @@ store.save(&#39;car&#39;, &#39;abc4567&#39;, {color: &#39;red&#39;})
     }
     return keys;
   };</code></pre>
-          <section id="changedObjects">
-            <h1>changedObjects</h1>
-            <h5 class="subheader"></h5>
-            <p>
-              <div class="label label-info radius ctx-type">method</div><span>store.changedObjects()</span>
-            </p>
-          </section>
-          <div class="description"><p>returns an Array of all dirty documents</p> </div>
-          <pre><code class="language-javascript">store.changedObjects = function changedObjects() {
+            <section id="changedObjects">
+              <h1>changedObjects</h1>
+              <h5 class="subheader"></h5>
+              <p>
+                <div class="label label-info radius ctx-type">method</div><span>store.changedObjects()</span>
+              </p>
+            </section>
+            <div class="description"><p>returns an Array of all dirty documents</p> </div>
+            <pre><code class="language-javascript">store.changedObjects = function changedObjects() {
     var id, key, object, type, _ref, _ref1, _results;
 
     _ref = dirty;
@@ -514,15 +461,15 @@ store.save(&#39;car&#39;, &#39;abc4567&#39;, {color: &#39;red&#39;})
     }
     return _results;
   };</code></pre>
-          <section id="hasLocalChanges">
-            <h1>hasLocalChanges</h1>
-            <h5 class="subheader"></h5>
-            <p>
-              <div class="label label-info radius ctx-type">method</div><span>store.hasLocalChanges()</span>
-            </p>
-          </section>
-          <div class="description"><p>When no arguments passed, returns <code>true</code> or <code>false</code> depending on if there are<br />dirty objects in the store.<br />Otherwise it returns <code>true</code> or <code>false</code> for the passed object. An object is dirty<br />if it has no <code>_syncedAt</code> attribute or if <code>updatedAt</code> is more recent than <code>_syncedAt</code></p> </div>
-          <pre><code class="language-javascript">store.hasLocalChanges = function(type, id) {
+            <section id="hasLocalChanges">
+              <h1>hasLocalChanges</h1>
+              <h5 class="subheader"></h5>
+              <p>
+                <div class="label label-info radius ctx-type">method</div><span>store.hasLocalChanges()</span>
+              </p>
+            </section>
+            <div class="description"><p>When no arguments passed, returns <code>true</code> or <code>false</code> depending on if there are<br />dirty objects in the store.<br />Otherwise it returns <code>true</code> or <code>false</code> for the passed object. An object is dirty<br />if it has no <code>_syncedAt</code> attribute or if <code>updatedAt</code> is more recent than <code>_syncedAt</code></p> </div>
+            <pre><code class="language-javascript">store.hasLocalChanges = function(type, id) {
     if (!type) {
       return !$.isEmptyObject(dirty);
     }
@@ -532,15 +479,15 @@ store.save(&#39;car&#39;, &#39;abc4567&#39;, {color: &#39;red&#39;})
     }
     return hasLocalChanges(cache(type, id));
   };</code></pre>
-          <section id="clear">
-            <h1>clear</h1>
-            <h5 class="subheader"></h5>
-            <p>
-              <div class="label label-info radius ctx-type">method</div><span>store.clear()</span>
-            </p>
-          </section>
-          <div class="description"><p>clears localStorage and cache<br />TODO: do not clear entire localStorage, clear only the items that have been stored<br />using <code>hoodie.store</code> before.</p> </div>
-          <pre><code class="language-javascript">store.clear = function clear() {
+            <section id="clear">
+              <h1>clear</h1>
+              <h5 class="subheader"></h5>
+              <p>
+                <div class="label label-info radius ctx-type">method</div><span>store.clear()</span>
+              </p>
+            </section>
+            <div class="description"><p>clears localStorage and cache<br />TODO: do not clear entire localStorage, clear only the items that have been stored<br />using <code>hoodie.store</code> before.</p> </div>
+            <pre><code class="language-javascript">store.clear = function clear() {
     var defer, key, keys, results;
     defer = getDefer();
     try {
@@ -565,72 +512,72 @@ store.save(&#39;car&#39;, &#39;abc4567&#39;, {color: &#39;red&#39;})
     }
     return defer.promise();
   };</code></pre>
-          <section id="bootstrapping">
-            <h1>bootstrapping</h1>
-            <h5 class="subheader"></h5>
-            <p>
-              <div class="label label-success radius ctx-type">declaration</div><span>bootstrapping</span>
-            </p>
-          </section>
-          <div class="description"><p>returns true if store is currently bootstrapping data from remote,<br />otherwise false.</p> </div>
-          <pre><code class="language-javascript">var bootstrapping = false;
+            <section id="bootstrapping">
+              <h1>bootstrapping</h1>
+              <h5 class="subheader"></h5>
+              <p>
+                <div class="label label-success radius ctx-type">declaration</div><span>bootstrapping</span>
+              </p>
+            </section>
+            <div class="description"><p>returns true if store is currently bootstrapping data from remote,<br />otherwise false.</p> </div>
+            <pre><code class="language-javascript">var bootstrapping = false;
   store.isBootstrapping = function isBootstrapping() {
     return bootstrapping;
   };</code></pre>
-          <section id="isPersistent">
-            <h1>isPersistent</h1>
-            <h5 class="subheader"></h5>
-            <p>
-              <div class="label label-info radius ctx-type">method</div><span>store.isPersistent()</span>
-            </p>
-          </section>
-          <div class="description"> </div>
-          <pre><code class="language-javascript">store.isPersistent = function isPersistent() {
+            <section id="isPersistent">
+              <h1>isPersistent</h1>
+              <h5 class="subheader"></h5>
+              <p>
+                <div class="label label-info radius ctx-type">method</div><span>store.isPersistent()</span>
+              </p>
+            </section>
+            <div class="description"> </div>
+            <pre><code class="language-javascript">store.isPersistent = function isPersistent() {
     return localStorageWrapper.isPersistent;
   };</code></pre>
-          <section id="now">
-            <h1>now</h1>
-            <h5 class="subheader"></h5>
-            <p>
-              <div class="label label-info radius ctx-type">function</div><span>now()</span>
-            </p>
-          </section>
-          <div class="description"><p>@private</p> </div>
-          <pre><code class="language-javascript">function now() {
+            <section id="now">
+              <h1>now</h1>
+              <h5 class="subheader"></h5>
+              <p>
+                <div class="label label-info radius ctx-type">function</div><span>now()</span>
+              </p>
+            </section>
+            <div class="description"><p>@private</p> </div>
+            <pre><code class="language-javascript">function now() {
     return JSON.stringify(new Date()).replace(/['&quot;]/g, '');
   }</code></pre>
-          <section id="isMarkedAsDeleted">
-            <h1>isMarkedAsDeleted</h1>
-            <h5 class="subheader"></h5>
-            <p>
-              <div class="label label-info radius ctx-type">function</div><span>isMarkedAsDeleted()</span>
-            </p>
-          </section>
-          <div class="description"><p>@private</p> </div>
-          <pre><code class="language-javascript">function isMarkedAsDeleted(object) {
+            <section id="isMarkedAsDeleted">
+              <h1>isMarkedAsDeleted</h1>
+              <h5 class="subheader"></h5>
+              <p>
+                <div class="label label-info radius ctx-type">function</div><span>isMarkedAsDeleted()</span>
+              </p>
+            </section>
+            <div class="description"><p>@private</p> </div>
+            <pre><code class="language-javascript">function isMarkedAsDeleted(object) {
     return object._deleted === true;
   }</code></pre>
-          <section id="startBootstrappingMode">
-            <h1>startBootstrappingMode</h1>
-            <h5 class="subheader"></h5>
-            <p>
-              <div class="label label-info radius ctx-type">function</div><span>startBootstrappingMode()</span>
-            </p>
-          </section>
-          <div class="description"><p>@private</p> </div>
-          <pre><code class="language-javascript">function startBootstrappingMode() {
+            <section id="startBootstrappingMode">
+              <h1>startBootstrappingMode</h1>
+              <h5 class="subheader"></h5>
+              <p>
+                <div class="label label-info radius ctx-type">function</div><span>startBootstrappingMode()</span>
+              </p>
+            </section>
+            <div class="description"><p>@private</p> </div>
+            <pre><code class="language-javascript">function startBootstrappingMode() {
     bootstrapping = true;
     store.trigger('bootstrap:start');
   }</code></pre>
-          <section id="endBootstrappingMode">
-            <h1>endBootstrappingMode</h1>
-            <h5 class="subheader"></h5>
-            <p>
-              <div class="label label-info radius ctx-type">function</div><span>endBootstrappingMode()</span>
-            </p>
-          </section>
-          <div class="description"><p>@private</p> </div>
-          <pre><code class="language-javascript">function endBootstrappingMode() {
+            <section id="endBootstrappingMode">
+              <h1>endBootstrappingMode</h1>
+              <h5 class="subheader"></h5>
+              <p>
+                <div class="label label-info radius ctx-type">function</div><span>endBootstrappingMode()</span>
+              </p>
+            </section>
+            <div class="description"><p>@private</p> </div>
+            <pre><code class="language-javascript">function endBootstrappingMode() {
     var methodCall, method, args, defer;
 
     bootstrapping = false;
@@ -644,15 +591,15 @@ store.save(&#39;car&#39;, &#39;abc4567&#39;, {color: &#39;red&#39;})
 
     store.trigger('bootstrap:end');
   }</code></pre>
-          <section id="abortBootstrappingMode">
-            <h1>abortBootstrappingMode</h1>
-            <h5 class="subheader"></h5>
-            <p>
-              <div class="label label-info radius ctx-type">function</div><span>abortBootstrappingMode()</span>
-            </p>
-          </section>
-          <div class="description"><p>@private</p> </div>
-          <pre><code class="language-javascript">function abortBootstrappingMode(error) {
+            <section id="abortBootstrappingMode">
+              <h1>abortBootstrappingMode</h1>
+              <h5 class="subheader"></h5>
+              <p>
+                <div class="label label-info radius ctx-type">function</div><span>abortBootstrappingMode()</span>
+              </p>
+            </section>
+            <div class="description"><p>@private</p> </div>
+            <pre><code class="language-javascript">function abortBootstrappingMode(error) {
     var methodCall, defer;
 
     bootstrapping = false;
@@ -664,31 +611,28 @@ store.save(&#39;car&#39;, &#39;abc4567&#39;, {color: &#39;red&#39;})
 
     store.trigger('bootstrap:error', error);
   }</code></pre>
-          <section id="enqueue">
-            <h1>enqueue</h1>
-            <h5 class="subheader"></h5>
-            <p>
-              <div class="label label-info radius ctx-type">function</div><span>enqueue()</span>
-            </p>
-          </section>
-          <div class="description"><p>@private</p> </div>
-          <pre><code class="language-javascript">function enqueue(method, args) {
+            <section id="enqueue">
+              <h1>enqueue</h1>
+              <h5 class="subheader"></h5>
+              <p>
+                <div class="label label-info radius ctx-type">function</div><span>enqueue()</span>
+              </p>
+            </section>
+            <div class="description"><p>@private</p> </div>
+            <pre><code class="language-javascript">function enqueue(method, args) {
     var defer = getDefer();
     queue.push([method, args, defer]);
     return defer.promise();
   }</code></pre>
-        </div>
+          </article><br class="clear">
+        </section>
       </div>
     </div>
-    <footer class="footer"></footer>
-    <script src="http://platform.twitter.com/widgets.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
-    <script src="http://leaverou.github.com/prefixfree/prefixfree.js"></script>
-    <script src="http://getbootstrap.com/2.3.2/assets/js/bootstrap-transition.js"></script>
-    <script src="http://getbootstrap.com/2.3.2/assets/js/bootstrap-scrollspy.js"></script>
-    <script src="http://getbootstrap.com/2.3.2/assets/js/bootstrap-dropdown.js"></script>
-    <script src="http://getbootstrap.com/2.3.2/assets/js/bootstrap-collapse.js"></script>
-    <script src="http://getbootstrap.com/2.3.2/assets/js/bootstrap-affix.js"></script>
+    <footer>
+      <div class="footer">
+        <section class="cb sitemap"></section><br class="clear">
+      </div>
+    </footer>
     <script>
       /**
        * Prism: Lightweight, robust, elegant syntax highlighting
@@ -699,6 +643,7 @@ store.save(&#39;car&#39;, &#39;abc4567&#39;, {color: &#39;red&#39;})
       Prism.languages.css={comment:/\/\*[\w\W]*?\*\//g,atrule:/@[\w-]+?(\s+[^;{]+)?(?=\s*{|\s*;)/gi,url:/url\((["']?).*?\1\)/gi,selector:/[^\{\}\s][^\{\}]*(?=\s*\{)/g,property:/(\b|\B)[a-z-]+(?=\s*:)/ig,string:/("|')(\\?.)*?\1/g,important:/\B!important\b/gi,ignore:/&(lt|gt|amp);/gi,punctuation:/[\{\};:]/g};Prism.languages.markup&&Prism.languages.insertBefore("markup","tag",{style:{pattern:/(&lt;|<)style[\w\W]*?(>|&gt;)[\w\W]*?(&lt;|<)\/style(>|&gt;)/ig,inside:{tag:{pattern:/(&lt;|<)style[\w\W]*?(>|&gt;)|(&lt;|<)\/style(>|&gt;)/ig,inside:Prism.languages.markup.tag.inside},rest:Prism.languages.css}}});;
       Prism.languages.clike={comment:{pattern:/(^|[^\\])(\/\*[\w\W]*?\*\/|\/\/.*?(\r?\n|$))/g,lookbehind:!0},string:/("|')(\\?.)*?\1/g,keyword:/\b(if|else|while|do|for|return|in|instanceof|function|new|try|catch|finally|null|break|continue)\b/g,"boolean":/\b(true|false)\b/g,number:/\b-?(0x)?\d*\.?[\da-f]+\b/g,operator:/[-+]{1,2}|!|=?&lt;|=?&gt;|={1,2}|(&amp;){1,2}|\|?\||\?|\*|\//g,ignore:/&(lt|gt|amp);/gi,punctuation:/[{}[\];(),.:]/g};;
       Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(var|let|if|else|while|do|for|return|in|instanceof|function|new|with|typeof|try|catch|finally|null|break|continue)\b/g,number:/\b(-?(0x)?\d*\.?[\da-f]+|NaN|-?Infinity)\b/g});Prism.languages.insertBefore("javascript","keyword",{regex:{pattern:/(^|[^/])\/(?!\/)(\[.+?]|\\.|[^/\r\n])+\/[gim]{0,3}(?=\s*($|[\r\n,.;})]))/g,lookbehind:!0}});Prism.languages.markup&&Prism.languages.insertBefore("markup","tag",{script:{pattern:/(&lt;|<)script[\w\W]*?(>|&gt;)[\w\W]*?(&lt;|<)\/script(>|&gt;)/ig,inside:{tag:{pattern:/(&lt;|<)script[\w\W]*?(>|&gt;)|(&lt;|<)\/script(>|&gt;)/ig,inside:Prism.languages.markup.tag.inside},rest:Prism.languages.javascript}}});;
+      
       
     </script>
   </body>

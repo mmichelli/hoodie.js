@@ -1,127 +1,105 @@
 <!DOCTYPE html>
-<html>
+<html class="no-js">
   <head>
-    <meta name="viewport" content="width=device-width" charset="utf-8">
-    <title>Hoodie.js</title>
-    <link rel="stylesheet" href="http://getbootstrap.com/2.3.2/assets/css/bootstrap.css">
-    <link rel="stylesheet" href="http://getbootstrap.com/2.3.2/assets/css/bootstrap-responsive.css">
-    <link rel="stylesheet" href="http://getbootstrap.com/2.3.2/assets/css/docs.css">
-    <style>
-      .bs-docs-sidenav.affix {
-        box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.5);
-        z-index: 10;
-      }
-      
-      .bs-docs-sidenav i{
-        width: 8px;
-        height: 8px;
-        padding: 0px;
-        margin: 0px;
-        display: inline-block;
-        margin-right:0.5em;
-      }
-      
-      .bs-docs-sidenav > li > a {
-          word-wrap: break-word;
-      }
-      
-      .bs-docs-sidenav > li:first-child > a {
-        border-top-right-radius: 6px;
-        border-top-left-radius: 6px;
-      }
-      
-      code[class*="language-"],pre[class*="language-"]{color:black;text-shadow:0 1px white;font-family:Consolas,Monaco,'Andale Mono',monospace;direction:ltr;text-align:left;white-space:pre;word-spacing:normal;-moz-tab-size:2;-o-tab-size:2;tab-size2;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*="language-"]{padding:1em;margin:.5em 0;overflow:auto}:not(pre)>code[class*="language-"],pre[class*="language-"]{background:#f5f2f0}:not(pre)>code[class*="language-"]{padding:.1em;border-radius:.3em}.token.comment,.token.prolog,.token.doctype,.token.cdata{color:slategray}.token.punctuation{color:#999}.namespace{opacity:.7}.token.property,.token.tag,.token.boolean,.token.number{color:#905}.token.selector,.token.attr-name,.token.string{color:#690}.token.operator,.token.entity,.token.url,.language-css .token.string,.style .token.string{color:#a67f59;background:hsla(0,0%,100%,.5)}.token.atrule,.token.attr-value,.token.keyword{color:#07a}.token.regex,.token.important{color:#e90}.token.important{font-weight:bold}.token.entity{cursor:help}
-      div.description {margin: 14px 0; padding-top: 14px; border-bottom:1px solid #eee; }
-      .tags {}
-      .ctx-type {
-        display:inline-block;
-        margin-right:0.5em;
-        //- float:right; margin-top:8px
-      }
-      
-    </style>
+    <base target="http://0.0.0.0:1337">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://0.0.0.0:1337/dist/css/hoodie.css">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Fira+Sans:300,500|Fira+Mono" type="text/css">
   </head>
-  <body data-spy="scroll" data-target=".scrollspy">
-    <header id="overview" class="jumbotron subhead">
-      <div class="container">
-        <h1>Hoodie.js</h1>
-        <p class="lead"></p>
-      </div>
+  <body class="orange">
+    <header>
+      <section id="nav">
+        <div id="logo"><img src="http://0.0.0.0:1337/dist/img/logo.svg" width="135" alt=""></div>
+        <nav id="main-nav" aria-role="navigation"><a href="#">Intro</a><a href="#">Contribute</a><a href="#">Get help</a><a href="#">About</a><a href="#">Community</a><a href="#">Zoo</a><a href="#">Contact</a></nav>
+        <ul id="meta-nav">
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Docs</a></li>
+          <li><a href="#">try</a></li>
+          <li><a href="#">FAQ</a></li>
+        </ul>
+      </section>
+      <section class="hid">
+        <ul id="sub-nav">
+          <li><a href="/#">Team</a></li>
+          <li><a href="/#">wear hoodie</a></li>
+          <li><a href="/#">give money</a></li>
+          <li><a href="/#">hire us</a></li>
+          <li><a href="/#">contributors</a></li>
+          <li><a href="/#">friends</a></li>
+          <li><a href="/#">initiatives</a></li>
+          <li><a href="/#">tools</a></li>
+        </ul>
+      </section>
     </header>
-    <div class="container">
-      <div class="row">
-        <div class="span3 bs-docs-sidebar">
-          <ul class="nav nav-list bs-docs-sidenav affix-top">
-            <li><a href="../../index.html">Main</a></li>
-            <li><a href="../../hoodie/account.js.html">hoodie/account.js</a></li>
-            <li><a href="../../hoodie/connection.js.html">hoodie/connection.js</a></li>
-            <li><a href="../../hoodie/id.js.html">hoodie/id.js</a></li>
-            <li><a href="../../hoodie/open.js.html">hoodie/open.js</a></li>
-            <li><a href="../../hoodie/remote.js.html">hoodie/remote.js</a></li>
-            <li><a href="../../hoodie/request.js.html">hoodie/request.js</a></li>
-            <li><a href="../../hoodie/store.js.html">hoodie/store.js</a></li>
-            <li><a href="../../hoodie/task.js.html">hoodie/task.js</a></li>
-            <li><a href="../../hoodie.js.html">hoodie.js</a></li>
-            <li><a href="../../lib/error/error.js.html">lib/error/error.js</a></li>
-            <li><a href="../../lib/error/index.js.html">lib/error/index.js</a></li>
-            <li><a href="../../lib/error/object_id.js.html">lib/error/object_id.js</a></li>
-            <li><a href="../../lib/error/object_type.js.html">lib/error/object_type.js</a></li>
-            <li><a href="../../lib/events.js.html">lib/events.js</a></li>
-            <li><a href="../../lib/index.js.html">lib/index.js</a></li>
-            <li><a href="../../lib/store/api.js.html">lib/store/api.js</a></li>
-            <li><a href="../../lib/store/index.js.html">lib/store/index.js</a></li>
-            <li><a href="../../lib/store/remote.js.html">lib/store/remote.js</a></li>
-            <li><a href="../../lib/store/scoped.js.html">lib/store/scoped.js</a></li>
-            <li><a href="../../lib/task/index.js.html">lib/task/index.js</a></li>
-            <li><a href="../../lib/task/scoped.js.html">lib/task/scoped.js</a></li>
-            <li><a href="../../utils/config.js.html">utils/config.js</a></li>
-            <li><a href="../../utils/generate_id.js.html">utils/generate_id.js</a></li>
-            <li><a href="../../utils/hoodiefy_request_error_name.js.html">utils/hoodiefy_request_error_name.js</a></li>
-            <li><a href="../../utils/index.js.html">utils/index.js</a></li>
-            <li><a href="../../utils/local_storage_wrapper.js.html">utils/local_storage_wrapper.js</a></li>
-            <li><a href="../../utils/promise/defer.js.html">utils/promise/defer.js</a></li>
-            <li><a href="../../utils/promise/index.js.html">utils/promise/index.js</a></li>
-            <li><a href="../../utils/promise/is_promise.js.html">utils/promise/is_promise.js</a></li>
-            <li class="active"><a href="../../utils/promise/reject.js.html">utils/promise/reject.js</a></li>
-            <li><a href="../../utils/promise/reject_with.js.html">utils/promise/reject_with.js</a></li>
-            <li><a href="../../utils/promise/resolve.js.html">utils/promise/resolve.js</a></li>
-            <li><a href="../../utils/promise/resolve_with.js.html">utils/promise/resolve_with.js</a></li>
-          </ul>
-          <div class="scrollspy">
-            <ul class="nav nav-list bs-docs-sidenav affix-top">
-              <li><a href="#defer"><i class="alert alert-success"></i><span>defer</span></a>
-              </li>
+    <div id="content">
+      <div class="box">
+        <section class="cb teaser">
+          <h1>Docs</h1>
+          <aside>
+            <ul>
+              <li><a href="../../index.html">Main</a></li>
+              <li><a href="../../hoodie/account.js.html">hoodie/account.js</a></li>
+              <li><a href="../../hoodie/connection.js.html">hoodie/connection.js</a></li>
+              <li><a href="../../hoodie/id.js.html">hoodie/id.js</a></li>
+              <li><a href="../../hoodie/open.js.html">hoodie/open.js</a></li>
+              <li><a href="../../hoodie/remote.js.html">hoodie/remote.js</a></li>
+              <li><a href="../../hoodie/request.js.html">hoodie/request.js</a></li>
+              <li><a href="../../hoodie/store.js.html">hoodie/store.js</a></li>
+              <li><a href="../../hoodie/task.js.html">hoodie/task.js</a></li>
+              <li><a href="../../hoodie.js.html">hoodie.js</a></li>
+              <li><a href="../../lib/error/error.js.html">lib/error/error.js</a></li>
+              <li><a href="../../lib/error/index.js.html">lib/error/index.js</a></li>
+              <li><a href="../../lib/error/object_id.js.html">lib/error/object_id.js</a></li>
+              <li><a href="../../lib/error/object_type.js.html">lib/error/object_type.js</a></li>
+              <li><a href="../../lib/events.js.html">lib/events.js</a></li>
+              <li><a href="../../lib/index.js.html">lib/index.js</a></li>
+              <li><a href="../../lib/store/api.js.html">lib/store/api.js</a></li>
+              <li><a href="../../lib/store/index.js.html">lib/store/index.js</a></li>
+              <li><a href="../../lib/store/remote.js.html">lib/store/remote.js</a></li>
+              <li><a href="../../lib/store/scoped.js.html">lib/store/scoped.js</a></li>
+              <li><a href="../../lib/task/index.js.html">lib/task/index.js</a></li>
+              <li><a href="../../lib/task/scoped.js.html">lib/task/scoped.js</a></li>
+              <li><a href="../../utils/config.js.html">utils/config.js</a></li>
+              <li><a href="../../utils/generate_id.js.html">utils/generate_id.js</a></li>
+              <li><a href="../../utils/hoodiefy_request_error_name.js.html">utils/hoodiefy_request_error_name.js</a></li>
+              <li><a href="../../utils/index.js.html">utils/index.js</a></li>
+              <li><a href="../../utils/local_storage_wrapper.js.html">utils/local_storage_wrapper.js</a></li>
+              <li><a href="../../utils/promise/defer.js.html">utils/promise/defer.js</a></li>
+              <li><a href="../../utils/promise/index.js.html">utils/promise/index.js</a></li>
+              <li><a href="../../utils/promise/is_promise.js.html">utils/promise/is_promise.js</a></li>
+              <li class="active"><a href="../../utils/promise/reject.js.html">utils/promise/reject.js</a></li>
+              <li><a href="../../utils/promise/reject_with.js.html">utils/promise/reject_with.js</a></li>
+              <li><a href="../../utils/promise/resolve.js.html">utils/promise/resolve.js</a></li>
+              <li><a href="../../utils/promise/resolve_with.js.html">utils/promise/resolve_with.js</a></li>
             </ul>
-          </div>
-        </div>
-        <div class="span9">
-          <section id="defer">
-            <h1>defer</h1>
-            <h5 class="subheader"></h5>
-            <p>
-              <div class="label label-success radius ctx-type">declaration</div><span>defer</span>
-            </p>
-          </section>
-          <div class="description"> </div>
-          <pre><code class="language-javascript">var defer = require('./defer');
+          </aside>
+          <article>
+            <section id="defer">
+              <h1>defer</h1>
+              <h5 class="subheader"></h5>
+              <p>
+                <div class="label label-success radius ctx-type">declaration</div><span>defer</span>
+              </p>
+            </section>
+            <div class="description"> </div>
+            <pre><code class="language-javascript">var defer = require('./defer');
 //
 function reject() {
   return defer().reject().promise();
 }
 
 module.exports = reject;</code></pre>
-        </div>
+          </article><br class="clear">
+        </section>
       </div>
     </div>
-    <footer class="footer"></footer>
-    <script src="http://platform.twitter.com/widgets.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
-    <script src="http://leaverou.github.com/prefixfree/prefixfree.js"></script>
-    <script src="http://getbootstrap.com/2.3.2/assets/js/bootstrap-transition.js"></script>
-    <script src="http://getbootstrap.com/2.3.2/assets/js/bootstrap-scrollspy.js"></script>
-    <script src="http://getbootstrap.com/2.3.2/assets/js/bootstrap-dropdown.js"></script>
-    <script src="http://getbootstrap.com/2.3.2/assets/js/bootstrap-collapse.js"></script>
-    <script src="http://getbootstrap.com/2.3.2/assets/js/bootstrap-affix.js"></script>
+    <footer>
+      <div class="footer">
+        <section class="cb sitemap"></section><br class="clear">
+      </div>
+    </footer>
     <script>
       /**
        * Prism: Lightweight, robust, elegant syntax highlighting
@@ -132,6 +110,7 @@ module.exports = reject;</code></pre>
       Prism.languages.css={comment:/\/\*[\w\W]*?\*\//g,atrule:/@[\w-]+?(\s+[^;{]+)?(?=\s*{|\s*;)/gi,url:/url\((["']?).*?\1\)/gi,selector:/[^\{\}\s][^\{\}]*(?=\s*\{)/g,property:/(\b|\B)[a-z-]+(?=\s*:)/ig,string:/("|')(\\?.)*?\1/g,important:/\B!important\b/gi,ignore:/&(lt|gt|amp);/gi,punctuation:/[\{\};:]/g};Prism.languages.markup&&Prism.languages.insertBefore("markup","tag",{style:{pattern:/(&lt;|<)style[\w\W]*?(>|&gt;)[\w\W]*?(&lt;|<)\/style(>|&gt;)/ig,inside:{tag:{pattern:/(&lt;|<)style[\w\W]*?(>|&gt;)|(&lt;|<)\/style(>|&gt;)/ig,inside:Prism.languages.markup.tag.inside},rest:Prism.languages.css}}});;
       Prism.languages.clike={comment:{pattern:/(^|[^\\])(\/\*[\w\W]*?\*\/|\/\/.*?(\r?\n|$))/g,lookbehind:!0},string:/("|')(\\?.)*?\1/g,keyword:/\b(if|else|while|do|for|return|in|instanceof|function|new|try|catch|finally|null|break|continue)\b/g,"boolean":/\b(true|false)\b/g,number:/\b-?(0x)?\d*\.?[\da-f]+\b/g,operator:/[-+]{1,2}|!|=?&lt;|=?&gt;|={1,2}|(&amp;){1,2}|\|?\||\?|\*|\//g,ignore:/&(lt|gt|amp);/gi,punctuation:/[{}[\];(),.:]/g};;
       Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(var|let|if|else|while|do|for|return|in|instanceof|function|new|with|typeof|try|catch|finally|null|break|continue)\b/g,number:/\b(-?(0x)?\d*\.?[\da-f]+|NaN|-?Infinity)\b/g});Prism.languages.insertBefore("javascript","keyword",{regex:{pattern:/(^|[^/])\/(?!\/)(\[.+?]|\\.|[^/\r\n])+\/[gim]{0,3}(?=\s*($|[\r\n,.;})]))/g,lookbehind:!0}});Prism.languages.markup&&Prism.languages.insertBefore("markup","tag",{script:{pattern:/(&lt;|<)script[\w\W]*?(>|&gt;)[\w\W]*?(&lt;|<)\/script(>|&gt;)/ig,inside:{tag:{pattern:/(&lt;|<)script[\w\W]*?(>|&gt;)|(&lt;|<)\/script(>|&gt;)/ig,inside:Prism.languages.markup.tag.inside},rest:Prism.languages.javascript}}});;
+      
       
     </script>
   </body>
