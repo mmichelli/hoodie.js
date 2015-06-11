@@ -53,7 +53,7 @@ exports.request = function(hoodie, type, url, options) {
   var jQueryPromise;
   options = options || {};
 
-  if (hoodie.account.bearerToken) {
+  if (hoodie.account && hoodie.account.bearerToken) {
     defaults.headers = {
       Authorization: 'Bearer ' + hoodie.account.bearerToken
     };
